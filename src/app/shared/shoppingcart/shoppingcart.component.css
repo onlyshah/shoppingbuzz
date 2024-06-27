@@ -1,0 +1,116 @@
+img{
+    height:150px;
+    width:100%;
+  }
+  
+  div [class^="col-"]{
+    padding-left:5px;
+    padding-right:5px;
+  }
+  .card{
+    transition:0.5s;
+    cursor:pointer;
+    margin: 5px;
+  }
+  .card-title{  
+    font-size:12px;
+    transition:1s;
+    cursor:pointer;
+    margin: 2px;
+  }
+  .card-title a{  
+    font-size:12px;
+    transition:1s;
+    cursor:pointer;
+    color:#000
+  }
+  .card-title i:hover{
+    transform: scale(1.25) rotate(100deg); 
+    color:#18d4ca;
+    
+  }
+
+
+  /* .card:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+  } */
+  .card-text{
+    height:80px;  
+  }
+  
+  /* .card::before, .card::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scale3d(0, 0, 1);
+    transition: transform .3s ease-out 0s;
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    pointer-events: none;
+  }
+  .card::before {
+    transform-origin: left top;
+  }
+  .card::after {
+    transform-origin: right bottom;
+  }
+  .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+    transform: scale3d(1, 1, 1);
+  } */
+
+  .text-content h2 {
+    margin-bottom: 0.5rem;
+ }
+ 
+ .product-action-btn {
+    margin-top: 1rem;
+ }
+ 
+ .product-action-btn .btn-action {
+    display: inline-block;
+    margin-right: 0.5rem;
+ }
+ 
+ .rating {
+    display: flex;
+    align-items: center;
+ }
+ 
+ .rating .bi {
+    margin-right: 0.1rem;
+ }
+ 
+ .card-product {
+    max-width: 300px; /* Adjust the width as needed */
+    height: 500px; /* Adjust the height as needed */
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .text-container {
+    height: 100px; /* Fixed height for the text container */
+    overflow: hidden; /* Hide overflow text */
+    text-align: center;
+  }
+  .product-image {
+    flex-grow: 0;
+  }
+  .btn-container {
+    margin-top: auto;
+  }
+  .product-action-btn {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .rating-container {
+    height: 30px; /* Fixed height for the rating container */
+    overflow: hidden; /* Hide overflow content */
+    text-align: center;
+  }

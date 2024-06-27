@@ -1,0 +1,30 @@
+@media (min-width:320px) and (max-width:425px){
+    .input-group {
+        align-items: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        width: 220%;
+    }
+    .w{
+        width: 45%;
+    }
+}
+
+@media (min-width:768px) and (max-width:1024px){
+
+    .input-group {
+        align-items: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        width: 220%;
+    }
+}
+.slick-slider .slick-slide {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.slick-initialized .slick-slide {
+    display: block;
+}

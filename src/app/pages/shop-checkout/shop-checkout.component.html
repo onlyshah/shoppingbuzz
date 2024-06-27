@@ -1,0 +1,434 @@
+<section class="mb-lg-14 mb-8 mt-8">
+  <div class="container">
+
+    <div class="row">
+      <!-- col -->
+      <div class="col-12">
+        <div>
+          <div class="mb-8">
+            <!-- text -->
+            <h1 class="fw-bold mb-0">Checkout</h1>
+            <p class="mb-0">Already have an account? Click here to <a href="#!">Sign in</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+
+      <div class="row">
+        <div class="col-lg-7 col-md-12">
+
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+
+            <div class="accordion-item py-4">
+
+              <div class="accordion-item py-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <!-- heading one -->
+                  <a href="#" class="fs-5 text-inherit collapsed h4" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
+                    <i class="feather-icon icon-map-pin me-2 text-muted"></i>
+                    Add delivery address
+                  </a>
+                  <!-- btn -->
+                  <a class="btn btn-outline-primary btn-sm" (click)="newaddmodal(newaddress)">Add a new address</a>
+                  <!-- collapse -->
+                </div>
+                <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                  data-bs-parent="#accordionFlushExample">
+                  <div class="mt-5">
+                    <div class="row" *ngFor="let user of userData" >
+                      <div class="col-xl-6 col-lg-12 col-md-6 col-12 mb-4" *ngFor="let address of user.Address">
+                       
+                        <div class="card card-body p-6">
+                          <div class="form-check mb-4">
+                            <input class="form-check-input" type="radio"
+                            name="flexRadioDefault{{user._id}}"
+                             [id]="address.addresstype + 'Radio'" 
+                             [checked]="address.addresstype === 'home'" 
+                             (change)="selectAddress(address.addresstype, user._id)">
+                           <label class="form-check-label text-dark" 
+                           [for]="address.addresstype + 'Radio'">
+                             {{ address.addresstype | titlecase }}
+                           </label>
+                           </div>
+                          <strong>{{user?.firstName}} {{user?.lastName}}</strong>
+                          <abbr title="Phone">Mobile: {{user?.mobileNo}}</abbr>
+                          <abbr title="Phone">Pincode: {{address?.Postcode}}</abbr>
+
+                          <address> 
+                            
+
+                            {{address?.Street
+                            }},  {{address?.Postcode
+                            }},
+                           
+
+{{address?.City}}, 
+{{address?.State}},
+{{address?.Country}}
+
+                           
+                          </address>
+                          <span class="text-danger" *ngIf="address.addresstype === 'home'">Default address</span>
+
+                        </div>
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </div>
+
+
+            <div class="accordion-item py-4">
+
+              <a href="#" class="text-inherit h5" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
+                aria-expanded="true" aria-controls="flush-collapseFour">
+                <i class="feather-icon icon-credit-card me-2 text-muted"></i>Payment Method
+              </a>
+              <div id="flush-collapseFour" class="accordion-collapse collapse show"
+                data-bs-parent="#accordionFlushExample">
+
+                <div class="mt-5">
+                  <div>
+
+                    <div class="card card-bordered shadow-none mb-2">
+
+                      <!-- <div class="card-body p-6">
+                          <div class="d-flex">
+                            <div class="form-check">
+                             
+                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
+                              <label class="form-check-label ms-2" for="paypal">
+
+                              </label>
+                            </div>
+                            <div>
+                           
+                              <h5 class="mb-1 h6"> Payment with Paypal</h5>
+                              <p class="mb-0 small">You will be redirected to PayPal website to complete your purchase
+                                securely.</p>
+                            </div>
+                          </div>
+                        </div> -->
+                    </div>
+
+
+                    <div class="card card-bordered shadow-none">
+                      <div class="card-body p-6">
+
+                        <div class="d-flex">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" 
+                            id="cashonDelivery" name="cashonDelivery" 
+                            [checked]="false"
+                              value="cashonDelivery"
+                            (change)="onSelecteCOD('cashonDelivery')">
+                            <label class="form-check-label ms-2" for="cashonDelivery">
+
+                            </label>
+                          </div>
+                          <div>
+
+                            <h5 class="mb-1 h6"> Cash on Delivery</h5>
+                            <p class="mb-0 small">Pay with cash when your order is delivered.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-end">
+                      <!-- <a href="#" class="btn btn-outline-gray-400 text-muted collapsed"
+                         data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                          aria-expanded="false" aria-controls="flush-collapseThree">Prev</a> -->
+                      <a (click)="openModal(bill)" class="btn btn-primary ms-2">Place Order</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-12 offset-lg-1 col-lg-4">
+          <div class="mt-4 mt-lg-0">
+            <div class="card shadow-sm">
+              <h5 class="px-6 py-4 bg-transparent mb-0">Order Details</h5>
+              <ul class="list-group list-group-flush" *ngFor="let data of data">
+                <!-- list group item -->
+                <li class="list-group-item px-4 py-3">
+                  <div class="row align-items-center">
+                    <div class="col-2 col-md-2">
+                      <img [src]="imagePath+data?.productId.productImage" alt="Ecommerce" class="img-fluid">
+                    </div>
+                    <div class="col-5 col-md-5">
+                      <h6 class="mb-0">{{data.productId.productname}}</h6>
+                      <!-- <span><small class="text-muted">.98 / lb</small></span> -->
+
+                    </div>
+                    <div class="col-2 col-md-2 text-center text-muted">
+                      <span>{{data.quantity}}</span>
+
+                    </div>
+                    <div class="col-3 text-lg-end text-start text-md-end col-md-3">
+                      <span class="fw-bold">{{data.quantity * data.productId.price}}</span>
+
+                    </div>
+                  </div>
+
+                </li>
+
+
+              </ul>
+              <li class="list-group-item px-4 py-3">
+                <div class="d-flex align-items-center justify-content-between   mb-2">
+                  <div>
+                    Subtotal
+
+                  </div>
+                  <div class="fw-bold">
+                    {{updateprices}}
+
+                  </div>
+
+                </div>
+
+              </li>
+              <!-- list group item -->
+            </div>
+
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</section>
+
+<div  #template  class="off-screen">
+  <ng-container *ngTemplateOutlet="bill"></ng-container>
+</div>
+<ng-template #bill>
+<div class="card-body p-5" >
+  <div class="card-body p-5">
+    <div class="modal-header"  *ngFor="let user of userData">
+      <h2>
+        Hey {{this.user?.firstName }} {{this.user?.lastName }},
+      </h2>
+
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <p class="fs-sm">
+      This is the receipt for a payment of <strong> {{updateprices}}
+      </strong> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-currency-rupee" viewBox="0 0 16 16">
+        <path
+          d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z" />
+      </svg>
+    </p>
+
+    <div class="border-top border-gray-200 pt-3 mt-2">
+      <div class="row">
+        <table class="table  mt-2">
+          <thead>
+            <tr>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Payment Id</th>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Payment Date</th>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Payment Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-0"><strong>#88305</strong></td>
+              <td class="text-end px-0"><strong>Feb/09/20</strong></td>
+              <td class="text-end px-0"><strong>{{paymentMode}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="border-top border-gray-200 mt-4 py-4">
+      <div class="row">
+        
+    <table class="table border-bottom border-gray-200 mt-3">
+      <thead>
+        <tr>
+          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Producty</th>
+          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Qty</th>
+          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of data">
+          <td class="px-0">{{data.productId.productname}}</td>
+          <td class="text-end px-0">{{data.quantity}}</td>
+          <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+        <div class="col-md-6">
+          <div class="text-muted mb-2">Supplier</div>
+          <strong>
+          Vaibhav Shah
+          </strong>
+          <p class="fs-sm">
+            A-1011-12, Siddhi Vinayak Towers, near Kataria Arcade, Majalpure, Vadodara, Gujarat 380051
+            <br>
+            <a href="#!" class="text-purple">
+              diyantechno@gmail.com
+            </a>
+          </p>
+          <a href="#!" class="text-purple">8401344462
+          </a>
+        </div>
+        <div class="col-md-6 text-md-end" *ngFor="let user of userData">
+          <div class="text-muted mb-2">Buyer</div>
+          <strong>
+            {{this.user?.firstName }} {{this.user?.lastName }},
+          </strong>
+          <p class="fs-sm">
+            {{ this.selectedAddress?.Street
+            }},  {{ this.selectedAddress?.Postcode
+            }},
+           
+
+{{ this.selectedAddress?.City}}, 
+{{ this.selectedAddress?.State}},
+{{ this.selectedAddress?.Country}}
+            <br>
+            <a href="#!" class="text-purple">{{this.user.email}}
+            </a>
+            <a href="#!" class="text-purple">{{this.user.mobileNo}}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <table class="table border-bottom border-gray-200 mt-3">
+      <thead>
+        <tr>
+          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Description</th>
+          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Qty</th>
+          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of data">
+          <td class="px-0">{{data.productId.productname}}</td>
+          <td class="text-end px-0">{{data.quantity}}</td>
+          <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-5">
+      <div class="d-flex justify-content-end">
+        <p class="text-muted me-3">Subtotal:</p>
+        <span> {{updateprices}}</span>
+      </div>
+      <!-- <div class="d-flex justify-content-end">
+          <p class="text-muted me-3">Discount:</p>
+          <span>-$40.00</span>
+        </div> -->
+      <div class="d-flex justify-content-end mt-3">
+        <h5 class="me-3">Total:</h5>
+        <h5 class="text-success"> {{updateprices}}</h5>
+      </div>
+    </div>
+   
+  </div>
+
+</div>
+ <a #payNowButton  (click)="onOrder()"
+    class="btn btn-dark btn-lg card-footer-btn justify-content-center
+     text-uppercase-bold-sm hover-lift-light">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock"
+      viewBox="0 0 16 16">
+      <path
+        d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
+    </svg>
+    Pay Now
+  </a>
+</ng-template>
+
+<ng-template #newaddress>
+  <div class="container mt-2 mb-2">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 col-xl-12">
+        <div class="card">
+          <div class="card-body p-5">
+            <div class="d-flex justify-content-between mb-5">
+              <!-- heading -->
+              <div>
+                <h5 class="h6 mb-1" id="addAddressModalLabel">New Shipping Address</h5>
+                <p class="small mb-0">Add new shipping address for your order delivery.</p>
+              </div>
+              <div>
+
+                <button type="button" class="btn-close" (click)="modalRef?.hide()" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+            </div>
+            <!-- row -->
+            <form [formGroup]="userAddressForm">
+              <div class="row g-3">
+                <div class="col-12">
+                  <input type="text" class="form-control" formControlName="Street" placeholder="Street">
+                </div>
+                <div class="col-12">
+
+                  <input type="text" class="form-control" formControlName="City" placeholder="City">
+                </div>
+
+                <div class="col-12">
+
+                  <input type="text" class="form-control" formControlName="State" placeholder="State">
+                </div>
+                <div class="col-12">
+
+                  <input type="text" class="form-control" formControlName="Postcode" placeholder="Postcode">
+                </div>
+                <div class="col-12">
+
+                  <input type="text" class="form-control" formControlName="Country" placeholder="Country">
+                </div>
+                <!-- <div class="col-12">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+								
+									<label class="form-check-label" for="flexCheckDefault">Set as Default</label>
+								</div>
+							</div> -->
+
+                <div class="col-12 text-end">
+                  <button type="button" (click)="modalRef?.hide()" class="btn btn-outline-primary"
+                    data-bs-dismiss="modal">Cancel</button>
+                  <button class="btn btn-primary" (click)="Add_address()" type="button">Save Address</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>

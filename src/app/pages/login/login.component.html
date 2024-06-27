@@ -1,0 +1,121 @@
+<div class="border-bottom shadow-sm">
+    <nav class="navbar navbar-light py-2">
+      <div class="container justify-content-center justify-content-lg-between">
+        <a class="navbar-brand" href="https://freshcart.codescandy.com/index.html">
+          <img src="https://freshcart.codescandy.com/assets/images/logo/freshcart-logo.svg" alt="" class="d-inline-block align-text-top">
+        </a>
+        <span class="navbar-text"  *ngIf="!login">
+            Already have an account? <button type="submit" class="btn btn-primary" (click)="showlogin()">Sign in</button>
+          </span>
+        <span class="navbar-text" type="button" *ngIf="!singUp" >
+            please create your  account?
+            <button type="submit" class="btn btn-primary"   (click)="showSingup()">Singup</button>
+        </span>
+      </div>
+    </nav>
+  </div>
+<section class="my-lg-14 my-8" *ngIf="login">
+    <div class="container">
+      <!-- row -->
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
+          <!-- img -->
+          <img src="https://freshcart.codescandy.com/assets/images/svg-graphics/signin-g.svg" alt="" class="img-fluid">
+        </div>
+        <!-- col -->
+        <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
+          <div class="mb-lg-9 mb-5">
+            <h1 class="mb-1 h2 fw-bold">Sign in to FreshCart</h1>
+            <p>Welcome back to FreshCart! Enter your email to get started.</p>
+          </div>
+
+          <form [formGroup]="loginForm"  (ngSubmit)="submitLogin()">
+            <div class="row g-3">
+              <!-- row -->
+
+              <div class="col-12">
+                <!-- input -->
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" required>
+              </div>
+              <div class="col-12">
+                <!-- input -->
+                <div class="password-field position-relative">
+      <input type="password" formControlName="password" placeholder="Enter Password" class="form-control" required >
+      <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
+    </div>
+
+              </div>
+              <div class="d-flex justify-content-between">
+                <!-- form check -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <!-- label --> <label class="form-check-label" for="flexCheckDefault">
+                    Remember me
+                  </label>
+                </div>
+                <div> Forgot password? <a href="forgot-password.html">Reset It</a></div>
+              </div>
+              <!-- btn -->
+              <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign In</button>
+              </div>
+              <!-- link -->
+              <div>Don’t have an account? <a href="signup.html"> Sign Up</a></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="my-lg-14 my-8" *ngIf="singUp">
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
+          <!-- img -->
+          <img src="https://freshcart.codescandy.com/assets/images/svg-graphics/signup-g.svg" alt="" class="img-fluid">
+        </div>
+        <!-- col -->
+        <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
+          <div class="mb-lg-9 mb-5">
+            <h1 class="mb-1 h2 fw-bold">Get Start Shopping</h1>
+            <p>Welcome to FreshCart! Enter your email to get started.</p>
+          </div>
+          <!-- form -->
+          <form>
+            <div class="row g-3">
+              <!-- col -->
+              <div class="col">
+                <!-- input --><input type="text" class="form-control" placeholder="First name" aria-label="First name"
+                  required>
+              </div>
+              <div class="col">
+                <!-- input --><input type="text" class="form-control" placeholder="Last name" aria-label="Last name"
+                  required>
+              </div>
+              <div class="col-12">
+
+                <!-- input --><input type="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+              </div>
+              <div class="col-12">
+
+                <div class="password-field position-relative">
+                  <input type="password" id="fakePassword" placeholder="Enter Password" class="form-control" required >
+                  <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
+                </div>
+              </div>
+              <!-- btn -->
+              <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Register</button>
+              </div>
+
+              <!-- text -->
+              <p><small>By continuing, you agree to our <a href="#!"> Terms of Service</a> & <a href="#!">Privacy
+                    Policy</a></small></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </section>

@@ -1,0 +1,136 @@
+.card-product {
+    transition: .2s;
+    -moz-transition: .2s;
+    -webkit-transition: .2s;
+    -o-transition: .2s;
+    width: 320px;
+    width: 200px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%; /* Ensure image takes full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensures block-level display */
+    object-fit: cover; /* Ensures the image covers the entire container */
+    object-position: center; /* Centers the image within the container */
+  }
+/* 
+  ::ng-deep .slick-slider .slick-next{
+    align-items: center;
+    background-color: var(--fc-gray-200);
+    border: 1px solid var(--fc-gray-200);
+    border-radius: 50px;
+    color: var(--fc-gray-500);
+    cursor: pointer;
+    display: block;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    font-size: 0px;
+    height: 32px;
+    justify-content: center;
+    left: 97%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    transition: .3s ease-in-out;
+    width: 32px;
+}
+::ng-deep .slick-slider .slick-prev {
+    align-items: center;
+    background-color: var(--fc-gray-200);
+    border: 1px solid var(--fc-gray-200);
+    border-radius: 50px;
+    color: var(--fc-gray-500);
+    cursor: pointer;
+    display: block;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    font-size: 0px;
+    height: 32px;
+    justify-content: center;
+    left: 97%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    transition: .3s ease-in-out;
+    width: 32px;
+}
+.slick-prev:before {
+    content: '←';
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+} */
+::ng-deep .slick-slider .slick-prev,
+::ng-deep .slick-slider .slick-next {
+   align-items: center;
+    background-color: var(--fc-gray-200);
+    border: 1px solid var(--fc-gray-200);
+    border-radius: 50px;
+    color: var(--fc-gray-500);
+    cursor: pointer;
+    display: block;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    font-size: 0px;
+    height: 32px;
+    justify-content: center;
+    left: 97%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    transition: .3s ease-in-out;
+    width: 32px;
+}
+
+/* ::ng-deep .slick-slider .slick-prev {
+    left: -40px; /* Adjust as needed
+}  */
+
+::ng-deep .slick-slider .slick-next {
+    right: -40px; /* Adjust as needed */
+}
+
+::ng-deep .slick-prev:before, 
+::ng-deep .slick-next:before {
+    content: '';
+    font-family: 'slick';
+    font-size: 0px; /* Hide default text */
+    line-height: 1;
+    opacity: 0; /* Hide default icon */
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::ng-deep .slick-prev:after,
+::ng-deep .slick-next:after {
+    content: ' ';
+    font-size: 20px;
+    color: white; /* Adjust arrow color as needed */
+}
+
+::ng-deep .slick-prev:after {
+    content: '<'; /* Left arrow */
+}
+
+::ng-deep .slick-next:after {
+    content: '>'; /* Right arrow */
+}
