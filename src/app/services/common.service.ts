@@ -75,5 +75,8 @@ export class CommonService implements OnInit {
   getOrder(userId:any):Observable<any>{
     return this.http.get(environment.baseUrl+'order/getorderbyuserId/'+userId)
   }
+  deleteWishlistprod(userId:any ,data:any){
+    return this.http.delete(environment.baseUrl+'wishlist/deletewishlist/'+userId ,data)
+  }
   
 }

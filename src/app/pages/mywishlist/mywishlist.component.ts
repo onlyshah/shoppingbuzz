@@ -28,4 +28,12 @@ export class MywishlistComponent  implements OnInit{
   addtocart(productId:any){
     this.cart.addtocartbyWishList(productId ,this.userId)
   }
+  deleteWishlist(productId:any){
+      let  data ={
+        "productId":productId,
+       }
+    this.comApi.deleteWishlistprod(productId ,data).subscribe((res:any)=>{
+      console.log('product delete from wishlist',res)
+    })
+  }
 }
