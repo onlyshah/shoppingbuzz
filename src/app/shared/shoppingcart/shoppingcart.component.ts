@@ -15,7 +15,7 @@ providedIn:'root'
 
 export class ShoppingcartComponent  implements OnInit {
   imagePath = environment.baseUrl;
- // userId = this.auth.userValue.userId
+ userId = this.auth.userValue.userId
   @Input() categorytdata:any
   @Input() subcategorytdata:any
   @Input() pushproductdata:any
@@ -23,12 +23,15 @@ export class ShoppingcartComponent  implements OnInit {
   @Input() routeId:any
   @Input() item:any
   userData:any
+  //@Input () dataitem :any
   cartcount: number;
   wishlistcount:number;
+ 
   
   constructor(private comApi:CommonService , private route: Router , private router: ActivatedRoute ,
     public auth:AuthService) {
-  
+      //console.log('***',this.dataitem)
+    
       
 
      }
@@ -37,41 +40,13 @@ export class ShoppingcartComponent  implements OnInit {
     this.userData=(JSON.parse(localStorage.getItem('user')!))
     console.log('...', this.userData?.userId)
    
-    console.log('***',this.pushproductdata)
-    
+  
    
    
   }
   
-  // addItem(event:any){
-  //   console.log('id',event);
-  //   this.categorytdata =  this.categorytdata.filter(
-  //     (id:any) => id.SubCategoryId._id === event 
-     
-  //    )
-  //    this.categorytdata =  this.categorytdata.filter(
-  //     (id:any) =>  id.features[0].ram === event
-  //    )
-     
-  // }
-  addtocartbyWishList(productId :any ,userId:any)
-  {
-    var data ={
-      "userId":userId,
-      "products":{
-      "productId":productId,
-      "quantity":1
-      
-    }
-    }
-    console.log(data)
-    this.comApi.addtocart(data).subscribe((response:any)=>{
-      console.log(response);
-    
-    })
-
-  
-  }
+ 
+ 
   addcart(productId:any){  
     console.log(productId)
     console.log(this.userData?.userId)

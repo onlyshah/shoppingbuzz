@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ShoppingcartComponent } from 'src/app/shared/shoppingcart/shoppingcart.component';
@@ -14,7 +16,7 @@ export class MywishlistComponent  implements OnInit{
   wishlist:any;
   imagePath = environment.baseUrl;
  constructor(private comApi:CommonService ,private auth:AuthService,
-  private cart:ShoppingcartComponent){
+  private cart:ShoppingcartComponent , private router: Router){
 
  }
   ngOnInit() {
@@ -26,14 +28,29 @@ export class MywishlistComponent  implements OnInit{
   }
 
   addtocart(productId:any){
-    this.cart.addtocartbyWishList(productId ,this.userId)
+    var value= {
+      "userId":this.userId,
+      "products":{
+        "productId":productId,
+        "quantity":1
+        
+      }
+      
+    }
+    this.comApi.addtocart(value).subscribe((response:any)=>{
+      console.log(response);
+    
+    })
+    this.deleteWishlist(productId)
+   //this.router.navigateByUrl('/cart')
+    
   }
   deleteWishlist(productId:any){
-      let  data ={
-        "productId":productId,
-       }
-    this.comApi.deleteWishlistprod(productId ,data).subscribe((res:any)=>{
-      console.log('product delete from wishlist',res)
-    })
+    this.comApi.deleteWishlistprod(this.userId,productId).pipe(first())
+    .subscribe({
+      next: (res: any) => {
+         console.log('deleted',res)
+      },
+    });
   }
 }

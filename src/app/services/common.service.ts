@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CommonService implements OnInit {
-  public data = new Subject<any>();
+  public subjectOBJ = new Subject<any>();
   private cardCountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   cardCount$: Observable<number> = this.cardCountSubject.asObservable();
 
@@ -75,8 +75,22 @@ export class CommonService implements OnInit {
   getOrder(userId:any):Observable<any>{
     return this.http.get(environment.baseUrl+'order/getorderbyuserId/'+userId)
   }
-  deleteWishlistprod(userId:any ,data:any){
-    return this.http.delete(environment.baseUrl+'wishlist/deletewishlist/'+userId ,data)
+  deleteWishlistprod(userId:any ,productId:any) :Observable<any>{
+    console.log(productId)
+    return this.http.delete(environment.baseUrl+'wishlist/deletewishlist/'+userId+ '/' + productId)
+    .pipe(map((response:any) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      this.subjectOBJ.asObservable();
+      this.subjectOBJ.next(response);
+      return response;
+  }));
   }
-  
+  deletecartItem(userId:any ,productId:any):  Observable<any>{
+    return this.http.delete(environment.baseUrl+'cart/deletecartitem/'+ userId + '/' + productId).pipe(map((response:any) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      this.subjectOBJ.asObservable();
+      this.subjectOBJ.next(response);
+      return response;
+  }));
+  }
 }

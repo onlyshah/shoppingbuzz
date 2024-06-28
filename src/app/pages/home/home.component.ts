@@ -9,12 +9,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private comApi:CommonService , private router: Router) { }
+  constructor(private comApi:CommonService , private router: Router,) { }
   ngOnInit(): void {
     this.getcompareCategory();
     this.getcarouselData();
-    
-  }
+      }
   categoryData:any;
   getcatname:any;
   compareCategory:any;
@@ -24,6 +23,13 @@ export class HomeComponent implements OnInit {
   bSelling:any = [];
   featuredData:any = [];
   getcarouselvalue:any;
+  dataitem:  [
+    {
+      category: 'dairyfood',
+      icon: '  <i class="bi bi-stack"></i>'   },
+   
+    // Add more items as needed
+  ];
   imagePath = environment.baseUrl;
   slideConfig = { slidesToShow:4, slidesToScroll: 1, infinite: false, autoplay: true, 
     dots: true,

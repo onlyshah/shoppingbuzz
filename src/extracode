@@ -457,3 +457,22 @@ this.comApi.refresh.pipe().subscribe(()=>{
     </div>
 
     
+    // addtocartbyWishList(productId :any ,userId:any)
+    // {
+    //   var data ={
+    //     "userId":userId,
+    //     "products":{
+    //     "productId":productId,
+    //     "quantity":1
+        
+    //   }
+    //   }
+    //   console.log(data)
+    //   this.comApi.addtocart(data).subscribe((response:any)=>{
+    //     console.log(response);
+      
+    //   })
+  
+    
+    // }
+    

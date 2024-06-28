@@ -134,3 +134,8 @@
 ::ng-deep .slick-next:after {
     content: '>'; /* Right arrow */
 }
+
+.carousel-item {
+    text-align: center;
+    /* Add any other styles as needed */
+  }

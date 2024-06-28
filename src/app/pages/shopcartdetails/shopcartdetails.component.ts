@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { first ,Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
+import { ShoppingcartComponent } from 'src/app/shared/shoppingcart/shoppingcart.component';
 import { environment } from 'src/environments/environment';
 
 
@@ -24,7 +25,8 @@ export class ShopcartdetailsComponent  implements OnInit{
   quantityminus:any;
   mySubscription:Subscription
  constructor(private comApi:CommonService ,private auth:AuthService,
-  private route: Router , private router: ActivatedRoute) {
+  private route: Router , private router: ActivatedRoute ,
+) {
   this.route.routeReuseStrategy.shouldReuseRoute = function () {
     return false;
   };
@@ -106,10 +108,36 @@ export class ShopcartdetailsComponent  implements OnInit{
       this.onUpdadte(value)
   
   }
- onUpdadte(value:any){
- 
- }
-  
+  onUpdadte(value:any){}
+
+  // from  cart to wishlist
+  movetoWishList(productId:any){
+    var value= {
+      "userId":this.userId,
+      "List":{
+        "productId":productId,
+        
+        
+      }
+    }
+    // console.log(value)
+    this.comApi.addtowishlist(value).subscribe((res:any)=>{
+      let wishlist = res;
+      console.log('wishlist',wishlist)
+    })
+    this.deletecartItem(productId)
+
+  }
+  deletecartItem(productId:any){
+    console.log('delete',productId ,this.userId) 
+    this.comApi.deletecartItem(this.userId,productId).pipe(first())
+    .subscribe({
+      next: (res: any) => {
+         console.log('deleted',res)
+      },
+    });
+
+  }
    
   
   
