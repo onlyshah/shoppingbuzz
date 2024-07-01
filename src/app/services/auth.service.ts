@@ -29,6 +29,9 @@ export class AuthService implements OnInit {
   public get userValue() {
       return this.userSubject.value;
   }
+  SignUp(data:any){
+    return this.http.post<any>(environment.baseUrl+'signup',data)
+  }
   login(data:any) {
     this.loggedInStatus = true;
     return this.http.post<any>(environment.baseUrl+'login',data)

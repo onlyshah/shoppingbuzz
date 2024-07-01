@@ -37,31 +37,39 @@
    </div>
 </section>
 
-<!-- <section class="mb-lg-10 mt-lg-14 my-4">
+<section class="mb-lg-10 mt-lg-14 my-4" *ngIf="cardcarouselData.length > 0">
    <div class="container">
-      <carousel [itemsPerSlide]="3">
+      <carousel [itemsPerSlide]="2">
          <slide *ngFor="let data of cardcarouselData; let index=index"  >
-          
-            <div class="product-image_card">
-               <div class="py-10 px-8 rounded"  [ngStyle]="{
-                  'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
-                  'background-position': 'center center',
-                  'background-size': 'cover',
-                  'background-repeat': 'no-repeat',
-                  'border-radius': '0.5rem',
-               
-              }">
-                 <div>
-                   <h3 class="fw-bold mb-1">{{data.title}}</h3>
-                   <p class="mb-4">
-                     Get Upto
-                     <span class="fw-bold">30%</span>
-                     Off
-                   </p>
-                   <a href="#!" class="btn btn-dark">Shop Now</a>
-                 </div>
+            <!-- <div class="container">
+				<div class="row"> -->
+				<div class="col-12 col-md-12 col-sm-12 mb-3 mb-lg-0" *ngIf="data.cardIdNo === 1">
+               <div>
+                  <div class="product-image-card">
+                     <div class="py-10 px-8 rounded"  [ngStyle]="{
+                        'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
+                        'background-position': 'center center',
+                        'background-size': 'cover',
+                        'background-repeat': 'no-repeat',
+                        'border-radius': '0.5rem',
+                     
+                  }">
+                     <div>
+                        <h3 class="fw-bold mb-1">{{data.title}}</h3>
+                        <p class="mb-4">
+                           Get Upto
+                           <span class="fw-bold">30%</span>
+                           Off
+                        </p>
+                        <a href="#!" class="btn btn-dark">Shop Now</a>
+                     </div>
+                     </div>
+                  </div>
                </div>
+               </div>
+            <!-- </div>
             </div>
+                -->
                     
                 
                
@@ -72,7 +80,7 @@
 
 
    </div>
-</section> -->
+</section>
 
 <section class="mb-lg-14 my-4">
    <div class="container">

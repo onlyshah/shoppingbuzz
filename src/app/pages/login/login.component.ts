@@ -62,15 +62,16 @@ export class LoginComponent implements OnInit {
       Address: this.fb.array([
         this.fb.group({
           Country: ['', Validators.required],
-          Street: ['', Validators.required],
+          State:['', Validators.required],
           City: ['', Validators.required],
-          Ctate: ['', Validators.required],
+          Street: ['', Validators.required],
           Postcode: ['', Validators.required],
           addresstype: ['', Validators.required],
-          State:['', Validators.required],
+        
       
         })
       ])
+     
     });
   }
  get form() { return this.signupForm.controls; }
@@ -87,13 +88,13 @@ export class LoginComponent implements OnInit {
 
   onsignupSubmit(){
     console.log(this.signupForm.value)
-    // this.auth.SignUp(this.signupForm.value).subscribe((response:any)=>{
-    //   this.signupData = response;
-    //   console.log(this.signupData);
-    //   this.router.navigateByUrl('/login');
+    this.auth.SignUp(this.signupForm.value).subscribe((response:any)=>{
+      this.signupData = response;
+      console.log(this.signupData);
+      this.router.navigateByUrl('/login');
       
-    // })
-    console.log(this.signupForm.value)
+    })
+   // console.log(this.signupForm.value)
   }
   
   showlogin(){

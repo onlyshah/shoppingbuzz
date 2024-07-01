@@ -18,10 +18,10 @@
     object-fit: cover; /* Ensures the image covers the entire container */
     object-position: center; /* Centers the image within the container */
   }
-  .product-image_card {
-    width: 100%; /* Ensure image takes full width of its container */
-    height: 300; /* Maintain aspect ratio */
-    display: block; /* Ensures block-level display */
+  .product-image-card {
+    width: 781px; /* Ensure image takes full width of its container */
+    height:300px; /* Maintain aspect ratio */
+    display: contents; /* Ensures block-level display */
     object-fit: cover; /* Ensures the image covers the entire container */
     object-position: center; /* Centers the image within the container */
   }

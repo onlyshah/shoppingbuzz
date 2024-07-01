@@ -27,14 +27,7 @@ export class HomeComponent implements OnInit{
   bSelling:any = [];
   featuredData:any = [];
   getcarouselvalue:any;
-  cardcarouselData:any;
-  dataitem:  [
-    {
-      category: 'dairyfood',
-      icon: '  <i class="bi bi-stack"></i>'   },
-   
-    // Add more items as needed
-  ];
+  cardcarouselData:any=[];
   imagePath = environment.baseUrl;
   slideConfig = { slidesToShow:4, slidesToScroll: 1, infinite: false, autoplay: true, 
     dots: true,
