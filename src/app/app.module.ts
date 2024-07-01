@@ -8,7 +8,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {CarouselModule} from 'ngx-bootstrap/carousel'
 import { ShoppingcartComponent } from './shared/shoppingcart/shoppingcart.component';
@@ -19,6 +19,7 @@ import { MywishlistComponent } from './pages/mywishlist/mywishlist.component';
 import { ShopCheckoutComponent } from './pages/shop-checkout/shop-checkout.component';
 import { MyorderComponent } from './pages/myorder/myorder.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
     FiltersidebarComponent,
     MywishlistComponent,
     ShopCheckoutComponent,
-    MyorderComponent
+    MyorderComponent,
   ],
   imports: [
     BrowserModule,

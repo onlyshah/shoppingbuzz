@@ -1,478 +1,347 @@
-<ng-container  *ngIf="categorytdata != null && subcategorytdata != null">
 
-<div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3 mt-2" *ngIf="routeId === categorytdata[0]?.CategoryId?._id">
-
- 
-        
-<div class="col" *ngFor="let categorytdata of categorytdata">
- 
-  <div class="card card-product">
-    <div class="card-body">
-
-
-<div class="text-center position-relative ">
-   <div class=" position-absolute top-0 start-0">
-      <span class="badge bg-danger">Sale {{categorytdata?.CategoryId.categorydiscount}}</span>
-   </div>
- 
-   <a href="#!"> <img [src]="imagePath+categorytdata?.productImage"
-      alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>
- 
-   <div class="product-action-btn">
-      <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-         data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-      <a (click)="Wishlist(categorytdata._id)" class="btn-action mb-1" data-bs-toggle="tooltip"
-         data-bs-html="true" title="Wishlist"><i
-         class="bi bi-heart"></i></a>
-      <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-         data-bs-html="true" title="Compare"><i
-         class="bi bi-arrow-left-right"></i></a> -->
-   </div>
-</div>
-
-<h2 class="fs-6">
-  <a routerLink="/product/{{categorytdata?._id}}">{{categorytdata?.productname}}</a>
- </h2>
- <h2 class="fs-6"><a routerLink="/product/{{categorytdata?.CategoryId?._id}}"
-  
-
-   class="text-inherit text-decoration-none">{{categorytdata?.CategoryId?.categoryname}}</a>
-</h2>
-<h2 class="fs-6"><a routerLink="/product/{{categorytdata?.SubCategoryId?._id}}"
-  CategoryId
-
-   class="text-inherit text-decoration-none">{{categorytdata?.SubCategoryId?.subcategoryname}}</a>
-</h2>
-
-<div>
-  
-   <small class="text-warning"> <i class="bi bi-star-fill"></i>
-   <i class="bi bi-star-fill"></i>
-   <i class="bi bi-star-fill"></i>
-   <i class="bi bi-star-fill"></i>
-   <i class="bi bi-star-half"></i></small> <span
-      class="text-muted small">4.5(149)</span>
-</div>
-
-<div class="d-flex justify-content-between align-items-center mt-3">
-   <div><span class="text-danger">{{categorytdata?.price}}</span> <span
-      class="text-decoration-line-through text-muted">$24</span>
-   </div>
-   <div><span class="text-uppercase small text-primary">
-      In Stock</span>
-   </div>
-</div>
-<div class="d-grid mt-4">
-   <a (click)="addcart(categorytdata._id)" class="btn btn-primary rounded-pill">Add to Cart</a>
-</div>
-</div>
-</div>
-
-</div>          
-
-</div>
-<div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3 mt-2" *ngIf="routeId === subcategorytdata[0]?.SubCategoryId._id">
-
- 
-        
-   <div class="col" *ngFor="let subcategorytdata of subcategorytdata">
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3 mb-lg-0">
+            <div>
+              <div class="py-10 px-8 rounded" style="background-color: #f0efeb;">
+                <div>
+                  <h3 class="fw-bold mb-1">Fruits &amp; Vegetables</h3>
+                  <p class="mb-4">
+                    Get Upto
+                    <span class="fw-bold">30%</span>
+                    Off
+                  </p>
+                  <a href="#!" class="btn btn-dark">Shop Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div>
+              <div class="py-10 px-8 rounded" style="background-color:#f0efeb;">
+                <div>
+                  <h3 class="fw-bold mb-1">Freshly Baked Buns</h3>
+                  <p class="mb-4">
+                    Get Upto
+                    <span class="fw-bold">25%</span>
+                    Off
+                  </p>
+                  <a href="#!" class="btn btn-dark">Shop Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    .py-10 {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
     
-      <div class="card card-product">
-        <div class="card-body">
-
-   
-    <div class="text-center position-relative ">
-       <div class=" position-absolute top-0 start-0">
-          <span class="badge bg-danger">Sale {{subcategorytdata?.CategoryId.categorydiscount}}</span>
-       </div>
-     
-       <a href="#!"> <img [src]="imagePath+subcategorytdata?.productImage"
-          alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>
-     
-       <div class="product-action-btn">
-          <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-             data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-          <a (click)="Wishlist(subcategorytdata._id)" class="btn-action mb-1" data-bs-toggle="tooltip"
-             data-bs-html="true" title="Wishlist"><i
-             class="bi bi-heart"></i></a>
-          <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-             data-bs-html="true" title="Compare"><i
-             class="bi bi-arrow-left-right"></i></a> -->
-       </div>
-    </div>
-   
-    <h2 class="fs-6">
-      <a routerLink="/product/{{categorytdata?._id}}">{{subcategorytdata?.productname}}</a>
-     </h2>
-     <h2 class="fs-6"><a routerLink="/product/{{categorytdata?.CategoryId?._id}}"
-      
-
-       class="text-inherit text-decoration-none">{{subcategorytdata?.CategoryId?.categoryname}}</a>
-    </h2>
-    <h2 class="fs-6"><a routerLink="/product/{{categorytdata?.SubCategoryId?._id}}"
-      CategoryId
-
-       class="text-inherit text-decoration-none">{{subcategorytdata?.SubCategoryId?.subcategoryname}}</a>
-    </h2>
-   
-    <div>
-      
-       <small class="text-warning"> <i class="bi bi-star-fill"></i>
-       <i class="bi bi-star-fill"></i>
-       <i class="bi bi-star-fill"></i>
-       <i class="bi bi-star-fill"></i>
-       <i class="bi bi-star-half"></i></small> <span
-          class="text-muted small">4.5(149)</span>
-    </div>
+    .px-8 {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
     
-    <div class="d-flex justify-content-between align-items-center mt-3">
-       <div><span class="text-danger">{{categorytdata?.price}}</span> <span
-          class="text-decoration-line-through text-muted">$24</span>
-       </div>
-       <div><span class="text-uppercase small text-primary">
-          In Stock</span>
-       </div>
-    </div>
-    <div class="d-grid mt-4">
-       <a (click)="addcart(subcategorytdata._id)" class="btn btn-primary rounded-pill">Add to Cart</a>
-    </div>
- </div>
-</div>
-   </div>
-</div> 
-
-<div class="row" *ngIf="routeId ===pushproductdata[0]?._id">
-<!-- {{routeId}} ,{{pushproductdata[0]?._id}} -->
-<div class="col-md-6">
-
-   <img alt="product"  [src]="imagePath+pushproductdata[0]?.productImage" style="padding-top: 0px;">
-   <hr class="my-6">
-   <div>
-      <div class="mb-5">
-         <!-- text -->
-         <p class="mb-0">
-            {{ pushproductdata[0]?.productdescription}}.</p>
-      </div>
-   
-
-   </div>
-</div>
-
-<div class="col-md-6">
-<div class="ps-lg-10 mt-6 mt-md-0">
-   <!-- content -->
-   <h1 class="mb-1">{{ pushproductdata[0]?.productname}} </h1>
-   <a href="#!" class="mb-2 d-block">{{ pushproductdata[0]?.productname}}</a>
-   <a href="#!" class="mb-1 d-block">{{ pushproductdata[0]?.CategoryId.categoryname}}</a>
-   <!-- heading -->
-
-   <div class="mb-4">
-      <!-- rating -->
-      <!-- rating --> <small class="text-warning"> <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-half"></i></small><a href="#" class="ms-2">(30 reviews)</a></div>
-   <div class="fs-4">
-      <!-- price --><span class="fw-bold text-dark">{{pushproductdata[0]?.price}}</span> 
-      <!-- <span class="text-decoration-line-through text-muted">$35</span> -->
-      <span>
-         <small class="fs-6 ms-2 text-danger">{{pushproductdata[0]?.CategoryId?.categorydiscount}}%</small></span>
-   </div>
-   <!-- hr -->
-
-   <div class="mb-5">
-      <!-- input -->
-      <!-- <div class="input-group input-spinner  ">
-         <input type="button"  class="button-minus  btn  btn-sm" 
-         (click)="updateprice(pushproductdata[0]?.quality)">
-         <input type="number" step="1" max="10" value="{{updateprice}}" name="quantity" class="quantity-field form-control-sm form-input   ">
-         <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
-      </div> -->
-
-   </div>
-   <div class="mt-3 row justify-content-start g-2 align-items-center">
-
-      <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-      <!-- button -->
-      <button type="button" (click)="addcart(pushproductdata[0]?._id)"
-      class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>Add to
-         cart</button>
-      </div>
-      <div class="col-md-4 col-4">
-      <!-- btn -->
-            <a class="btn btn-light " (click)="Wishlist(pushproductdata[0]?._id)" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"><i class="feather-icon icon-heart"></i></a>
-      </div>
-   </div>
-   <!-- hr -->
-   <hr class="my-6">
-   
-</div>
-</div>
-</div>   
-</ng-container> 
-
-
-this.comApi.refresh.pipe().subscribe(()=>{
-   this.cartcount
-   console.log(this.cartcount)
-  })
-
-
-  <div class="col-xl-6 col-lg-12 col-md-6 col-12 mb-4">
-   <!-- input -->
-   <!-- <div class="card card-body p-6">
-     <div class="form-check mb-4">
-       <input class="form-check-input" type="radio" name="flexRadioDefault" value="office">
-       <label class="form-check-label text-dark" for="officeRadio">Office</label>
-     </div>
-     <address> <strong>{{userData?.firstName}} {{userData?.lastName}}</strong> <br>
-
-       {{userData?.Address[1]?.Street}}, <br>
-
-       {{userData?.Address[1]?.City}},{{userData?.Address[1]?.State}}
-       <br>
-       <abbr title="Phone">Mobile: {{userData?.mobileNo}}</abbr> <br>
-       <abbr title="Phone">Pincode: {{userData?.Address[0]?.Postcode}}</abbr>
-
-     </address>
-   </div> -->
- </div>
-
-
-
- <ng-template #template>
-   <div class="container mt-2 mb-2">
-     <div class="row justify-content-center">
-       <div class="col-lg-12 col col-xl-12">
-         <div class="card">
-           <div class="card-body p-5" #contentToConvert>
-             <div class="card-body p-5">
-               <div class="modal-header"  *ngFor="let user of userData">
-                 <h2>
-                   Hey {{this.user.firstName }} {{this.user.lastName }},
-                 </h2>
-           
-                 <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-                   <span aria-hidden="true" class="visually-hidden">&times;</span>
-                 </button>
-               </div>
-               <p class="fs-sm">
-                 This is the receipt for a payment of <strong> {{updateprices}}
-                 </strong> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                   class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                   <path
-                     d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z" />
-                 </svg>
-               </p>
-           
-               <div class="border-top border-gray-200 pt-3 mt-2">
-                 <div class="row">
-                   <table class="table  mt-2">
-                     <thead>
-                       <tr>
-                         <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Payment Id</th>
-                         <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Payment Date</th>
-                         <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Payment Type</th>
-                       </tr>
-                     </thead>
-                     <tbody>
-                       <tr>
-                         <td class="px-0"><strong>#88305</strong></td>
-                         <td class="text-end px-0"><strong>Feb/09/20</strong></td>
-                         <td class="text-end px-0"><strong>{{paymentMode}}</strong></td>
-                       </tr>
-                     </tbody>
-                   </table>
-                   <!-- <div class="col-md-6">
-                     <div class="text-muted mb-2">Payment .</div>
-                     <strong>#88305</strong>
-                   </div>
-                   <div class="col-md-6 text-md-end">
-                     <div class="text-muted mb-2">Payment Date</div>
-                     <strong>Feb/09/20</strong>
-                   </div>
-                   <div class="col-md-6">
-                     <div class="text-muted mb-2">Payment Mode</div>
-                     <strong>{{paymentMode}}</strong>
-                   </div> -->
+    .rounded {
+      border-radius: 10px;
+    }
+    
+    .fw-bold {
+      font-weight: bold;
+    }
+    
+    .mb-1 {
+      margin-bottom: 1rem;
+    }
+    
+    .mb-4 {
+      margin-bottom: 4rem;
+    }
+    
+    .btn-dark {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .btn-dark:hover {
+      background-color: #444;
+    }
+    <!-- <section class="mb-lg-14 my-8">
+   <div class="container">
+       <div class="row align-items-center mb-6">
+           <div class="col-lg-10 col-9">
+              <div class="d-xl-flex justify-content-between align-items-center">
+               
+                 <div class="d-flex">
+                    <div class="mt-1">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round"
+                          class="feather feather-shopping-bag text-primary">
+                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                          <line x1="3" y1="6" x2="21" y2="6"></line>
+                          <path d="M16 10a4 4 0 0 1-8 0"></path>
+                       </svg>
+                    </div>
+                    <div class="ms-3">
+                       <h3 class=" mb-0">{{featuredData[0].displaycategory}}</h3>
+                       <p class="mb-0">Find the bestseller products in your area with discount.</p>
+                    </div>
                  </div>
-               </div>
-           
-               <div class="border-top border-gray-200 mt-4 py-4">
-                 <div class="row">
-                   
-               <table class="table border-bottom border-gray-200 mt-3">
-                 <thead>
-                   <tr>
-                     <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Producty</th>
-                     <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Qty</th>
-                     <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Amount</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr *ngFor="let data of data">
-                     <td class="px-0">{{data.productId.productname}}</td>
-                     <td class="text-end px-0">{{data.quantity}}</td>
-                     <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
-                   </tr>
-                 </tbody>
-               </table>
-           
-                   <div class="col-md-6">
-                     <div class="text-muted mb-2">Supplier</div>
-                     <strong>
-                     Vaibhav Shah
-                     </strong>
-                     <p class="fs-sm">
-                       A-1011-12, Siddhi Vinayak Towers, near Kataria Arcade, Majalpure, Vadodara, Gujarat 380051
-                       <br>
-                       <a href="#!" class="text-purple">
-                         diyantechno@gmail.com
-                       </a>
-                     </p>
-                     <a href="#!" class="text-purple">8401344462
-                     </a>
-                   </div>
-                   <div class="col-md-6 text-md-end">
-                     <div class="text-muted mb-2">Buyer</div>
-                     <strong>
-                       {{this.billdetail.firstName }} {{this.billdetail.lastName }},
-                     </strong>
-                     <p class="fs-sm">
-                       {{ this.selectedAddress?.Street
-                       }},  {{ this.selectedAddress?.Postcode
-                       }},
-                      
-           
-           {{ this.selectedAddress?.City}}, 
-           {{ this.selectedAddress?.State}},
-           {{ this.selectedAddress?.Country}}
-                       <br>
-                       <a href="#!" class="text-purple">{{this.billdetail.email}}
-                       </a>
-                       <a href="#!" class="text-purple">{{this.billdetail.mobileNo}}
-                       </a>
-                     </p>
-                   </div>
-                 </div>
-               </div>
-           
-               <table class="table border-bottom border-gray-200 mt-3">
-                 <thead>
-                   <tr>
-                     <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Description</th>
-                     <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Qty</th>
-                     <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Amount</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr *ngFor="let data of data">
-                     <td class="px-0">{{data.productId.productname}}</td>
-                     <td class="text-end px-0">{{data.quantity}}</td>
-                     <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
-                   </tr>
-                 </tbody>
-               </table>
-           
-               <div class="mt-5">
-                 <div class="d-flex justify-content-end">
-                   <p class="text-muted me-3">Subtotal:</p>
-                   <span> {{updateprices}}</span>
-                 </div>
-                 <!-- <div class="d-flex justify-content-end">
-                     <p class="text-muted me-3">Discount:</p>
-                     <span>-$40.00</span>
-                   </div> -->
-                 <div class="d-flex justify-content-end mt-3">
-                   <h5 class="me-3">Total:</h5>
-                   <h5 class="text-success"> {{updateprices}}</h5>
-                 </div>
-               </div>
-             </div>
-           
+              </div>
            </div>
-           <a (click)="onOrder()"
-             class="btn btn-dark btn-lg card-footer-btn justify-content-center text-uppercase-bold-sm hover-lift-light">
-             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock"
-               viewBox="0 0 16 16">
-               <path
-                 d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
-             </svg>
-             Pay Now
-           </a>
-         </div>
+           <div class="col-lg-2 col-3">
+              <div class="slider-arrow" id="slider-third-arrows"></div>
+           </div>
+        </div>
+   <ngx-slick-carousel class="carousel slide"  [config]="slideConfig">
+       <div ngxSlickItem class="carousel-item active"  *ngFor="let item of featuredData; let index=index">
+          <app-shoppingcart [item]="item"></app-shoppingcart>
        </div>
-     </div>
+     </ngx-slick-carousel>
    </div>
- </ng-template>
-                     
- <div class="product-info">
-  
-    <div class="badge-container">
-       <span class="badge bg-danger">Sale {{ item?.CategoryId.categorydiscount }}</span>
-    </div>
-    
-   
-    <h2 class="fs-6">
-       <a routerLink="/product/{{ item?._id }}">{{ item?.productname }}</a>
-    </h2>
-    
- 
-    <div class="category-info">
-       <h2 class="fs-6">
-          <a routerLink="/product/{{ item?.CategoryId?._id }}" class="text-inherit text-decoration-none">{{ item?.CategoryId?.categoryname }}</a>
-       </h2>
-       <h2 class="fs-6">
-          <a routerLink="/product/{{ item?.SubCategoryId?._id }}" class="text-inherit text-decoration-none">{{ item?.SubCategoryId?.subcategoryname }}</a>
-       </h2>
-    </div>
-    
-   
-    <div class="rating-info">
-       <small class="text-warning">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-half"></i>
-       </small>
-       <span class="text-muted small">4.5 (149)</span>
-    </div>
-    
-   
-    <div class="price-stock-info">
-       <div>
-          <span class="text-danger">{{ item?.price }}</span>
-          <span class="text-decoration-line-through text-muted">$24</span>
-       </div>
-       <div>
-          <span class="text-uppercase small text-primary">In Stock</span>
-       </div>
-    </div>
-    
-   
-    <div class="add-to-cart-btn">
-       <a (click)="addcart(item._id)" class="btn btn-primary rounded-pill">Add to Cart</a>
-    </div>
+</section> -->
+/* 
+  ::ng-deep .slick-slider .slick-next{
+    align-items: center;
+    background-color: var(--fc-gray-200);
+    border: 1px solid var(--fc-gray-200);
+    border-radius: 50px;
+    color: var(--fc-gray-500);
+    cursor: pointer;
+    display: block;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    font-size: 0px;
+    height: 32px;
+    justify-content: center;
+    left: 97%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    transition: .3s ease-in-out;
+    width: 32px;
+}
+::ng-deep .slick-slider .slick-prev {
+    align-items: center;
+    background-color: var(--fc-gray-200);
+    border: 1px solid var(--fc-gray-200);
+    border-radius: 50px;
+    color: var(--fc-gray-500);
+    cursor: pointer;
+    display: block;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    font-size: 0px;
+    height: 32px;
+    justify-content: center;
+    left: 97%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    transition: .3s ease-in-out;
+    width: 32px;
+}
+.slick-prev:before {
+    content: '←';
+}
 
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+} */
+/* ::ng-deep .slick-slider .slick-prev,
+::ng-deep .slick-slider .slick-next {
+   align-items: center;
+    background-color: var(--fc-gray-200);
+    border: 1px solid var(--fc-gray-200);
+    border-radius: 50px;
+    color: var(--fc-gray-500);
+    cursor: pointer;
+    display: block;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    font-size: 0px;
+    height: 32px;
+    justify-content: center;
+    left: 97%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    transition: .3s ease-in-out;
+    width: 32px;
+} */
+
+/* ::ng-deep .slick-slider .slick-prev {
+    left: -40px; /* Adjust as needed
+}  */
+
+/* ::ng-deep .slick-slider .slick-next {
+    right: -40px; 
+}
+
+::ng-deep .slick-prev:before, 
+::ng-deep .slick-next:before {
+    content: '';
+    font-family: 'slick';
+    font-size: 0px; 
+    line-height: 1;
+    opacity: 0; 
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::ng-deep .slick-prev:after,
+::ng-deep .slick-next:after {
+    content: ' ';
+    font-size: 20px;
+    color: white; 
+}
+
+::ng-deep .slick-prev:after {
+    content: '<'; 
+}
+
+::ng-deep .slick-next:after {
+    content: '>'; 
+}
+
+.carousel-item {
+    text-align: center;
     
-    // addtocartbyWishList(productId :any ,userId:any)
-    // {
-    //   var data ={
-    //     "userId":userId,
-    //     "products":{
-    //     "productId":productId,
-    //     "quantity":1
-        
-    //   }
-    //   }
-    //   console.log(data)
-    //   this.comApi.addtocart(data).subscribe((response:any)=>{
-    //     console.log(response);
+  }
+  .card-image {
+    transition: box-shadow .25s ease, transform .25s ease;
+    border: solid;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+} */
+
+<!-- 
+<section class="mb-lg-14 my-8">
+   <div class="container">
+      <div class="row align-items-center mb-6">
+         <div class="col-lg-10 col-9">
+            <div class="d-xl-flex justify-content-between align-items-center">
+           
+               <div class="d-flex">
+                  <div class="mt-1">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-shopping-bag text-primary">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                     </svg>
+                  </div>
+                  <div class="ms-3">
+                     <h3 class=" mb-0">{{tDeal.displaycategory}}</h3>
+                     <p class="mb-0">Find the bestseller products in your area with discount.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-2 col-3">
+            <div class="slider-arrow" id="slider-third-arrows"></div>
+         </div>
+      </div>
+      <ngx-slick-carousel class="carousel slide" [config]=" bestselling">
+         <div ngxSlickItem class="carousel-item active" *ngFor="let item of tDeal; let index=index">
+            <app-shoppingcart [item]="item"></app-shoppingcart>
+         </div>
+      </ngx-slick-carousel>
+   </div>
+</section>  -->
+
+<!-- <section class="mb-lg-14 my-8">
+   <div class="container">
+      <div class="row align-items-center mb-6">
+         <div class="col-lg-10 col-9">
+            <div class="d-xl-flex justify-content-between align-items-center">
+              
+               <div class="d-flex">
+                  <div class="mt-1">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-shopping-bag text-primary">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                     </svg>
+                  </div>
+                  <div class="ms-3">
+                     <h3 class=" mb-0">{{bSelling.displaycategory}}</h3>
+                     <p class="mb-0">Find the bestseller products in your area with discount.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+      </div>
+      <ngx-slick-carousel class="product-slider-second slick-initialized slick-slider" [config]="bestselling">
+         <div ngxSlickItem class="item slick-slide slick-cloned" *ngFor="let item of bSelling; let index=index">
+            <app-shoppingcart [item]="item"></app-shoppingcart>
+         </div>
+
+      </ngx-slick-carousel>
       
-    //   })
-  
-    
-    // }
-    
+       
+   </div>
+</section> -->
+
+
+<!-- <section class="mb-lg-14 my-8">
+   <div class="container">
+       <div class="row align-items-center mb-6">
+           <div class="col-lg-10 col-9">
+              <div class="d-xl-flex justify-content-between align-items-center">
+               
+                 <div class="d-flex">
+                    <div class="mt-1">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round"
+                          class="feather feather-shopping-bag text-primary">
+                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                          <line x1="3" y1="6" x2="21" y2="6"></line>
+                          <path d="M16 10a4 4 0 0 1-8 0"></path>
+                       </svg>
+                    </div>
+                    <div class="ms-3">
+                       <h3 class=" mb-0">{{featuredData[0].displaycategory}}</h3>
+                       <p class="mb-0">Find the bestseller products in your area with discount.</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div class="col-lg-2 col-3">
+              <div class="slider-arrow" id="slider-third-arrows"></div>
+           </div>
+        </div>
+   <ngx-slick-carousel class="carousel slide"  [config]="slideConfig">
+       <div ngxSlickItem class="carousel-item active"  *ngFor="let item of featuredData; let index=index">
+          <app-shoppingcart [item]="item"></app-shoppingcart>
+       </div>
+     </ngx-slick-carousel>
+   </div>
+</section> -->

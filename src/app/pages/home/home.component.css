@@ -18,6 +18,13 @@
     object-fit: cover; /* Ensures the image covers the entire container */
     object-position: center; /* Centers the image within the container */
   }
+  .product-image_card {
+    width: 100%; /* Ensure image takes full width of its container */
+    height: 300; /* Maintain aspect ratio */
+    display: block; /* Ensures block-level display */
+    object-fit: cover; /* Ensures the image covers the entire container */
+    object-position: center; /* Centers the image within the container */
+  }
 /* 
   ::ng-deep .slick-slider .slick-next{
     align-items: center;
@@ -139,3 +146,125 @@
     text-align: center;
     /* Add any other styles as needed */
   }
+  .card-image {
+    transition: box-shadow .25s ease, transform .25s ease;
+    border: solid;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .px-8 {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .rounded {
+    border-radius: 10px;
+  }
+  
+  .fw-bold {
+    font-weight: bold;
+  }
+  
+  .mb-1 {
+    margin-bottom: 1rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 4rem;
+  }
+  
+  .btn-dark {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-dark:hover {
+    background-color: #444;
+  }
+
+  section {
+    /* background-color: #f4f4f4; */
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+  }
+  
+  .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 15px;
+  }
+  
+  .mb-3 {
+    margin-bottom: 1rem;
+  }
+  
+  .mb-lg-0 {
+    margin-bottom: 0;
+  }
+/*   
+  .card {
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-body {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .fw-bold {
+    font-weight: bold;
+  }
+  
+  .mb-1 {
+    margin-bottom: 0.25rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-dark {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-dark:hover {
+    background-color: #444;
+  } */

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   singUp: boolean = false;
 
   constructor(private auth:AuthService, private fb: FormBuilder,
-    private router: Router) { }
+    public router: Router) { }
   loginForm!: FormGroup;
   submitted = false;
   loginData:any;
@@ -58,16 +58,42 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(10)]],
       firstName:['',[Validators.required]],
       lastName:['',[Validators.required]],
-      mobileNo:['',[Validators.required]]
+      mobileNo:['',[Validators.required]],
+      Address: this.fb.array([
+        this.fb.group({
+          Country: ['', Validators.required],
+          Street: ['', Validators.required],
+          City: ['', Validators.required],
+          Ctate: ['', Validators.required],
+          Postcode: ['', Validators.required],
+          addresstype: ['', Validators.required],
+          State:['', Validators.required],
+      
+        })
+      ])
     });
   }
+ get form() { return this.signupForm.controls; }
+ get addressControls() {
+  return (this.signupForm.get('Address') as FormArray).controls;
+}
+
+
+
+ 
+
+ 
+  
+
   onsignupSubmit(){
+    console.log(this.signupForm.value)
     // this.auth.SignUp(this.signupForm.value).subscribe((response:any)=>{
     //   this.signupData = response;
     //   console.log(this.signupData);
     //   this.router.navigateByUrl('/login');
       
     // })
+    console.log(this.signupForm.value)
   }
   
   showlogin(){

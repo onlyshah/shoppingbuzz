@@ -36,6 +36,7 @@
               "node_modules/slick-carousel/slick/slick.min.js",
               "src/assets/js/theme.min.js" ,
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              
             ]
           },
           "configurations": {

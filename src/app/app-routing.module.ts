@@ -8,9 +8,11 @@ import { MywishlistComponent } from './pages/mywishlist/mywishlist.component';
 import { ShopCheckoutComponent } from './pages/shop-checkout/shop-checkout.component';
 import { MyorderComponent } from './pages/myorder/myorder.component';
 
+
 const routes: Routes = [
   {path:'' ,component:HomeComponent},
-  {path:'login', component:LoginComponent},  
+  {path:'login', component:LoginComponent},
+  {path:'singup', component:LoginComponent},  
   {path:'product/:_id', component:ProductComponent},
   {path:'cart', component:ShopcartdetailsComponent},
   {path:'wishlist', component:MywishlistComponent},

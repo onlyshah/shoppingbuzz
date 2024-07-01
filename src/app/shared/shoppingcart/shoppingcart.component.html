@@ -20,9 +20,7 @@
                                  class="bi bi-eye"></i></a>
                            <a type="" (click)="Wishlist(item._id)" class="btn-action mb-1" data-bs-toggle="tooltip"
                               data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                           <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" 
-                   data-bs-html="true" title="Compare">
-                   <i class="bi bi-arrow-left-right"></i></a> -->
+                   
                         </div>
                      </div>
                      <div class="text-container">
@@ -53,23 +51,21 @@
                      <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                            <span class="text-danger">{{item?.price}}</span>
-                           <!-- <span class="text-decoration-line-through text-muted">$24</span> -->
+                          
                         </div>
                         <div><span class="text-uppercase small text-primary">In Stock</span></div>
                      </div>
                      <div class="d-grid mt-4 btn-container">
                         <a (click)="addcart(item._id)" class="btn btn-primary rounded-pill">Add to Cart</a>
                      </div>
-                     <!-- <div class="d-grid mt-4 btn-container">
-                  <a routerLink="#" class="btn btn-primary rounded-pill">Move To Cart</a>
-                </div> -->
+                   
                   </div>
                </div>
             </div>
          </div>
       </div>
    </div>
-</ng-container>
+</ng-container> 
 <ng-container *ngIf="categorytdata != null && subcategorytdata != null">
    <div class="row gx-10">
       <aside class="col-lg-3 col-md-4 mb-6 mb-md-0" *ngIf="routeId !==pushproductdata[0]?._id">

@@ -1,27 +1,32 @@
 <div class="border-bottom shadow-sm">
     <nav class="navbar navbar-light py-2">
       <div class="container justify-content-center justify-content-lg-between">
-        <a class="navbar-brand" href="https://freshcart.codescandy.com/index.html">
-          <img src="https://freshcart.codescandy.com/assets/images/logo/freshcart-logo.svg" alt="" class="d-inline-block align-text-top">
+        <a class="navbar-brand d-none d-lg-block" routerLink="/">
+          <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+          <span class="fw-bold">Shoppingbuzz</span>
         </a>
-        <span class="navbar-text"  *ngIf="!login">
-            Already have an account? <button type="submit" class="btn btn-primary" (click)="showlogin()">Sign in</button>
+        <span class="navbar-text"   *ngIf="router.url != '/login'">
+            Already have an account? <button type="submit" class="btn btn-primary"
+            routerLink="/login">Sign in</button>
           </span>
-        <span class="navbar-text" type="button" *ngIf="!singUp" >
+        <span class="navbar-text" type="button" *ngIf="router.url !== '/singup'">
             please create your  account?
-            <button type="submit" class="btn btn-primary"   (click)="showSingup()">Singup</button>
+            <button type="submit" class="btn btn-primary"  routerLink="/singup">Singup</button>
         </span>
       </div>
     </nav>
   </div>
-<section class="my-lg-14 my-8" *ngIf="login">
+<section class="my-lg-14 my-8"*ngIf="router.url === '/login'">
     <div class="container">
       <!-- row -->
       <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
           <!-- img -->
-          <img src="https://freshcart.codescandy.com/assets/images/svg-graphics/signin-g.svg" alt="" class="img-fluid">
-        </div>
+          <a class="navbar-brand d-none d-lg-block" routerLink="/">
+            <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+            <span class="fw-bold">Shoppingbuzz</span>
+          </a>
+          </div>
         <!-- col -->
         <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
           <div class="mb-lg-9 mb-5">
@@ -66,7 +71,7 @@
       </div>
     </div>
   </section>
-  <section class="my-lg-14 my-8" *ngIf="singUp">
+  <section class="my-lg-14 my-8" *ngIf="router.url == '/singup'">
     <!-- container -->
     <div class="container">
       <!-- row -->
@@ -81,29 +86,62 @@
             <h1 class="mb-1 h2 fw-bold">Get Start Shopping</h1>
             <p>Welcome to FreshCart! Enter your email to get started.</p>
           </div>
-          <!-- form -->
-          <form>
+      
+          <form [formGroup]="signupForm" (ngSubmit)=" onsignupSubmit()">
             <div class="row g-3">
-              <!-- col -->
               <div class="col">
-                <!-- input --><input type="text" class="form-control" placeholder="First name" aria-label="First name"
-                  required>
-              </div>
-              <div class="col">
-                <!-- input --><input type="text" class="form-control" placeholder="Last name" aria-label="Last name"
+                <input type="text" class="form-control" formControlName="firstName" placeholder="First name" 
+                 aria-label="First name"
                   required>
               </div>
               <div class="col-12">
-
-                <!-- input --><input type="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+               <input type="text" formControlName="lastName" class="form-control" placeholder="Last name" 
+                 aria-label="Last name"
+                  required>
               </div>
               <div class="col-12">
+                <input type="email" class="form-control" 
+                 id="inputEmail4"  formControlName="email" placeholder="Email" required>
+              </div>
+              <div class="col-12" formArrayName="Address" >
+                  <div class="row g-3"  *ngFor="let address of addressControls; let i = index" [formGroupName]="i">
+                    <div  class="col-12">
+                      <!-- <label>Country</label> -->
+                      <input formControlName="Country" placeholder="Country" class="form-control" >
+                    </div>
+                    <div  class="col-12">
+                      <!-- <label>State</label> -->
+                      <input formControlName="State"  placeholder="State" class="form-control" >
+                    </div>
+                    <div  class="col-12">
+                      <!-- <label>City</label> -->
+                      <input formControlName="City" placeholder="City" class="form-control" >
+                    </div >
+                    <div  class="col-12">
+                      <!-- <label>Street</label> -->
+                      <input formControlName="Street" placeholder="Street" class="form-control" >
+                    </div>
+                    
+                   
+                    <div  class="col-12">
+                      <!-- <label>Postcode</label> -->
+                      <input formControlName="Postcode" placeholder="Postcode"  class="form-control" >
+                    </div>
+                    <div  class="col-12">
+                      <!-- <label>Address Type</label> -->
+                      <input formControlName="addresstype" placeholder="Address Type" class="form-control" >
+                    </div>
+                  </div>
+              
 
+              </div>
+              <div class="col-12">
                 <div class="password-field position-relative">
+              
                   <input type="password" id="fakePassword" placeholder="Enter Password" class="form-control" required >
                   <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
                 </div>
-              </div>
+                </div>
               <!-- btn -->
               <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Register</button>
               </div>

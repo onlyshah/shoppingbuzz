@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit {
       console.log(this.id)
     })
     //this.userId =localStorage.getItem('userId');
+    //userId = this.auth.userValue.userId
     this.getcat()
     
    

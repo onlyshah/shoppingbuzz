@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
@@ -6,13 +6,17 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit{
   constructor(private comApi:CommonService , private router: Router,) { }
+
   ngOnInit(): void {
     this.getcompareCategory();
     this.getcarouselData();
+    this.getCardcarouselData()
+   
       }
   categoryData:any;
   getcatname:any;
@@ -23,6 +27,7 @@ export class HomeComponent implements OnInit {
   bSelling:any = [];
   featuredData:any = [];
   getcarouselvalue:any;
+  cardcarouselData:any;
   dataitem:  [
     {
       category: 'dairyfood',
@@ -46,8 +51,22 @@ export class HomeComponent implements OnInit {
         decodedBanner: decodeURIComponent(item.banner).replace(/º/g, '/').replace(/\\/g, '/')
         
       }));
-      console.log('carousel',this.getcarouselvalue)
+      console.log('cardcarousel',this.getcarouselvalue)
       console.log('imgpath'  ,this.imagePath+this.getcarouselvalue[0]?.banner)
+     
+      
+    })
+  }
+  getCardcarouselData(){
+    this.comApi.getCardcarousel().subscribe((response:any)=>{
+      this.cardcarouselData = response
+      .map((item:any) => ({
+        ...item,
+        decodedBanner: decodeURIComponent(item.backgroundImg).replace(/º/g, '/').replace(/\\/g, '/')
+        
+      }));
+      console.log('Cardcarousel',this.cardcarouselData)
+      console.log('imgpath'  ,this.imagePath+this.cardcarouselData[0]?.backgroundImg)
      
       
     })

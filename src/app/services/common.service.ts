@@ -31,6 +31,9 @@ export class CommonService implements OnInit {
   getcarousel():Observable<any> {
     return this.http.get(environment.baseUrl + 'getcarousle');
   }
+  getCardcarousel():Observable<any> {
+    return this.http.get(environment.baseUrl + 'getcardcarousel');
+  }
   addtocart(data: any):Observable<any> {
     return this.http.post(environment.baseUrl + 'cart/addtocart', data);
   }

@@ -1,12 +1,13 @@
 
   <!-- navigation -->
-  <header class="py-lg-5 py-4 px-0 border-bottom border-bottom-lg-0" *ngIf="router.url !== '/login'">
+  <header class="py-lg-5 py-4 px-0 border-bottom border-bottom-lg-0" *ngIf="router.url !== '/login' && router.url !== '/singup'">
     <div class="container-fluid">
        <div class="row w-100 align-items-center g-0 gx-lg-3">
           <div class="col-xxl-9 col-lg-8">
              <div class="d-flex align-items-center">
-                <a class="navbar-brand d-none d-lg-block" href="https://freshcart.codescandy.com/index.html">
-                <img src="https://freshcart.codescandy.com/assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template">
+               <a class="navbar-brand d-none d-lg-block" routerLink="/">
+                  <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+                  <span class="fw-bold">Shoppingbuzz</span>
                 </a>
                 <div class=" w-100 ms-4  d-none d-lg-block ">
                    <form action="#">
@@ -32,9 +33,9 @@
                 </div>
              </div>
              <div class="d-flex justify-content-between w-100 d-lg-none">
-                <a class="navbar-brand" href="https://freshcart.codescandy.com/index.html">
-                <img src="https://freshcart.codescandy.com/assets/images/logo/freshcart-logo.svg" 
-                alt="eCommerce HTML Template">
+               <a class="navbar-brand d-none d-lg-block" routerLink="/">
+                  <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+                  <span class="fw-bold">Shoppingbuzz</span>
                 </a>
                 <div class="d-flex align-items-center lh-1">
                    <div class="list-inline me-4">
@@ -66,7 +67,7 @@
                          </a>
                       </div>
                    </div>
-                   <!-- Button -->
+               
                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
                       data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
                       aria-label="Toggle navigation">
@@ -80,7 +81,7 @@
              </div>
           </div>
           <div class="col-xxl-3 col-lg-4 d-flex align-items-center ">
-             <!-- Button trigger modal -->
+             
              <button type="button" class="btn btn-outline-gray-400 text-muted d-none d-lg-block" data-bs-toggle="modal"
                 data-bs-target="#locationModal">
              <i class="feather-icon icon-map-pin me-2"></i>Pick Location
@@ -133,7 +134,7 @@
   </header>
   
   <nav class="navbar navbar-expand-lg  navbar-dark bg-primary d-none d-lg-block navbar-default" 
-  *ngIf="router.url !== '/login'">
+  *ngIf="router.url !== '/login' && router.url !== '/singup'">
     <div class="container-fluid px-0 px-md-3">
        <div class="me-auto p-4 p-lg-0">
           <div class="d-none d-lg-block">
@@ -171,7 +172,7 @@
        </div>
     </div>
   </nav>
-  <div class="border-bottom shadow-sm" *ngIf="router.url == '/login'">
+  <!-- <div class="border-bottom shadow-sm" *ngIf="router.url == '/login'">
    <nav class="navbar navbar-light py-2">
      <div class="container justify-content-center justify-content-lg-between">
        <a class="navbar-brand" href="https://freshcart.codescandy.com/index.html">
@@ -188,4 +189,4 @@
        </span>
      </div>
    </nav>
- </div>
+ </div> -->
