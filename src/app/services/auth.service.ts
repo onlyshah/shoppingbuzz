@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService implements OnInit, OnDestroy {
 
   private userSubject: BehaviorSubject<any>;
   private loggedInStatus = false;
@@ -19,8 +19,11 @@ export class AuthService implements OnInit {
       private http: HttpClient
   ) {
       this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+      window.addEventListener('beforeunload', this.clearTokenOnClose);
 
   }
+
+ 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
    }
@@ -62,6 +65,12 @@ billsendtoEmail(data:any){
   }
   isLoggedIn() {
     return this.loggedInStatus;
+  }
+  private clearTokenOnClose = () => {
+    this.logout();
+  }
+  ngOnDestroy(): void {
+    window.removeEventListener('beforeunload', this.clearTokenOnClose);
   }
 }
 

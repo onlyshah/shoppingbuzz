@@ -33,10 +33,40 @@ export class HomeComponent implements OnInit{
     dots: true,
     arrows: true
   };
-  bestselling = { slidesToShow:4, slidesToScroll: 1, infinite: false, autoplay: true, 
+  bestselling = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
     dots: false,
-    arrows: true
+    infinite: true,
+    arrows: true,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
+  
   getcarouselData(){
     this.comApi.getcarousel().subscribe((response:any)=>{
       this.getcarouselvalue = response.map((item:any) => ({
@@ -94,5 +124,23 @@ export class HomeComponent implements OnInit{
       
     });
    })
+}
+itemsPerSlideOneOnMobile(): number {
+  // Adjust this logic based on your desired screen size breakpoints
+  if (window.innerWidth <= 576) { // Example breakpoint for mobile screens
+    return 1; // Show 1 item per slide on mobile
+  } else {
+    return 2; // Show 2 items per slide on larger screens
+  }
+
+}
+itemsPerSlidetwoOnMobile(): number {
+  // Adjust this logic based on your desired screen size breakpoints
+  if (window.innerWidth <= 576) { // Example breakpoint for mobile screens
+    return 1; // Show 1 item per slide on mobile
+  } else {
+    return 3; // Show 2 items per slide on larger screens
+  }
+
 }
 }

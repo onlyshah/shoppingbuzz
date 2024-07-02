@@ -268,3 +268,10 @@
   .btn-dark:hover {
     background-color: #444;
   } */
+   /* styles.css or component-specific CSS */
+
+/* @media (min-width: 769px) {
+  ::ng-deep .carousel-item {
+    width: 100px !important;
+  }
+} */

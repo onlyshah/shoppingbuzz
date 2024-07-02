@@ -9,7 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FormArray, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {CarouselModule} from 'ngx-bootstrap/carousel'
 import { ShoppingcartComponent } from './shared/shoppingcart/shoppingcart.component';
 import { ProductComponent } from './pages/product/product.component';
@@ -19,6 +19,9 @@ import { MywishlistComponent } from './pages/mywishlist/mywishlist.component';
 import { ShopCheckoutComponent } from './pages/shop-checkout/shop-checkout.component';
 import { MyorderComponent } from './pages/myorder/myorder.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { AuthGuard } from './services/auth.guard';
+import { AuthInterceptor } from './services/auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
     MywishlistComponent,
     ShopCheckoutComponent,
     MyorderComponent,
+    
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,15 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
     SlickCarouselModule,
     CarouselModule
   ],
-  providers: [BsModalService],
-  bootstrap: [AppComponent]
+  providers: [BsModalService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+  exports:[]
 })
 export class AppModule { }

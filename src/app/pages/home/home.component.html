@@ -1,4 +1,4 @@
- <section class="mb-lg-10 mt-lg-14 my-4">
+ <section class="mb-lg-10 mt-lg-6 my-4">
    <div class="container">
       <carousel>
        
@@ -37,45 +37,37 @@
    </div>
 </section>
 
-<section class="mb-lg-10 mt-lg-14 my-4" *ngIf="cardcarouselData.length > 0">
+<section class="mb-lg-10 mt-lg-6 my-4" *ngIf="cardcarouselData.length > 0">
    <div class="container">
-      <carousel [itemsPerSlide]="2">
-         <slide *ngFor="let data of cardcarouselData; let index=index"  >
-            <!-- <div class="container">
-				<div class="row"> -->
-				<div class="col-12 col-md-12 col-sm-12 mb-3 mb-lg-0" *ngIf="data.cardIdNo === 1">
-               <div>
-                  <div class="product-image-card">
-                     <div class="py-10 px-8 rounded"  [ngStyle]="{
-                        'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
-                        'background-position': 'center center',
-                        'background-size': 'cover',
-                        'background-repeat': 'no-repeat',
-                        'border-radius': '0.5rem',
-                     
-                  }">
-                     <div>
-                        <h3 class="fw-bold mb-1">{{data.title}}</h3>
-                        <p class="mb-4">
-                           Get Upto
-                           <span class="fw-bold">30%</span>
-                           Off
-                        </p>
-                        <a href="#!" class="btn btn-dark">Shop Now</a>
-                     </div>
+      <carousel [itemsPerSlide]="itemsPerSlideOneOnMobile()">
+         <ng-container *ngFor="let data of cardcarouselData">
+            <slide *ngIf="data.cardIdNo === 1">
+               <div class="col-12 col-md-12 col-sm-12 mb-3 mb-lg-0">
+                  <div>
+                     <div class="product-image-card">
+                        <div class="py-10 px-8 rounded"  [ngStyle]="{
+                           'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
+                           'background-position': 'center center',
+                           'background-size': 'cover',
+                           'background-repeat': 'no-repeat',
+                           'border-radius': '0.5rem',
+                        
+                     }">
+                        <div>
+                           <h3 class="fw-bold mb-1">{{data.title}}</h3>
+                           <p class="mb-4">
+                              Get Upto
+                              <span class="fw-bold">30%</span>
+                              Off
+                           </p>
+                           <a href="#!" class="btn btn-dark">Shop Now</a>
+                        </div>
+                        </div>
                      </div>
                   </div>
-               </div>
-               </div>
-            <!-- </div>
-            </div>
-                -->
-                    
-                
-               
-   
-         
-         </slide>
+                  </div>
+            </slide>
+         </ng-container>
       </carousel>
 
 
@@ -114,104 +106,48 @@
             <app-shoppingcart [item]="item"></app-shoppingcart>
          </div>
       </ngx-slick-carousel>
-   </div>
+   </div> 
 </section> 
 
-<section class="mt-8">
+<section class="mb-lg-10 mt-lg-14 my-4" *ngIf="cardcarouselData.length > 0">
    <div class="container">
-      <carousel>
-       
+      <carousel [itemsPerSlide]="itemsPerSlidetwoOnMobile()">
+         <ng-container *ngFor="let data of cardcarouselData">
+            <slide *ngIf="data.cardIdNo === 2">
+               <div class="table-responsive-xl pb-6 pb-xl-0 m-3">
+                  <div class="row flex-nowrap">
+                     <div class="col-12 col-xl-4 col-lg-6">
+                        <div class="p-8 mb-3 rounded" 
+                        [ngStyle]="{
+                           'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
+                           'background-position': 'center center',
+                           'background-color': 'data?.backgroundcolor' ? data?.backgroundcolor : 'transparent',
+                           'background-size': 'cover',
+                           'background-repeat': 'no-repeat',
+                           'border-radius': '0.5rem',
+                        
+                       }">
+                           <div>
+                              <h3 class="mb-0 fw-bold" style="font-size: 15px;">
+                                {{data.title}}
+                              </h3>
+                              <div class="mt-4 mb-5 fs-5">
+                                 <p class="mb-0">{{data.tagline}}</p>
+                                 <span>
+                                    <span class="fw-bold text-dark">{{data.subtitle}}</span>
+                                 </span>
+                              </div>
+                              <a href="#" class="btn btn-dark">Shop Now</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+          
+    
 
-    <slide *ngFor="let data of getcarouselvalue; let index=index"  >
-            <div class="container">
-      <div class="table-responsive-xl pb-6 pb-xl-0">
-         <div class="row flex-nowrap">
-            <div class="col-4 col-xl-4 col-lg-6">
-               <div class="p-8 mb-3 rounded" 
-               [ngStyle]="{
-            'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
-            'background-position': 'center center',
-            'background-size': 'cover',
-            'background-repeat': 'no-repeat',
-            'border-radius': '0.5rem',
-         
-        }">
-                  <div>
-                     <h3 class="mb-0 fw-bold">
-                        10% cashback on
-                        <br>
-                        personal care
-                     </h3>
-                     <div class="mt-4 mb-5 fs-5">
-                        <p class="mb-0">Max cashback: $12</p>
-                        <span>
-                           Code:
-                           <span class="fw-bold text-dark">CARE12</span>
-                        </span>
-                     </div>
-                     <a href="#" class="btn btn-dark">Shop Now</a>
-                  </div>
-               </div>
-            </div>
-            
-            <div class="col-4 col-xl-4 col-lg-6">
-               <div class="p-8 mb-3 rounded" 
-               [ngStyle]="{
-                  'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
-                  'background-position': 'center center',
-                  'background-size': 'cover',
-                  'background-repeat': 'no-repeat',
-                  'border-radius': '0.5rem',
-               
-              }">
-                  <div>
-                     <h3 class="mb-0 fw-bold">
-                        10% cashback on
-                        <br>
-                        personal care
-                     </h3>
-                     <div class="mt-4 mb-5 fs-5">
-                        <p class="mb-0">Max cashback: $12</p>
-                        <span>
-                           Code:
-                           <span class="fw-bold text-dark">CARE12</span>
-                        </span>
-                     </div>
-                     <a href="#" class="btn btn-dark">Shop Now</a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-4 col-xl-4 col-lg-6">
-               <div class="p-8 mb-3 rounded"
-               [ngStyle]="{
-                  'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
-                  'background-position': 'center center',
-                  'background-size': 'cover',
-                  'background-repeat': 'no-repeat',
-                  'border-radius': '0.5rem',
-               
-              }">
-                  <div>
-                     <h3 class="mb-0 fw-bold">
-                        10% cashback on
-                        <br>
-                        personal care
-                     </h3>
-                     <div class="mt-4 mb-5 fs-5">
-                        <p class="mb-0">Max cashback: $12</p>
-                        <span>
-                           Code:
-                           <span class="fw-bold text-dark">CARE12</span>
-                        </span>
-                     </div>
-                     <a href="#" class="btn btn-dark">Shop Now</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   </slide>
+        </slide>
+         </ng-container>
 </carousel>
    </div>
 </section>
