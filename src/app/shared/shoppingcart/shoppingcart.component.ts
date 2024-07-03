@@ -123,23 +123,6 @@ export class ShoppingcartComponent  implements OnInit {
       // alert('You must be logged in to add items to the wishlist');
     }
   }
-  @HostListener('window:resize')
-  onResize() {
-    this.setResponsiveWidth();
-  }
-
-  @HostListener('window:load')
-  onLoad() {
-    this.setResponsiveWidth();
-  }
-
-  private setResponsiveWidth() {
-    const width = window.innerWidth;
-    if (width <= 768) { // Assuming 768px is the breakpoint for mobile
-      this.renderer.setStyle(this.el.nativeElement, 'width', '100px'); // Adjust the width as needed
-    } else {
-      this.renderer.setStyle(this.el.nativeElement, 'width', '75px'); // Original width
-    }
-  }
+ 
 }
 

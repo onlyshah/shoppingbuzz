@@ -1,6 +1,5 @@
 
-  <!-- navigation -->
-  <header class="py-lg-5 py-4 px-0 border-bottom border-bottom-lg-0" *ngIf="router.url !== '/login' && router.url !== '/singup'">
+ <header class="py-lg-5 py-4 px-0 border-bottom border-bottom-lg-0" *ngIf="router.url !== '/login' && router.url !== '/singup'">
     <div class="container-fluid">
        <div class="row w-100 align-items-center g-0 gx-lg-3">
           <div class="col-xxl-9 col-lg-8">
@@ -33,13 +32,28 @@
                 </div>
              </div>
              <div class="d-flex justify-content-between w-100 d-lg-none">
-               <a class="navbar-brand d-none d-lg-block" routerLink="/">
+               <a class="navbar-brand" routerLink="/">
                   <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
                   <span class="fw-bold">Shoppingbuzz</span>
                 </a>
                 <div class="d-flex align-items-center lh-1">
                    <div class="list-inline me-4">
-                      <div class="list-inline-item">
+                     <div class="list-inline-item">
+                        <a routerLink="wishlist" class="text-muted position-relative">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="feather feather-heart">
+                              <path
+                                 d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                              </path>
+                           </svg>
+                           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                          {{wishListCount}}
+                           <span class="visually-hidden">unread messages</span>
+                           </span>
+                        </a>
+                     </div>
+                     <div class="list-inline-item">
                         <a  routerLink="login">
                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -48,24 +62,22 @@
                               <circle cx="12" cy="7" r="4"></circle>
                            </svg>
                         </a>
-                      </div>
-                      <div class="list-inline-item">
-                         <a  routerLink="cart"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                               class="feather feather-shopping-bag">
-                               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                               <line x1="3" y1="6" x2="21" y2="6"></line>
-                               <path d="M16 10a4 4 0 0 1-8 0"></path>
-                            </svg>
-                            <span class="position-absolute top-0 start-100 translate-middle 
-                            badge rounded-pill bg-success">
-                            1
-                            <span class="visually-hidden">unread messages</span>
-                            </span>
-                         </a>
-                      </div>
+                     </div>
+                     <div class="list-inline-item">
+                        <a class="text-muted position-relative "  routerLink="cart" role="button" >
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="feather feather-shopping-bag">
+                              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                              <line x1="3" y1="6" x2="21" y2="6"></line>
+                              <path d="M16 10a4 4 0 0 1-8 0"></path>
+                           </svg>
+                           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                             {{ cartCount}}
+                           <span class="visually-hidden">unread messages</span>
+                           </span>
+                        </a>
+                     </div>
                    </div>
                
                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
@@ -132,61 +144,154 @@
        </div>
     </div>
   </header>
-  
-  <nav class="navbar navbar-expand-lg  navbar-dark bg-primary d-none d-lg-block navbar-default" 
-  *ngIf="router.url !== '/login' && router.url !== '/singup'">
-    <div class="container-fluid px-0 px-md-3">
-       <div class="me-auto p-4 p-lg-0">
-          <div class="d-none d-lg-block">
-             <ul class="navbar-nav align-items-center">
-                <li class="nav-item dropdown" *ngFor="let  categorydata of categoryData?.category;let i = index">
-                   <a class="nav-link dropdown-toggle" 
-                   routerLink="product/{{categorydata._id}}" 
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     {{ categorydata.categoryname}}
-                    
-                   </a>
-                   <ul class="dropdown-menu">
-                     <!-- <li><a routerLink="product/{{categorydata._id}}">All</a> </li>  -->
-                      <li class="dropdown-submenu dropend fs-6"  
-                      *ngFor="let data of subcategoryData?.subcategory;let i = index">
 
-      
-                         <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
-                         routerLink="product/{{data._id}}"*ngIf="categorydata._id == data.CategoryId._id"
-                         >
-                         {{ data?.subcategoryname}}
-                         </a>
-                         <ul class="dropdown-menu">
-                            <li *ngFor="let categoryData_ of compareCategory?.product;let i = index"
-                            ><a class="dropdown-item" routerLink="product/{{categoryData_._id}}" 
-                            *ngIf="data._id == categoryData_.SubCategoryId._id">{{categoryData_?.productname}}</a></li>
-                           
-                         </ul>
-                      </li>
-                   </ul>
-                </li>
-               
-             </ul>
-          </div>
-       </div>
-    </div>
-  </nav>
-  <!-- <div class="border-bottom shadow-sm" *ngIf="router.url == '/login'">
-   <nav class="navbar navbar-light py-2">
-     <div class="container justify-content-center justify-content-lg-between">
-       <a class="navbar-brand" href="https://freshcart.codescandy.com/index.html">
-         <img src="https://freshcart.codescandy.com/assets/images/logo/freshcart-logo.svg" alt=""
-          class="d-inline-block align-text-top">
-       </a>
-       <span class="navbar-text">
-         <div class="row">
-            <div class="col-4"><input  type="checkbox" checked>Login</div>
-            <div class="col-4"> <input  type="checkbox" >Singup</div>
-          </div>
-        
-       
-       </span>
-     </div>
-   </nav>
- </div> -->
+  
+  <nav class="navbar navbar-expand-lg bg-primary  navbar-light navbar-default py-0 pb-lg-4" aria-label="Offcanvas navbar large">
+   <div class="container">
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar-default" aria-labelledby="navbar-defaultLabel">
+         <div class="offcanvas-header pb-1">
+            <a href="index.html"><img src="assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template" /></a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+         </div>
+         <div class="offcanvas-body">
+            <div class="d-block d-lg-none mb-4">
+               <form action="#">
+                  <div class="input-group">
+                     <input class="form-control rounded" type="search" placeholder="Search for products" />
+                     <span class="input-group-append">
+                        <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                           >
+                              <circle cx="11" cy="11" r="8"></circle>
+                              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                           </svg>
+                        </button>
+                     </span>
+                  </div>
+               </form>
+               <div class="mt-2">
+                  <button type="button" class="btn btn-outline-gray-400 text-muted w-100" data-bs-toggle="modal" data-bs-target="#locationModal">
+                     <i class="feather-icon icon-map-pin me-2"></i>
+                     Pick Location
+                  </button>
+               </div>
+            </div>
+            <div class="d-block d-lg-none mb-4">
+               <a
+                  class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+                  data-bs-toggle="collapse"
+                  href="#collapseExample"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+               >
+                  <span class="me-2">
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-grid"
+                     >
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                     </svg>
+                  </span>
+                  All Departments
+               </a>
+               <div class="collapse mt-2" id="collapseExample">
+                  <div class="card card-body">
+                     <ul class="mb-0 list-unstyled">
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Dairy, Bread & Eggs</a></li>
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Snacks & Munchies</a></li>
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Fruits & Vegetables</a></li>
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Cold Drinks & Juices</a></li>
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Breakfast & Instant Food</a></li>
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Bakery & Biscuits</a></li>
+                        <li><a class="dropdown-item" href="pages/shop-grid.html">Chicken, Meat & Fish</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="dropdown me-3 d-none d-lg-block">
+               <button class="btn btn-primary px-6" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="me-1">
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-grid"
+                     >
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                     </svg>
+                  </span>
+                  All Departments
+               </button>
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Dairy, Bread & Eggs</a></li>
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Snacks & Munchies</a></li>
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Fruits & Vegetables</a></li>
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Cold Drinks & Juices</a></li>
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Breakfast & Instant Food</a></li>
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Bakery & Biscuits</a></li>
+                  <li><a class="dropdown-item" href="pages/shop-grid.html">Chicken, Meat & Fish</a></li>
+               </ul>
+            </div>
+            <div>
+               <ul class="navbar-nav align-items-center" >
+                  <li class="nav-item dropdown w-100 w-lg-auto" *ngFor="let  categorydata of categoryData?.category;let i = index">
+                     <a class="nav-link dropdown-toggle"   routerLink="product/{{categorydata._id}}"  role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">  {{ categorydata.categoryname}}</a>
+                     <ul class="dropdown-menu">
+                       
+                           <li class="dropdown-submenu dropend" *ngFor="let data of subcategoryData?.subcategory;let i = index">
+										<a class="dropdown-item dropdown-list-group-item dropdown-toggle" 
+                              routerLink="product/{{data._id}}"
+                           *ngIf="categorydata._id == data.CategoryId._id"
+                              
+                              >{{ data?.subcategoryname}}</a>
+										<ul class="dropdown-menu">
+											<li *ngFor="let categoryData_ of compareCategory?.product;let i = index"
+                                 ><a routerLink="product/{{categoryData_._id}}" 
+                                 *ngIf="data._id == categoryData_.SubCategoryId._id" class="dropdown-item" href="pages/account-orders.html">
+                                    {{categoryData_?.productname}}</a></li>
+											</ul>
+									</li>
+                        
+                     </ul>
+                     
+                  </li>
+                
+                  
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</nav>

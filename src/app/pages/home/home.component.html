@@ -48,6 +48,7 @@
                         <div class="py-10 px-8 rounded"  [ngStyle]="{
                            'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
                            'background-position': 'center center',
+                           'background-color': 'data?.backgroundcolor' ? data?.backgroundcolor : 'transparent',
                            'background-size': 'cover',
                            'background-repeat': 'no-repeat',
                            'border-radius': '0.5rem',
@@ -55,12 +56,17 @@
                      }">
                         <div>
                            <h3 class="fw-bold mb-1">{{data.title}}</h3>
+                           <div class="mt-4 mb-5 fs-5">
+                              <p class="fs-5 mb-0">
+                                {{data.tagline}}
+                              </p>
+                           </div>
                            <p class="mb-4">
                               Get Upto
                               <span class="fw-bold">30%</span>
                               Off
                            </p>
-                           <a href="#!" class="btn btn-dark">Shop Now</a>
+                           <a routerLink="/product/{{data?.CategoryId?._id}}" class="btn btn-dark">Shop Now</a>
                         </div>
                         </div>
                      </div>

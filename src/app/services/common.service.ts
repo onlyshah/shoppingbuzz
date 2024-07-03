@@ -96,4 +96,7 @@ export class CommonService implements OnInit {
       return response;
   }));
   }
+  SearchData(data:any): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/search?searchValue=${data}`)
+  }
 }

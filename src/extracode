@@ -1,347 +1,851 @@
+ <!-- <nav class="navbar navbar-expand-lg  navbar-dark bg-primary d-none d-lg-block navbar-default" 
+  *ngIf="router.url !== '/login' && router.url !== '/singup'">
+    <div class="container-fluid px-0 px-md-3">
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar-default" aria-labelledby="navbar-defaultLabel">
+			<div class="offcanvas-header pb-1">
+       <div class="me-auto p-4 p-lg-0">
+         <div class="offcanvas-body">
+          <div class="d-none d-lg-block">
+             <ul class="navbar-nav align-items-center">
+                <li class="nav-item dropdown" *ngFor="let  categorydata of categoryData?.category;let i = index">
+                   <a class="nav-link dropdown-toggle" 
+                   routerLink="product/{{categorydata._id}}" 
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     {{ categorydata.categoryname}}
+                    
+                   </a>
+                   <ul class="dropdown-menu">
+                      <li><a routerLink="product/{{categorydata._id}}">All</a> </li>  
+                       <li class="dropdown-submenu dropend fs-6"  
+                      *ngFor="let data of subcategoryData?.subcategory;let i = index">
 
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-6 mb-3 mb-lg-0">
-            <div>
-              <div class="py-10 px-8 rounded" style="background-color: #f0efeb;">
-                <div>
-                  <h3 class="fw-bold mb-1">Fruits &amp; Vegetables</h3>
-                  <p class="mb-4">
-                    Get Upto
-                    <span class="fw-bold">30%</span>
-                    Off
-                  </p>
-                  <a href="#!" class="btn btn-dark">Shop Now</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div>
-              <div class="py-10 px-8 rounded" style="background-color:#f0efeb;">
-                <div>
-                  <h3 class="fw-bold mb-1">Freshly Baked Buns</h3>
-                  <p class="mb-4">
-                    Get Upto
-                    <span class="fw-bold">25%</span>
-                    Off
-                  </p>
-                  <a href="#!" class="btn btn-dark">Shop Now</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    .py-10 {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-    
-    .px-8 {
-      padding-left: 8px;
-      padding-right: 8px;
-    }
-    
-    .rounded {
-      border-radius: 10px;
-    }
-    
-    .fw-bold {
-      font-weight: bold;
-    }
-    
-    .mb-1 {
-      margin-bottom: 1rem;
-    }
-    
-    .mb-4 {
-      margin-bottom: 4rem;
-    }
-    
-    .btn-dark {
-      background-color: #333;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    
-    .btn-dark:hover {
-      background-color: #444;
-    }
-    <!-- <section class="mb-lg-14 my-8">
-   <div class="container">
-       <div class="row align-items-center mb-6">
-           <div class="col-lg-10 col-9">
-              <div class="d-xl-flex justify-content-between align-items-center">
-               
-                 <div class="d-flex">
-                    <div class="mt-1">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="feather feather-shopping-bag text-primary">
-                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                          <line x1="3" y1="6" x2="21" y2="6"></line>
-                          <path d="M16 10a4 4 0 0 1-8 0"></path>
-                       </svg>
-                    </div>
-                    <div class="ms-3">
-                       <h3 class=" mb-0">{{featuredData[0].displaycategory}}</h3>
-                       <p class="mb-0">Find the bestseller products in your area with discount.</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-           <div class="col-lg-2 col-3">
-              <div class="slider-arrow" id="slider-third-arrows"></div>
-           </div>
-        </div>
-   <ngx-slick-carousel class="carousel slide"  [config]="slideConfig">
-       <div ngxSlickItem class="carousel-item active"  *ngFor="let item of featuredData; let index=index">
-          <app-shoppingcart [item]="item"></app-shoppingcart>
-       </div>
-     </ngx-slick-carousel>
-   </div>
-</section> -->
-/* 
-  ::ng-deep .slick-slider .slick-next{
-    align-items: center;
-    background-color: var(--fc-gray-200);
-    border: 1px solid var(--fc-gray-200);
-    border-radius: 50px;
-    color: var(--fc-gray-500);
-    cursor: pointer;
-    display: block;
-    display: inline-flex;
-    flex-shrink: 0;
-    font-size: 20px;
-    font-size: 0px;
-    height: 32px;
-    justify-content: center;
-    left: 97%;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    transform: translateY(-50%);
-    transition: .3s ease-in-out;
-    width: 32px;
-}
-::ng-deep .slick-slider .slick-prev {
-    align-items: center;
-    background-color: var(--fc-gray-200);
-    border: 1px solid var(--fc-gray-200);
-    border-radius: 50px;
-    color: var(--fc-gray-500);
-    cursor: pointer;
-    display: block;
-    display: inline-flex;
-    flex-shrink: 0;
-    font-size: 20px;
-    font-size: 0px;
-    height: 32px;
-    justify-content: center;
-    left: 97%;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    transform: translateY(-50%);
-    transition: .3s ease-in-out;
-    width: 32px;
-}
-.slick-prev:before {
-    content: '←';
-}
-
-.slick-prev:before, .slick-next:before {
-    font-family: 'slick';
-    font-size: 20px;
-    line-height: 1;
-    opacity: .75;
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-} */
-/* ::ng-deep .slick-slider .slick-prev,
-::ng-deep .slick-slider .slick-next {
-   align-items: center;
-    background-color: var(--fc-gray-200);
-    border: 1px solid var(--fc-gray-200);
-    border-radius: 50px;
-    color: var(--fc-gray-500);
-    cursor: pointer;
-    display: block;
-    display: inline-flex;
-    flex-shrink: 0;
-    font-size: 20px;
-    font-size: 0px;
-    height: 32px;
-    justify-content: center;
-    left: 97%;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    transform: translateY(-50%);
-    transition: .3s ease-in-out;
-    width: 32px;
-} */
-
-/* ::ng-deep .slick-slider .slick-prev {
-    left: -40px; /* Adjust as needed
-}  */
-
-/* ::ng-deep .slick-slider .slick-next {
-    right: -40px; 
-}
-
-::ng-deep .slick-prev:before, 
-::ng-deep .slick-next:before {
-    content: '';
-    font-family: 'slick';
-    font-size: 0px; 
-    line-height: 1;
-    opacity: 0; 
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-::ng-deep .slick-prev:after,
-::ng-deep .slick-next:after {
-    content: ' ';
-    font-size: 20px;
-    color: white; 
-}
-
-::ng-deep .slick-prev:after {
-    content: '<'; 
-}
-
-::ng-deep .slick-next:after {
-    content: '>'; 
-}
-
-.carousel-item {
-    text-align: center;
-    
-  }
-  .card-image {
-    transition: box-shadow .25s ease, transform .25s ease;
-    border: solid;
-}
-.rounded-circle {
-    border-radius: 50% !important;
-} */
-
-<!-- 
-<section class="mb-lg-14 my-8">
-   <div class="container">
-      <div class="row align-items-center mb-6">
-         <div class="col-lg-10 col-9">
-            <div class="d-xl-flex justify-content-between align-items-center">
-           
-               <div class="d-flex">
-                  <div class="mt-1">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-shopping-bag text-primary">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                     </svg>
-                  </div>
-                  <div class="ms-3">
-                     <h3 class=" mb-0">{{tDeal.displaycategory}}</h3>
-                     <p class="mb-0">Find the bestseller products in your area with discount.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-2 col-3">
-            <div class="slider-arrow" id="slider-third-arrows"></div>
-         </div>
-      </div>
-      <ngx-slick-carousel class="carousel slide" [config]=" bestselling">
-         <div ngxSlickItem class="carousel-item active" *ngFor="let item of tDeal; let index=index">
-            <app-shoppingcart [item]="item"></app-shoppingcart>
-         </div>
-      </ngx-slick-carousel>
-   </div>
-</section>  -->
-
-<!-- <section class="mb-lg-14 my-8">
-   <div class="container">
-      <div class="row align-items-center mb-6">
-         <div class="col-lg-10 col-9">
-            <div class="d-xl-flex justify-content-between align-items-center">
-              
-               <div class="d-flex">
-                  <div class="mt-1">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-shopping-bag text-primary">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                     </svg>
-                  </div>
-                  <div class="ms-3">
-                     <h3 class=" mb-0">{{bSelling.displaycategory}}</h3>
-                     <p class="mb-0">Find the bestseller products in your area with discount.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-         
-      </div>
-      <ngx-slick-carousel class="product-slider-second slick-initialized slick-slider" [config]="bestselling">
-         <div ngxSlickItem class="item slick-slide slick-cloned" *ngFor="let item of bSelling; let index=index">
-            <app-shoppingcart [item]="item"></app-shoppingcart>
-         </div>
-
-      </ngx-slick-carousel>
       
-       
-   </div>
-</section> -->
-
-
-<!-- <section class="mb-lg-14 my-8">
-   <div class="container">
-       <div class="row align-items-center mb-6">
-           <div class="col-lg-10 col-9">
-              <div class="d-xl-flex justify-content-between align-items-center">
+                         <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
+                         routerLink="product/{{data._id}}"*ngIf="categorydata._id == data.CategoryId._id"
+                         >
+                         {{ data?.subcategoryname}}
+                         </a>
+                         <ul class="dropdown-menu">
+                            <li *ngFor="let categoryData_ of compareCategory?.product;let i = index"
+                            ><a class="dropdown-item" routerLink="product/{{categoryData_._id}}" 
+                            *ngIf="data._id == categoryData_.SubCategoryId._id">{{categoryData_?.productname}}</a></li>
+                           
+                         </ul>
+                      </li>
+                   </ul>
+                </li>
                
-                 <div class="d-flex">
-                    <div class="mt-1">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="feather feather-shopping-bag text-primary">
-                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                          <line x1="3" y1="6" x2="21" y2="6"></line>
-                          <path d="M16 10a4 4 0 0 1-8 0"></path>
-                       </svg>
-                    </div>
-                    <div class="ms-3">
-                       <h3 class=" mb-0">{{featuredData[0].displaycategory}}</h3>
-                       <p class="mb-0">Find the bestseller products in your area with discount.</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-           <div class="col-lg-2 col-3">
-              <div class="slider-arrow" id="slider-third-arrows"></div>
-           </div>
-        </div>
-   <ngx-slick-carousel class="carousel slide"  [config]="slideConfig">
-       <div ngxSlickItem class="carousel-item active"  *ngFor="let item of featuredData; let index=index">
-          <app-shoppingcart [item]="item"></app-shoppingcart>
+             </ul>
+             .navbar {
+    padding: .625rem 1rem
+}
+
+.navbar .navbar-brand {
+    padding-bottom: .2rem;
+    padding-top: 0
+}
+
+.navbar .navbar-toggler {
+    border: none;
+    margin-left: .5rem;
+    padding: 0
+}
+
+.navbar .navbar-toggler:focus {
+    box-shadow: none;
+    outline: 0
+}
+
+.navbar .navbar-toggler .icon-bar {
+    background-color: var(--fc-primary);
+    display: block;
+    height: 2px;
+    margin-top: .25rem;
+    transition: all .2s;
+    width: 20px
+}
+
+.navbar .navbar-toggler .top-bar {
+    background-color: var(--fc-primary);
+    transform: rotate(45deg);
+    transform-origin: 16% 190%
+}
+
+.navbar .navbar-toggler .middle-bar {
+    opacity: 0
+}
+
+.navbar .navbar-toggler .bottom-bar {
+    background-color: var(--fc-primary);
+    transform: rotate(-45deg);
+    transform-origin: 10% -80%
+}
+
+.navbar .navbar-collapse .navbar-toggler {
+    position: absolute;
+    right: .5rem;
+    top: .6rem;
+    z-index: 1
+}
+
+.navbar .navbar-toggler.collapsed .top-bar {
+    background-color: var(--fc-primary);
+    transform: rotate(0)
+}
+
+.navbar .navbar-toggler.collapsed .middle-bar {
+    opacity: 1
+}
+
+.navbar .navbar-toggler.collapsed .bottom-bar {
+    background-color: var(--fc-primary);
+    transform: rotate(0)
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    line-height: 1.8
+}
+
+@media (max-width: 992px) {
+    .navbar .navbar-nav .nav-item .nav-link {
+        border-bottom:1px solid var(--fc-gray-200)
+    }
+}
+
+.navbar .dropdown-fullwidth {
+    position: static
+}
+
+.navbar .dropdown-fullwidth .dropdown-menu {
+    left: 0;
+    margin: 1.25rem auto;
+    max-width: 1320px;
+    padding: 1rem 0;
+    right: 0;
+    top: 32px
+}
+
+.navbar .dropdown .dropdown-toggle:after {
+    background-repeat: no-repeat;
+    background-size: .625rem .625rem;
+    border: none;
+    color: var(--fc-gray-600);
+    content: "\f12f";
+    float: right;
+    font-family: feather-icons!important;
+    line-height: 2;
+    margin-left: .375rem
+}
+
+.navbar .dropdown-menu {
+    border-radius: .5rem;
+    box-shadow: 0 0 2px rgba(145,158,171,.2),0 12px 24px -4px rgba(145,158,171,.12);
+    color: var(--fc-gray-600);
+    line-height: 1.2rem;
+    min-width: 12rem;
+    top: 40px
+}
+
+.navbar .dropdown-menu .dropdown-list-group-item {
+    min-width: 100%
+}
+
+.navbar .dropdown-menu .dropdown-submenu a:after {
+    position: absolute;
+    right: 1rem;
+    transform: rotate(-90deg)
+}
+
+.navbar .dropdown-menu .dropdown-submenu.dropend .dropdown-menu {
+    left: 100%;
+    min-width: 12rem;
+    right: 0;
+    top: -18px
+}
+
+.navbar .dropdown-menu .dropdown-submenuBig a:after {
+    position: absolute;
+    right: 1rem;
+    transform: rotate(-90deg)
+}
+
+.navbar .dropdown-menu .dropdown-submenuBig.dropend .dropdown-menu {
+    left: 105%;
+    min-width: 12rem;
+    right: 0;
+    top: -35px
+}
+
+.navbar .navbar-right-wrap .list-group-item {
+    padding: 1rem 1.25rem
+}
+
+.navbar .nav-badge {
+    position: absolute;
+    right: 3px;
+    top: -9px
+}
+
+@media (min-width: 1200px) {
+    .navbar-default .dropdown-menu {
+        display:block;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all .3s ease-in;
+        visibility: hidden
+    }
+
+    .navbar-default .dropdown-menu-end {
+        left: auto;
+        right: 0
+    }
+
+    .navbar-default .dropdown-menu-start {
+        left: 0;
+        right: auto
+    }
+
+    .navbar-default .dropdown-submenu:hover>.dropdown-menu,.navbar-default .dropdown-submenuBig:hover>.dropdown-menu,.navbar-default .dropdown:hover>.dropdown-menu {
+        opacity: 1;
+        transform: scaleY(1);
+        visibility: visible
+    }
+}
+
+.navbar-nav-offcanvac .nav-item .nav-link {
+    border-bottom: 1px solid var(--fc-gray-200)
+}
+
+@media (max-width: 990px) {
+    .navbar-offcanvas-color .nav-item {
+        width:100%
+    }
+
+    .navbar-offcanvas-color .nav-item .nav-link {
+        border-bottom: 1px solid var(--fc-gray-200);
+        color: #21313c
+    }
+}
+
+.navbar-dark .navbar-brand {
+    filter: brightness(0) invert(1)
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: var(--fc-white)
+}
+
+.navbar-dark .navbar-toggler .icon-bar {
+    background-color: var(--fc-white)
+}
+
+.navbar-dark .navbar-toggler.collapsed .top-bar {
+    background-color: var(--fc-white);
+    transform: rotate(0)
+}
+
+.navbar-dark .navbar-toggler.collapsed .middle-bar {
+    opacity: 1
+}
+
+.navbar-dark .navbar-toggler.collapsed .bottom-bar {
+    background-color: var(--fc-white);
+    transform: rotate(0)
+}
+
+.navbar-dark .navbar-nav .dropdown .dropdown-toggle:after {
+    color: var(--fc-gray-400)
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    border-bottom: transparent
+}
+
+.navbar-toggler-icon {
+    height: 1.2em
+}
+
+.icon-hover {
+    background-color: transparent;
+    transition: background-color .5s ease-in-out
+}
+
+.icon-hover:hover {
+    background-color: var(--fc-light-primary)
+}
+
+body {
+    -webkit-font-smoothing: antialiased
+}
+
+a {
+    color: #0aad0a
+}
+
+a,a:hover {
+    text-decoration: none
+}
+
+a:hover {
+    color: #088a08
+}
+
+.h1,.h2,.h3,h1,h2,h3 {
+    letter-spacing: -.03rem
+}
+
+.nav-scroll {
+    border-bottom: 1px solid var(--fc-gray-300)
+}
+
+@media (max-width: 990px) {
+    .nav-scroll {
+        flex-wrap:nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden
+    }
+
+    .nav-scroll::-webkit-scrollbar {
+        display: none
+    }
+}
+
+@media (max-width: 990px) {
+    .nav-scroll .nav-item .nav-link {
+        white-space:nowrap
+    }
+}
+
+.nav-category .nav-item .nav-link {
+    align-items: center;
+    color: #001e2b;
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0
+}
+
+.nav-category .nav-item .nav-link:hover {
+    color: var(--fc-primary)
+}
+
+.nav-lb-tab {
+    border-bottom: 1px solid var(--fc-gray-300)
+}
+
+@media (max-width: 576px) {
+    .nav-lb-tab {
+        flex-wrap:nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden
+    }
+
+    .nav-lb-tab::-webkit-scrollbar {
+        display: none
+    }
+}
+
+.nav-lb-tab .nav-item {
+    margin-right: 2rem
+}
+
+.nav-lb-tab .nav-item .nav-link {
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--fc-gray-600);
+    font-weight: 500;
+    margin-bottom: -1px;
+    padding: 16px 0;
+    white-space: nowrap
+}
+
+.nav-lb-tab .nav-item .nav-link.active,.nav-lb-tab .nav-item .nav-link:hover {
+    background-color: transparent;
+    border-bottom: 2px solid var(--fc-primary);
+    color: var(--fc-primary)
+}
+
+.nav-pills-dark .nav-item .nav-link {
+    background-color: transparent;
+    border-radius: .5rem;
+    color: var(--fc-gray-800);
+    font-weight: 500;
+    margin-bottom: .25rem;
+    padding: .5rem .75rem
+}
+
+.nav-pills-dark .nav-item .nav-link:hover {
+    background-color: var(--fc-light);
+    color: #001e2b
+}
+
+.nav-pills-dark .nav-item .nav-link.active {
+    background-color: #001e2b;
+    color: var(--fc-white)
+}
+
+@media (max-width: 576px) {
+    .nav-pills-light {
+        flex-wrap:nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden
+    }
+
+    .nav-pills-light::-webkit-scrollbar {
+        display: none
+    }
+}
+
+.nav-pills-light .nav-item {
+    margin-right: 8px
+}
+
+.nav-pills-light .nav-item .nav-link {
+    background-color: var(--fc-gray-200);
+    border-radius: .5rem;
+    color: var(--fc-gray-800);
+    font-weight: 500;
+    padding: .5rem .75rem;
+    white-space: nowrap
+}
+
+.nav-pills-light .nav-item .nav-link.active,.nav-pills-light .nav-item .nav-link:hover {
+    background-color: var(--fc-primary);
+    color: var(--fc-white)
+}
+
+.nav-links .nav-item .nav-link {
+    color: var(--fc-gray-800);
+    padding: .25rem 0;
+    white-space: nowrap
+}
+
+.nav-links .nav-item .nav-link.active,.nav-links .nav-item .nav-link:hover {
+    color: var(--fc-primary)
+}
+
+.nav-line-bottom {
+    border-bottom: 1px solid var(--fc-gray-200)
+}
+
+@media (max-width: 576px) {
+    .nav-line-bottom {
+        flex-wrap:nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden
+    }
+
+    .nav-line-bottom::-webkit-scrollbar {
+        display: none
+    }
+}
+
+.nav-line-bottom .nav-item .nav-link {
+    border-radius: 0;
+    color: var(--fc-gray-600);
+    font-weight: 500;
+    margin-bottom: -1px;
+    padding: 1.2rem;
+    white-space: nowrap
+}
+
+@media (max-width: 576px) {
+    .nav-line-bottom .nav-item .nav-link {
+        padding:.8rem
+    }
+}
+
+.nav-line-bottom .nav-item .nav-link.active {
+    background-color: transparent;
+    border-bottom: 1px solid var(--fc-primary);
+    color: var(--fc-primary)
+}
+
+@media (max-width: 576px) {
+    .nav-line-bottom .nav-item .nav-link.active {
+        padding:.747rem
+    }
+}
+
+.nav-line-bottom .nav-item .nav-link:hover {
+    background-color: transparent;
+    border-bottom: 1px solid var(--fc-primary);
+    color: var(--fc-primary)
+}
+
+.nav-line-bottom .nav-item .nav-link .badge {
+    line-height: 1.4
+}
+
+.dropdown-menu {
+    box-shadow: var(--fc-dropdown-box-shadow);
+    line-height: 1.375rem;
+    z-index: 1021
+}
+
+.dropdown-header {
+    color: var(--fc-gray-500);
+    font-size: .6875rem;
+    letter-spacing: 1px;
+    margin-bottom: .2rem;
+    text-transform: uppercase
+}
+
+.dropdown-text {
+    color: var(--fc-gray-500);
+    font-size: .75rem;
+    line-height: 1.4;
+    padding: .25rem 1.2rem
+}
+
+.dropdown-item {
+    align-items: center;
+    background-color: transparent;
+    border-radius: .5rem!important;
+    display: flex;
+    font-weight: var(--fc-font-weight-medium);
+    line-height: 26px;
+    padding: .125rem .75rem
+}
+
+.dropdown-item:hover {
+    color: var(--fc-gray-800)!important
+}
+
+.dropdown-item.active,.dropdown-item:hover {
+    background-color: var(--fc-gray-100);
+    text-decoration: none
+}
+
+.dropdown-item.active {
+    color: var(--fc-gray-800)
+}
+
+.dropdown-item:last-child {
+    border-bottom: 0
+}
+
+.dropdown-item:focus {
+    background-color: var(--fc-gray-100);
+    color: var(--fc-gray-800);
+    text-decoration: none
+}
+
+.dropdown-item:focus .dropdown-toggle:after {
+    color: var(--fc-primary)
+}
+
+.dropdown-item:focus:hover {
+    color: var(--fc-primary)
+}
+
+.dropdown-item:focus:active,.dropdown-item:focus:hover {
+    background-color: var(--fc-gray-100);
+    text-decoration: none
+}
+
+.dropdown-item:focus:active {
+    color: var(--fc-black)
+}
+
+.dropdown-item:hover.dropdown-toggle:after {
+    color: var(--fc-primary)
+}
+
+.dropdown-menu-xs {
+    min-width: 8rem!important
+}
+
+.dropdown-menu-md {
+    min-width: 17rem!important
+}
+
+.dropdown-menu-lg {
+    min-width: 22rem!important
+}
+
+@media (max-width: 420px) {
+    .dropdown-menu-lg {
+        min-width:17rem!important
+    }
+}
+
+.dropdown-menu-xl {
+    min-width: 29rem!important
+}
+
+.dropdown-toggle:after {
+    border: 0;
+    content: "\f12f";
+    float: right;
+    font-family: feather-icons!important;
+    margin-left: .255em;
+    vertical-align: .255em
+}
+
+.dropup .dropdown-toggle:after {
+    content: "\f132"
+}
+
+.dropend .dropdown-toggle:after,.dropup .dropdown-toggle:after {
+    border: 0;
+    display: inline-block;
+    font-family: feather-icons!important;
+    margin-left: .255em;
+    vertical-align: .255em
+}
+
+.dropend .dropdown-toggle:after {
+    content: "\f131"
+}
+
+.dropstart .dropdown-toggle:before {
+    border: 0;
+    content: "\f130";
+    display: inline-block;
+    font-family: feather-icons!important;
+    margin-right: .255em
+}
+
+.dropdown-item-icon {
+    color: var(--fc-gray-600);
+    display: inline-block;
+    font-size: .8125rem;
+    opacity: .7;
+    width: 1.5rem
+}
+
+@media (min-width: 990px) {
+    .dropstart-lg {
+        position:relative
+    }
+
+    .dropstart-lg .dropdown-menu {
+        margin-right: .125rem;
+        margin-top: 0;
+        right: 100%;
+        top: 0
+    }
+
+    .dropstart-toggle-none.dropstart .dropdown-toggle:before {
+        display: none
+    }
+}
+
+.dropdown-toggle-none .dropdown-toggle:before {
+    display: none
+}
+
+.dropdown-animation.dropdown-submenu .dropdown-menu {
+    display: block;
+    margin-right: .125rem;
+    margin-top: 0;
+    opacity: 0;
+    right: 100%;
+    top: 0;
+    transform: translateY(20px);
+    transition: all .3s ease-in;
+    visibility: hidden
+}
+
+.dropdown-animation.dropdown-submenu:hover>.dropdown-menu {
+    opacity: 1;
+    transform: scaleY(1);
+    visibility: visible
+}
+
+.dropdown-animation .dropdown-menu {
+    display: block;
+    margin-right: .125rem;
+    margin-top: 0;
+    opacity: 0;
+    right: 100%;
+    top: 0;
+    transform: translateY(20px);
+    transition: all .3s ease-in;
+    visibility: hidden
+}
+
+.dropdown-animation:hover>.dropdown-menu {
+    opacity: 1;
+    transform: scaleY(1);
+    visibility: visible
+}
+
+.dropdown-menu-list .dropdown-menu-list-submenu {
+    grid-gap: 24px;
+    background: var(--fc-white);
+    border-radius: var(--fc-border-radius);
+    box-shadow: var(--fc-box-shadow);
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    left: 100%;
+    margin-left: 12px;
+    min-height: 100%;
+    min-width: 260px;
+    opacity: 0;
+    overflow: auto;
+    padding: var(--fc-dropdown-padding-y);
+    position: absolute;
+    top: 0;
+    transition: all .3s ease-in-out;
+    visibility: hidden
+}
+
+@media (max-width: 990px) {
+    .dropdown-menu-list .dropdown-menu-list-submenu {
+        display:block;
+        width: 100%
+    }
+
+    .dropdown-menu-list .dropdown-menu-list-submenu .dropdown-menu-list-submenu-list {
+        margin: .5rem 0
+    }
+}
+
+.dropdown-menu-list:hover .dropdown-menu-list-submenu {
+    margin-left: 0;
+    opacity: 1;
+    visibility: visible
+}
+
+.dropdown-menu-list:hover .dropdown-item svg {
+    fill: var(--fc-gray-600)
+}
+
+.dropdown-flyout .dropdown-item {
+    padding: 14px 18px
+}
+
+.card-product {
+    transition: .2s;
+    -moz-transition: .2s;
+    -webkit-transition: .2s;
+    -o-transition: .2s
+}
+
+.card-product .card-hidden {
+    background-color: #fff;
+    border-bottom: 1px solid var(--fc-gray-300);
+    border-left: 1px solid var(--fc-gray-300);
+    border-radius: .4375rem;
+    border-right: 1px solid var(--fc-gray-300);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    left: 0;
+    margin-top: -1.25rem;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    transition: all .15s ease-in-out;
+    visibility: hidden;
+    width: 100%;
+    z-index: 1
+}
+
+.card-product .product-action-btn {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(10px);
+    transition: opacity .25s cubic-bezier(.17,.62,.44,.99),transform .25s cubic-bezier(.17,.62,.44,.99)
+}
+
+          </div>
+          </div>
        </div>
-     </ngx-slick-carousel>
+       </div>
+       </div> 
+
+    </div>
+  </nav>  -->
+
+  <nav class="navbar navbar-expand-l py-0 py-lg-2 navbar-default"
+  *ngIf="router.url !== '/login' && router.url !== '/singup'"
+  >
+   <div class="container-fluid">
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar-default" aria-labelledby="navbar-defaultLabel">
+         <div class="offcanvas-header pb-1">
+               <a  routerLink="/">
+                  <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+                  <span class="fw-bold text-dark">Shoppingbuzz</span>
+                </a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+         </div>
+         <div class="offcanvas-body">
+            <div class="d-block d-lg-none mb-4">
+               <form action="#">
+                  <div class="input-group">
+                     <input class="form-control rounded" type="search" placeholder="Search for products" />
+                     <span class="input-group-append">
+                        <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                           >
+                              <circle cx="11" cy="11" r="8"></circle>
+                              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                           </svg>
+                        </button>
+                     </span>
+                  </div>
+               </form>
+               <div class="mt-2">
+                  <button type="button" class="btn btn-outline-gray-400 text-muted w-100" data-bs-toggle="modal" data-bs-target="#locationModal">
+                     <i class="feather-icon icon-map-pin me-2"></i>
+                     Pick Location
+                  </button>
+               </div>
+            </div>
+            <div class="d-none d-lg-block">
+              
+                  <i class="bi bi-bag text-white" style="font-size: 25px; margin: 10px;"></i>
+               
+            </div>
+            <div>
+               <ul class="navbar-nav  navbar-nav-offcanvac align-items-center navbar-offcanvas-color">
+                  <li class="nav-item dropdown" *ngFor="let  categorydata of categoryData?.category;let i = index">
+                     <a class="nav-link dropdown-toggle" 
+                     routerLink="product/{{categorydata._id}}" 
+                      role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       {{ categorydata.categoryname}}
+                      
+                     </a>
+                     <ul class="dropdown-menu">
+                        <!-- <li><a routerLink="product/{{categorydata._id}}">All</a> </li>  -->
+                         <li class="dropdown-submenu dropend fs-6"  
+                        *ngFor="let data of subcategoryData?.subcategory;let i = index">
+  
+        
+                           <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
+                           routerLink="product/{{data._id}}"*ngIf="categorydata._id == data.CategoryId._id"
+                           >
+                           {{ data?.subcategoryname}}
+                           </a>
+                           <ul class="dropdown-menu">
+                              <li *ngFor="let categoryData_ of compareCategory?.product;let i = index"
+                              ><a class="dropdown-item" routerLink="product/{{categoryData_._id}}" 
+                              *ngIf="data._id == categoryData_.SubCategoryId._id">{{categoryData_?.productname}}</a></li>
+                             
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+                 
+               </ul>
+            
+            </div>
+         </div>
+      </div>
    </div>
-</section> -->
+  </nav>
