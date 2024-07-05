@@ -13,6 +13,8 @@ export class CommonService implements OnInit {
 
   private wishlistCountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   wishlistCount$: Observable<number> = this.wishlistCountSubject.asObservable();
+  private searchSubject = new BehaviorSubject<any[]>([]);
+  public searchData$: Observable<any[]> = this.searchSubject.asObservable();
  
   constructor(private http: HttpClient) {}
   
@@ -97,6 +99,23 @@ export class CommonService implements OnInit {
   }));
   }
   SearchData(data:any): Observable<any> {
-    return this.http.get(`${environment.baseUrl}/search?searchValue=${data}`)
+    return this.http.get(`${environment.baseUrl}search?searchValue=${data}`)
+    .pipe(map((response:any) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      // this.searchSubject.asObservable();
+      // this.searchSubject.next(response);
+      // return response;
+      this.searchSubject.next(response);
+      return response;
+  }));
   }
+  getSearchObservable(): Observable<any> {
+    return this.searchSubject.asObservable();
+  }
+  updateSearchResults(results: any[]): void {
+    console.log("*****",results)
+    this.searchSubject.next(results);
+    console.log(results)
+  }
+ 
 }

@@ -1,4 +1,6 @@
-<footer class="footer" *ngIf="router.url !== '/login' && router.url !== '/singup'">
+<footer class="footer"
+ *ngIf="router.url !== '/login' && router.url !== '/singup' 
+ &&  router.url !=='/forgot-password' && router.url =='reset-password'">
     <div class="container">
       <div class="row g-4 py-4">
         <div class="col-12 col-md-12 col-lg-4">

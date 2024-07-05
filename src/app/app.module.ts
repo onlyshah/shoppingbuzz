@@ -21,6 +21,12 @@ import { MyorderComponent } from './pages/myorder/myorder.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { ForgotPasswordComponent } from './shared/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './shared/reset-password/reset-password.component';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
 
 
 @NgModule({
@@ -37,6 +43,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MywishlistComponent,
     ShopCheckoutComponent,
     MyorderComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     
     
    
@@ -49,7 +57,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
     FormsModule,
     HttpClientModule,
     SlickCarouselModule,
-    CarouselModule
+    CarouselModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [BsModalService,
     AuthGuard,

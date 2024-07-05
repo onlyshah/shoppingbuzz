@@ -24,9 +24,11 @@ export class ShoppingcartComponent  implements OnInit {
   @Input() routeId:any
   @Input() item:any
   userData:any
+  @Input() getSearchData:any
   //@Input () dataitem :any
   cartcount: number;
   wishlistcount:number;
+  
  
   
   constructor(private comApi:CommonService , private route: Router ,
@@ -35,13 +37,14 @@ export class ShoppingcartComponent  implements OnInit {
     public guard:AuthGuard,
     private el: ElementRef, private renderer: Renderer2
     
-
   ) {
-      //console.log('***',this.dataitem)
+    console.log('searchitem',this.getSearchData)
+     
     
       
 
      }
+ 
   
   ngOnInit() {
     this.userData=(JSON.parse(localStorage.getItem('user')!))

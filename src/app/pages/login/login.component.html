@@ -48,6 +48,12 @@
       <input type="password" formControlName="password" placeholder="Enter Password" class="form-control" required >
       <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
     </div>
+    <!-- <div class="password-field position-relative">
+      <input [type]="passwordFieldType" formControlName="password" placeholder="Enter Password" class="form-control" required>
+      <span class="position-absolute top-50 end-0 translate-middle-y pe-2" (click)="togglePasswordVisibility()">
+        <i [ngClass]="passwordFieldType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+      </span>
+    </div> -->
 
               </div>
               <div class="d-flex justify-content-between">
@@ -58,13 +64,13 @@
                     Remember me
                   </label>
                 </div>
-                <div> Forgot password? <a href="forgot-password.html">Reset It</a></div>
+                <div> Forgot password? <a routerLink="/forgot-password">Reset It</a></div>
               </div>
               <!-- btn -->
               <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign In</button>
               </div>
               <!-- link -->
-              <div>Don’t have an account? <a href="signup.html"> Sign Up</a></div>
+              <div>Don’t have an account? <a routerLink="/singup"> Sign Up</a></div>
             </div>
           </form>
         </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +19,7 @@ export class AuthService implements OnInit, OnDestroy {
       private http: HttpClient
   ) {
       this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
-      window.addEventListener('beforeunload', this.clearTokenOnClose);
+     // window.addEventListener('beforeunload', this.clearTokenOnClose);
 
   }
 
@@ -66,11 +66,18 @@ billsendtoEmail(data:any){
   isLoggedIn() {
     return this.loggedInStatus;
   }
-  private clearTokenOnClose = () => {
-    this.logout();
-  }
+  // private clearTokenOnClose = () => {
+  //   this.logout();
+  // }
   ngOnDestroy(): void {
-    window.removeEventListener('beforeunload', this.clearTokenOnClose);
+    //window.removeEventListener('beforeunload', this.clearTokenOnClose);
+  }
+  sendResetLink(data:any): Observable<any>{
+    return this.http.post(environment.baseUrl+'forgotpassword',data)
+  }
+  resetuserPassword(data:any){
+    console.log(data)
+    return this.http.post(environment.baseUrl+'resetpassword',data)
   }
 }
 

@@ -97,6 +97,7 @@ export class HomeComponent implements OnInit{
   getcompareCategory(){
     this.comApi.getall().subscribe((response:any)=>{
     this.compareCategory =response.product;
+    console.log('compareCategory',this.compareCategory)
     this.compareCategory.forEach((element:any) => {
       if(element.displaycategory === 'Todaysdeals'
       ){
@@ -124,6 +125,7 @@ export class HomeComponent implements OnInit{
       
     });
    })
+  ;
 }
 itemsPerSlideOneOnMobile(): number {
   // Adjust this logic based on your desired screen size breakpoints

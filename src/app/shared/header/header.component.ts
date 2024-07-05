@@ -1,9 +1,10 @@
 import { AfterContentChecked, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { CommonService } from 'src/app/services/common.service';
-import { Location } from '@angular/common';
 import { first, switchMap } from 'rxjs';
+import { CommonService } from 'src/app/services/common.service';
+import { debounce } from 'lodash';
+
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,10 @@ export class HeaderComponent implements OnInit{
   @Input() cartCount: any;
   @Input() wishListCount: any;
   userData: any;
+  searchStatus: boolean;
+  productList: any;
+  searchValue:any;
+  debouncedSearch: any;
  
     
     
@@ -25,7 +30,7 @@ export class HeaderComponent implements OnInit{
 
 constructor(public router: Router ,private comApi:CommonService ,private auth:AuthService,
   ){
-  
+   // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
   ngOnInit(): void {
     this.getallCatgoery();
@@ -83,5 +88,18 @@ constructor(public router: Router ,private comApi:CommonService ,private auth:Au
     })
 
   }
+  searchProduct(searchValue:any){
+    console.log(searchValue)
+  //  this.debouncedSearch(searchValue);
+    this.comApi.SearchData(searchValue).pipe(first())
+    .subscribe({
+      next: (res: any) => {
+        let data = res
+        console.log('searchValue',res)
+        this.comApi.updateSearchResults(data);
+        this.router.navigateByUrl('product')
+      },
+    });
 
+  }
 }
