@@ -1,0 +1,110 @@
+<!-- <form [formGroup]="signupForm" (ngSubmit)="onsignupSubmit()">
+<div class="row g-3">
+  <div class="col">
+    <input type="text" class="form-control" formControlName="firstName" placeholder="First name" 
+     aria-label="First name"
+      required>
+      <div *ngIf="(form['firstName'].touched || submitted) && form['firstName'].errors" class="error text-capitalize">
+        <div *ngIf="form['firstName'].errors['required']">Field is required</div>
+      </div>
+  </div>
+  <div class="col-12">
+   <input type="text" formControlName="lastName" class="form-control" placeholder="Last name" 
+     aria-label="Last name"
+      required>
+      <div *ngIf="(form['firstName'].touched || submitted) && form['firstName'].errors" class="error text-capitalize">
+        <div *ngIf="form['firstName'].errors['required']">Field is required</div>
+      </div>
+  </div>
+  <div class="col-12">
+    <input type="text" formControlName="mobileNo" class="form-control" 
+    placeholder="mobile number" 
+      aria-label="mobile number"
+       required>
+       <div *ngIf="(form['mobileNo']?.errors?.['mobileNo'] && signupForm.controls['mobileNo']?.touched) || submitted" class="error text-capitalize">
+        Field is required
+      </div>
+      <div *ngIf="form['mobileNo']?.errors?.['minlength'] && signupForm.controls['mobileNo']?.touched" class="error text-capitalize">
+        Minimum length is 10
+      </div>
+   </div>
+  <div class="col-12">
+    <input type="email" class="form-control" 
+     id="inputEmail4"  formControlName="email" placeholder="Email" required>
+     <div *ngIf="(form['email']?.errors?.['required'] && signupForm.controls['email']?.touched) || submitted" class="error text-capitalize">
+      Field is required
+    </div>
+    <div *ngIf="form['email']?.errors?.['pattern'] && signupForm.controls['email']?.touched" class="error text-capitalize">
+      Invalid email format
+    </div>
+  </div>
+  <div class="col-12" formArrayName="Address" >
+      <div class="row g-3"  *ngFor="let address of addressControls; let i = index" [formGroupName]="i">
+        <div  class="col-12">
+        <input formControlName="Country" placeholder="Country" class="form-control" >
+        <div *ngIf="(form['Country']?.errors?.['required'] && signupForm.controls['Country']?.touched) || submitted" class="error text-capitalize">
+          Field is required
+        </div>
+      </div>
+        <div  class="col-12">
+          <input formControlName="State"  placeholder="State" class="form-control" >
+          <div *ngIf="(form['State']?.errors?.['required'] && 
+            signupForm.controls['State']?.touched) || submitted" class="error text-capitalize">
+            Field is required
+          </div>
+        </div>
+        <div  class="col-12">
+        
+          <input formControlName="City" placeholder="City" class="form-control" >
+          <div *ngIf="(form['City']?.errors?.['required'] && 
+          signupForm.controls['City']?.touched) || submitted" class="error text-capitalize">
+          Field is required
+        </div>
+        </div >
+        <div  class="col-12">
+         
+          <input formControlName="Street" placeholder="Street" class="form-control" >
+          <div *ngIf="(form['Street']?.errors?.['required'] && 
+          signupForm.controls['Street']?.touched) || submitted" class="error text-capitalize">
+          Field is required
+        </div>
+        </div>
+        
+       
+        <div  class="col-12">
+        
+          <input formControlName="Postcode" placeholder="Postcode"  class="form-control" >
+          <div *ngIf="(form['Postcode']?.errors?.['required'] && 
+          signupForm.controls['Postcode']?.touched) || submitted" class="error text-capitalize">
+          Field is required
+        </div>
+        </div>
+        <div  class="col-12">
+       
+          <input formControlName="addresstype" placeholder="Address Type" class="form-control" >
+          <div *ngIf="(form['addresstype']?.errors?.['required'] && 
+          signupForm.controls['addresstype']?.touched) || submitted" class="error text-capitalize">
+          Field is required
+        </div>
+        </div>
+      </div>
+  
+
+  </div>
+  <div class="col-12">
+    <div class="password-field position-relative">
+  
+      <input type="password"  formControlName="password" placeholder="Enter Password" 
+      class="form-control" required >
+      <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
+    </div>
+    </div>
+
+  <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Register</button>
+  </div>
+
+
+  <p><small>By continuing, you agree to our <a href="#!"> Terms of Service</a> & <a href="#!">Privacy
+        Policy</a></small></p>
+</div>
+</form> -->

@@ -73,7 +73,7 @@
       </div>
    </div>
 </ng-container> 
-<ng-container  *ngIf="categorytdata != null && subcategorytdata != null && getSearchData == null">
+<ng-container  *ngIf="categorytdata != null && subcategorytdata != null && getSearchData !== null">
    <div class="row gx-10">
       <aside class="col-lg-3 col-md-4 mb-6 mb-md-0"  *ngIf="routeId !==pushproductdata[0]?._id">
          <app-filtersidebar></app-filtersidebar>

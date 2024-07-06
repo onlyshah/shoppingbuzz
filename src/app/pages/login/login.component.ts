@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   loginData:any;
   signupForm !:FormGroup;
   signupData:any
+  passwordFieldType: string = 'password';
 
   ngOnInit(): void {
     this.buildloginForm();
@@ -32,13 +33,17 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
-  get f() { return this.loginForm.controls; }
+  get loginerror() { return this.loginForm?.controls }
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
   submitLogin(){
-    // this.submitted = true;  
-    //   // stop here if form is invalid
-    //   if (this.loginForm.invalid) {
-    //       return;
-    //   }
+    this.submitted = true;  
+    // //stop here if form is invalid
+      if (this.loginForm.invalid) {
+          return;
+      }
    this.auth.login(this.loginForm.value)
    .pipe(first())
    .subscribe({
@@ -88,6 +93,11 @@ export class LoginComponent implements OnInit {
 
   onsignupSubmit(){
     console.log(this.signupForm.value)
+    this.submitted = true;  
+    // //stop here if form is invalid
+      if (this.signupForm.invalid) {
+          return;
+      }
     this.auth.SignUp(this.signupForm.value).subscribe((response:any)=>{
       this.signupData = response;
       console.log(this.signupData);
