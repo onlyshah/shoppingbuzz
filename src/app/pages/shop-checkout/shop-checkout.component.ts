@@ -15,7 +15,7 @@ import html2canvas from 'html2canvas';
 export class ShopCheckoutComponent implements OnInit ,OnDestroy {
   @ViewChild('template', { static: false }) template: ElementRef;
   @ViewChild('payNowButton') payNowButton: ElementRef;
-  data: any;
+  data: any =[];
   updateprices: number =0;
   productquantity: any;
   id:any;
@@ -36,7 +36,7 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
     ,private modalService: BsModalService ,private fb:FormBuilder) {}
    
   ngAfterViewInit() {
-    // Ensure the template is available after the view initializes
+    //Ensure the template is available after the view initializes
     if (!this.template || !this.template.nativeElement) {
       console.error('Template reference is invalid or not initialized.');
     }
@@ -58,9 +58,9 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
     });
     this.comApi.getproducttocart(this.id).subscribe((response:any)=>{
       this.data = response;
-      console.log('data',this.data)
+      console.log('data',response)
       this.updateprices =0;
-      this.data.forEach((el:any) => {
+      this.data.products.forEach((el:any) => {
         this.productquantity = el.quantity
         this.updateprices +=el.quantity*el.productId.price
         console.log(this.updateprices)
@@ -71,12 +71,14 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
         }
         
         this.products.push(this.orderData)
+        console.log('productData',this.products)
       });
        })
        this.auth.getUser(this.id).subscribe((user:any)=>{
         this.userData.push(user)
         this.billdetail = user
         console.log('userData',this.userData ,'biil' ,this.billdetail.firstName)
+        console.log('email',this.userData ,'biil' ,this.billdetail.email)
         this.selectedAddress = this.userData[0].Address.find((addr:any) => addr.addresstype === 'home');
     console.log('Selected Address:', this.selectedAddress);
    
@@ -179,7 +181,7 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
       console.log(res)
     })
     formdata.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
+      console.log("formdata",`${key}: ${value}`);
     });
   }
 
@@ -188,6 +190,7 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
       "products":this.products,
       "totalprice":this.updateprices,
       "userId":this.id,
+      "paymentType":this.paymentMode
 
     }
   

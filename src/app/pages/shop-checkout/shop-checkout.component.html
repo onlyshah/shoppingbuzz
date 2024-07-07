@@ -2,11 +2,11 @@
   <div class="container">
 
     <div class="row">
-      <!-- col -->
+     
       <div class="col-12">
         <div>
           <div class="mb-8">
-            <!-- text -->
+         
             <h1 class="fw-bold mb-0">Checkout</h1>
             <p class="mb-0">Already have an account? Click here to <a href="#!">Sign in</a>.</p>
           </div>
@@ -24,15 +24,16 @@
 
               <div class="accordion-item py-4">
                 <div class="d-flex justify-content-between align-items-center">
-                  <!-- heading one -->
-                  <a href="#" class="fs-5 text-inherit collapsed h4" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
-                    <i class="feather-icon icon-map-pin me-2 text-muted"></i>
+                 
+                  <a href="#"  class="fs-5 text-inherit h4 collapsed"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                   aria-expanded="false" aria-controls="flush-collapseOne">
+                   <i class="bi bi-geo-alt"></i>
                     Add delivery address
                   </a>
-                  <!-- btn -->
+              
                   <a class="btn btn-outline-primary btn-sm" (click)="newaddmodal(newaddress)">Add a new address</a>
-                  <!-- collapse -->
+                
                 </div>
                 <div id="flush-collapseOne" class="accordion-collapse collapse show"
                   data-bs-parent="#accordionFlushExample">
@@ -86,7 +87,7 @@
 
               <a href="#" class="text-inherit h5" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
                 aria-expanded="true" aria-controls="flush-collapseFour">
-                <i class="feather-icon icon-credit-card me-2 text-muted"></i>Payment Method
+                <i class="bi bi-credit-card"></i> Payment Method
               </a>
               <div id="flush-collapseFour" class="accordion-collapse collapse show"
                 data-bs-parent="#accordionFlushExample">
@@ -94,26 +95,57 @@
                 <div class="mt-5">
                   <div>
 
-                    <div class="card card-bordered shadow-none mb-2">
-
-                      <!-- <div class="card-body p-6">
-                          <div class="d-flex">
-                            <div class="form-check">
-                             
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                              <label class="form-check-label ms-2" for="paypal">
-
-                              </label>
+                   
+                        <div class="card card-bordered shadow-none mb-2">
+                          <!-- card body -->
+                          <div class="card-body p-6">
+                            <div class="d-flex mb-4">
+                              <div class="form-check">
+                                <!-- input -->
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="creditdebitcard">
+                                <label class="form-check-label ms-2" for="creditdebitcard"></label>
+                              </div>
+                              <div>
+                                <h5 class="mb-1 h6"> <i class="bi bi-stripe"></i> Credit / Debit Card</h5>
+                                <p class="mb-0 small">Safe money transfer using your bank accou k account. We support Mastercard tercard, Visa, Discover and Stripe.</p>
+                              </div>
                             </div>
-                            <div>
-                           
-                              <h5 class="mb-1 h6"> Payment with Paypal</h5>
-                              <p class="mb-0 small">You will be redirected to PayPal website to complete your purchase
-                                securely.</p>
+                            <div class="row g-2">
+                              <div class="col-12">
+                                <!-- input -->
+                                <div class="mb-3">
+                                  <label class="form-label">Card Number</label>
+                                  <input type="text" class="form-control" placeholder="1234 4567 6789 4321">
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-12">
+                                <!-- input -->
+                                <div class="mb-3 mb-lg-0">
+                                  <label class="form-label">Name on card</label>
+                                  <input type="text" class="form-control" placeholder="Enter your first name">
+                                </div>
+                              </div>
+                              <div class="col-md-3 col-12">
+                                <!-- input -->
+                                <div class="mb-3 mb-lg-0 position-relative">
+                                  <label class="form-label">Expiry date</label>
+                                  <input class="form-control flatpickr flatpickr-input" type="text" placeholder="Select Date" readonly="readonly">
+                                  <div class="position-absolute bottom-0 end-0 p-3 lh-1">
+                                    <i class="bi bi-calendar text-muted"></i>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-3 col-12">
+                                <!-- input -->
+                                <div class="mb-3 mb-lg-0">
+                                  <label class="form-label">CVV code</label>
+                                  <input type="password" class="form-control" placeholder="***">
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div> -->
-                    </div>
+                        </div>
+                   
 
 
                     <div class="card card-bordered shadow-none">
@@ -140,9 +172,7 @@
                     </div>
 
                     <div class="mt-5 d-flex justify-content-end">
-                      <!-- <a href="#" class="btn btn-outline-gray-400 text-muted collapsed"
-                         data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                          aria-expanded="false" aria-controls="flush-collapseThree">Prev</a> -->
+                      
                       <a (click)="openModal(bill)" class="btn btn-primary ms-2">Place Order</a>
                     </div>
                   </div>
@@ -160,8 +190,8 @@
           <div class="mt-4 mt-lg-0">
             <div class="card shadow-sm">
               <h5 class="px-6 py-4 bg-transparent mb-0">Order Details</h5>
-              <ul class="list-group list-group-flush" *ngFor="let data of data">
-                <!-- list group item -->
+              <ul class="list-group list-group-flush" *ngFor="let data of data.products">
+               
                 <li class="list-group-item px-4 py-3">
                   <div class="row align-items-center">
                     <div class="col-2 col-md-2">
@@ -169,7 +199,7 @@
                     </div>
                     <div class="col-5 col-md-5">
                       <h6 class="mb-0">{{data.productId.productname}}</h6>
-                      <!-- <span><small class="text-muted">.98 / lb</small></span> -->
+                    
 
                     </div>
                     <div class="col-2 col-md-2 text-center text-muted">
@@ -200,7 +230,7 @@
                 </div>
 
               </li>
-              <!-- list group item -->
+            
             </div>
 
 
@@ -275,7 +305,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of data">
+        <tr *ngFor="let data of data.products">
           <td class="px-0">{{data.productId.productname}}</td>
           <td class="text-end px-0">{{data.quantity}}</td>
           <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
@@ -331,7 +361,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of data">
+        <tr *ngFor="let data of data.products">
           <td class="px-0">{{data.productId.productname}}</td>
           <td class="text-end px-0">{{data.quantity}}</td>
           <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
@@ -344,10 +374,7 @@
         <p class="text-muted me-3">Subtotal:</p>
         <span> {{updateprices}}</span>
       </div>
-      <!-- <div class="d-flex justify-content-end">
-          <p class="text-muted me-3">Discount:</p>
-          <span>-$40.00</span>
-        </div> -->
+     
       <div class="d-flex justify-content-end mt-3">
         <h5 class="me-3">Total:</h5>
         <h5 class="text-success"> {{updateprices}}</h5>
@@ -376,7 +403,7 @@
         <div class="card">
           <div class="card-body p-5">
             <div class="d-flex justify-content-between mb-5">
-              <!-- heading -->
+           
               <div>
                 <h5 class="h6 mb-1" id="addAddressModalLabel">New Shipping Address</h5>
                 <p class="small mb-0">Add new shipping address for your order delivery.</p>
@@ -387,7 +414,7 @@
                   aria-label="Close"></button>
               </div>
             </div>
-            <!-- row -->
+           
             <form [formGroup]="userAddressForm">
               <div class="row g-3">
                 <div class="col-12">
@@ -410,13 +437,7 @@
 
                   <input type="text" class="form-control" formControlName="Country" placeholder="Country">
                 </div>
-                <!-- <div class="col-12">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-								
-									<label class="form-check-label" for="flexCheckDefault">Set as Default</label>
-								</div>
-							</div> -->
+                
 
                 <div class="col-12 text-end">
                   <button type="button" (click)="modalRef?.hide()" class="btn btn-outline-primary"
