@@ -79,5 +79,11 @@ billsendtoEmail(data:any){
     console.log(data)
     return this.http.post(environment.baseUrl+'resetpassword',data)
   }
+  createOrder(amount: number) {
+    return this.http.post(environment.baseUrl+"create-order", { amount });
+  }
+  verifyPayment(paymentDetails: any) {
+    return this.http.post(environment.baseUrl+ "verify-paymen", paymentDetails);
+  }
 }
 

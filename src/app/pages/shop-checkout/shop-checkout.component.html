@@ -97,53 +97,73 @@
 
                    
                         <div class="card card-bordered shadow-none mb-2">
-                          <!-- card body -->
-                          <div class="card-body p-6">
-                            <div class="d-flex mb-4">
-                              <div class="form-check">
-                                <!-- input -->
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="creditdebitcard">
-                                <label class="form-check-label ms-2" for="creditdebitcard"></label>
-                              </div>
-                              <div>
-                                <h5 class="mb-1 h6"> <i class="bi bi-stripe"></i> Credit / Debit Card</h5>
-                                <p class="mb-0 small">Safe money transfer using your bank accou k account. We support Mastercard tercard, Visa, Discover and Stripe.</p>
-                              </div>
-                            </div>
-                            <div class="row g-2">
-                              <div class="col-12">
-                                <!-- input -->
-                                <div class="mb-3">
-                                  <label class="form-label">Card Number</label>
-                                  <input type="text" class="form-control" placeholder="1234 4567 6789 4321">
+                          <div class="card card-bordered shadow-none mb-2">
+                            <!-- card body -->
+                            <div class="card-body p-6">
+                              <div class="d-flex mb-4">
+                                <div class="form-check">
+                                  <a type="button" class="form-check-input"
+                                  id="Onlinepayment" name="Onlinepayment" 
+                                 
+                                    value="Onlinepayment"
+                                   (click)="onSelectepayment('Card')" type="radio" name="flexRadioDefault" id="creditdebitcard">
+                                  <label class="form-check-label ms-2" for="creditdebitcard"></label>
+                                </a>
+                                
+                                  <h5 class="mb-1 h6"> <i class="bi bi-stripe"></i> Credit / Debit Card</h5>
+                                  <p class="mb-0 small">Safe money transfer using your bank account. We support Mastercard, Visa, Discover and Stripe.</p>
                                 </div>
                               </div>
-                              <div class="col-md-6 col-12">
-                                <!-- input -->
-                                <div class="mb-3 mb-lg-0">
-                                  <label class="form-label">Name on card</label>
-                                  <input type="text" class="form-control" placeholder="Enter your first name">
-                                </div>
-                              </div>
-                              <div class="col-md-3 col-12">
-                                <!-- input -->
-                                <div class="mb-3 mb-lg-0 position-relative">
-                                  <label class="form-label">Expiry date</label>
-                                  <input class="form-control flatpickr flatpickr-input" type="text" placeholder="Select Date" readonly="readonly">
-                                  <div class="position-absolute bottom-0 end-0 p-3 lh-1">
-                                    <i class="bi bi-calendar text-muted"></i>
+                              <div class="row g-2">
+                                <div class="col-12">
+                                  <!-- input -->
+                                  <div class="mb-3">
+                                    <label class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" placeholder="1234 4567 6789 4321" [(ngModel)]="cardNumber">
                                   </div>
                                 </div>
-                              </div>
-                              <div class="col-md-3 col-12">
-                                <!-- input -->
-                                <div class="mb-3 mb-lg-0">
-                                  <label class="form-label">CVV code</label>
-                                  <input type="password" class="form-control" placeholder="***">
+                                <div class="col-md-6 col-12">
+                                  <!-- input -->
+                                  <div class="mb-3 mb-lg-0">
+                                    <label class="form-label">Name on card</label>
+                                    <input type="text" class="form-control" placeholder="Enter your first name" [(ngModel)]="cardHolderName">
+                                  </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                  <!-- input -->
+                                  <div class="mb-3 mb-lg-0 position-relative">
+                                    <label class="form-label">ExpiryDate</label>
+                                    <input class="form-control flatpickr flatpickr-input" type="date" placeholder="Select Date"  [(ngModel)]="expiryDate">
+                                   
+                                  </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                  <!-- input -->
+                                  <div class="mb-3 mb-lg-0 position-relative">
+                                    <label class="form-label">Card Type</label>
+                                    <input class="form-control flatpickr flatpickr-input" type="text" placeholder="Select Date"  [(ngModel)]="cardType">
+                                   
+                                  </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                  <!-- input -->
+                                  <div class="mb-3 mb-lg-0 position-relative">
+                                    <label class="form-label">Bank</label>
+                                    <input class="form-control flatpickr flatpickr-input" type="text" placeholder="Select Date"  [(ngModel)]="BankName">
+                                   
+                                  </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                  <!-- input -->
+                                  <div class="mb-3 mb-lg-0">
+                                    <label class="form-label">CVV code</label>
+                                    <input type="password" class="form-control" placeholder="***" [(ngModel)]="cvvCode">
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+                          
                         </div>
                    
 
@@ -244,14 +264,14 @@
 
   </div>
 
-
+  <button (click)="pay(this.updateprices)">Pay</button>
 </section>
 
 <div  #template  class="off-screen">
   <ng-container *ngTemplateOutlet="bill"></ng-container>
 </div>
 <ng-template #bill>
-<div class="card-body p-5" >
+
   <div class="card-body p-5">
     <div class="modal-header"  *ngFor="let user of userData">
       <h2>
@@ -271,32 +291,50 @@
       </svg>
     </p>
 
-    <div class="border-top border-gray-200 pt-3 mt-2">
+    <div class="pt-3 mt-2">
       <div class="row">
         <table class="table  mt-2">
           <thead>
             <tr>
               <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Payment Id</th>
               <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Payment Date</th>
-              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Payment Type</th>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0" >Payment Type</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="px-0"><strong>#88305</strong></td>
               <td class="text-end px-0"><strong>Feb/09/20</strong></td>
-              <td class="text-end px-0"><strong>{{paymentMode}}</strong></td>
+              <td class="text-end px-0" *ngIf="paymenttype  ==='cashonDelivery'"><strong>{{this.paymenttype}}</strong></td>
+              <td class="text-end px-0" *ngIf="paymenttype  ==='Card'"><strong>{{this.paymenttype }}</strong></td>
+            </tr>
+           
+          </tbody>
+        </table>
+        
+        <table class="table  mt-2" *ngIf="paymenttype  ==='Card'">
+          <thead>
+            <tr>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Card Number</th>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Card Holder Name</th>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0" >Card Type</th>
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0" >Bank Name</th>
+       
+              <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0" >ExpiryDate</th>
+       
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-0"><strong>{{paymentMode.cardNumber}}</strong></td>
+              <td class="text-end px-0"><strong>{{paymentMode.cardHolderName}}</strong></td>
+              <td class="text-end px-0"><strong>{{paymentMode.cardType}}</strong></td>
+              <td class="text-end px-0"><strong>{{paymentMode.BankName}}</strong></td>
+              <td class="text-end px-0"><strong>{{paymentMode.expiryDate}}</strong></td>
             </tr>
           </tbody>
         </table>
-
-      </div>
-    </div>
-
-    <div class="border-top border-gray-200 mt-4 py-4">
-      <div class="row">
-        
-    <table class="table border-bottom border-gray-200 mt-3">
+        <table class="table  mt-3">
       <thead>
         <tr>
           <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Producty</th>
@@ -311,8 +349,11 @@
           <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
         </tr>
       </tbody>
-    </table>
-
+       </table>
+      </div>
+    </div>
+  
+    <div class="row">
         <div class="col-md-6">
           <div class="text-muted mb-2">Supplier</div>
           <strong>
@@ -349,41 +390,26 @@
             </a>
           </p>
         </div>
+        <div class="mt-5">
+          <div class="d-flex justify-content-end">
+            <p class="text-muted me-3">Subtotal:</p>
+            <span> {{updateprices}}</span>
+          </div>
+         
+          <div class="d-flex justify-content-end mt-3">
+            <h5 class="me-3">Total:</h5>
+            <h5 class="text-success"> {{updateprices}}</h5>
+          </div>
+        </div>
       </div>
     </div>
+  
 
-    <table class="table border-bottom border-gray-200 mt-3">
-      <thead>
-        <tr>
-          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Description</th>
-          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Qty</th>
-          <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of data.products">
-          <td class="px-0">{{data.productId.productname}}</td>
-          <td class="text-end px-0">{{data.quantity}}</td>
-          <td class="text-end px-0">{{data.quantity * data.productId.price}}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="mt-5">
-      <div class="d-flex justify-content-end">
-        <p class="text-muted me-3">Subtotal:</p>
-        <span> {{updateprices}}</span>
-      </div>
-     
-      <div class="d-flex justify-content-end mt-3">
-        <h5 class="me-3">Total:</h5>
-        <h5 class="text-success"> {{updateprices}}</h5>
-      </div>
-    </div>
    
-  </div>
 
-</div>
+  
+   
+
  <a #payNowButton  (click)="onOrder()"
     class="btn btn-dark btn-lg card-footer-btn justify-content-center
      text-uppercase-bold-sm hover-lift-light">

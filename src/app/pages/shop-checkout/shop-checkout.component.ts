@@ -7,6 +7,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+declare var Razorpay: any;
 @Component({
   selector: 'app-shop-checkout',
   templateUrl: './shop-checkout.component.html',
@@ -30,7 +31,14 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
  userAddressForm!:FormGroup
  ischecked = true
  paymentMode:any
- PDFbill:any
+ PDFbill:any;
+ cardNumber: string;
+ cardHolderName: string;
+ expiryDate: string;
+ cvvCode: string;
+ cardType: string;
+ BankName:string
+ paymenttype:any;
   constructor(private comApi:CommonService ,private auth:AuthService,
     private route: Router , private router: ActivatedRoute 
     ,private modalService: BsModalService ,private fb:FormBuilder) {}
@@ -91,7 +99,23 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
   
   onSelecteCOD(mode:any){
     
-    this.paymentMode =  mode
+    this.paymenttype =  mode
+    console.log(this.paymenttype)
+
+  }
+  onSelectepayment(mode:any){
+    this.paymenttype  =  mode
+    console.log(this.paymenttype)
+
+    const paymentDetails = {
+      cardNumber: this.cardNumber,
+      cardHolderName: this.cardHolderName,
+      expiryDate: this.expiryDate,
+      BankName :this.BankName,
+      cardType:this.cardType,
+      cvvCode: this.cvvCode,
+    };
+    this.paymentMode = paymentDetails
     console.log(this.paymentMode)
 
   }
@@ -196,6 +220,10 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
   
    console.log(data)
    this.generatebillPdf()
+   if(this.paymenttype === 'Card'){
+    this.pay(this.updateprices)
+   }
+   
    this.comApi.orderCreate(data).subscribe((reponse:any)=>{
     let order = reponse
     console.log('createorder' ,order)
@@ -220,6 +248,47 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
    this.data= []
 
   }
-  
+  pay(amount: number) {
+    this.auth.createOrder(amount).subscribe((order: any) => {
+      const options = {
+        key: 'rzp_test_MiheZxloav4xYh',
+        amount: this.updateprices,
+        currency: 'INR',
+        name: 'FreshCart',
+        description: 'Test Transaction',
+        order_id: order.id,
+        handler: (response: any) => {
+          this.auth.verifyPayment(response).subscribe((res) => {
+            console.log('Payment success:', res);
+          }, (error) => {
+            console.error('Payment verification failed:', error);
+          });
+        },
+        prefill: {
+          name: this.billdetail.firstName+this.billdetail.lastName,
+          email: this.billdetail.email,
+          contact: this.billdetail.mobileNo,
+          cardNumber:this.cardNumber,
+          cvvv:this.cvvCode,
+          expiryDate:this.expiryDate,
+        },
+        notes: {
+          address: this.billdetail.Address[0].Country+
+                   this.billdetail.Address[0].State+
+                   this.billdetail.Address[0].City+
+                   this.billdetail.Address[0].Postcode+
+                   this.billdetail.Address[0].Street
+                   
 
+        },
+        theme: {
+          color: '#3399cc'
+        }
+      };
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
+    });
+  }
 }
+
+
