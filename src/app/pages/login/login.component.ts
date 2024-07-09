@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   login: boolean = true;
   singUp: boolean = false;
 
-  constructor(private auth:AuthService, private fb: FormBuilder,
+  constructor(private auth:AuthService, private fb: FormBuilder, private sessionService: SessionService,
     public router: Router) { }
   loginForm!: FormGroup;
   submitted = false;
@@ -50,6 +51,8 @@ export class LoginComponent implements OnInit {
        next: (res:any) => {
            //get return url from query parameters or default to home page
           console.log(res)
+          this.sessionService.startSession(600000);
+          this.sessionService.saveSession();
           this.router.navigateByUrl('');
        },
       
@@ -86,6 +89,7 @@ export class LoginComponent implements OnInit {
 
 
 
+
  
 
  
@@ -101,6 +105,7 @@ export class LoginComponent implements OnInit {
     this.auth.SignUp(this.signupForm.value).subscribe((response:any)=>{
       this.signupData = response;
       console.log(this.signupData);
+      
       this.router.navigateByUrl('/login');
       
     })

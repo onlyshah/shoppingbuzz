@@ -4,9 +4,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ToastrService } from 'ngx-toastr';
 declare var Razorpay: any;
 @Component({
   selector: 'app-shop-checkout',
@@ -30,18 +31,17 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
  modalRef?: BsModalRef;
  userAddressForm!:FormGroup
  ischecked = true
- paymentMode:any
  PDFbill:any;
- cardNumber: string;
- cardHolderName: string;
- expiryDate: string;
- cvvCode: string;
- cardType: string;
- BankName:string
- paymenttype:any;
+ paymentForm: FormGroup;
+ selectedPayment:any
+ submitted = false
+cardData:any
   constructor(private comApi:CommonService ,private auth:AuthService,
     private route: Router , private router: ActivatedRoute 
-    ,private modalService: BsModalService ,private fb:FormBuilder) {}
+    ,private modalService: BsModalService ,private fb:FormBuilder,
+    private toastr:ToastrService
+    
+  ) {}
    
   ngAfterViewInit() {
     //Ensure the template is available after the view initializes
@@ -91,33 +91,53 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
     console.log('Selected Address:', this.selectedAddress);
    
        })
-      
-       
-         // You can perform any additional logic here based on the selected address
+       this.paymentForm = this.fb.group({
+        cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$') 
+          ,Validators.maxLength(16) ,Validators.minLength(14)]],
+        cardHolderName: ['', [Validators.required , Validators.pattern('^[a-zA-Z ]*$')]],
+        expiryDate: ['', Validators.required],
+        cardType: ['', Validators.required],
+        bankName: ['', Validators.required ,Validators.pattern('^[a-zA-Z ]*$')],
+        cvvCode: ['', [Validators.required, Validators.pattern('^[0-9]{3}$'),
+          ,Validators.maxLength(4) ,Validators.minLength(3)
+        ]]
+      });
       
   }
-  
+  get cardform() {
+    return this.paymentForm.controls;
+  }
   onSelecteCOD(mode:any){
     
-    this.paymenttype =  mode
-    console.log(this.paymenttype)
+    this.selectedPayment =  mode
+    console.log(this.selectedPayment)
 
   }
   onSelectepayment(mode:any){
-    this.paymenttype  =  mode
-    console.log(this.paymenttype)
+    this.selectedPayment  =  mode
+    console.log(this.selectedPayment)
+    this.submitted= true
+    if (this.paymentForm.invalid) {
+      return;
+  }
 
     const paymentDetails = {
-      cardNumber: this.cardNumber,
-      cardHolderName: this.cardHolderName,
-      expiryDate: this.expiryDate,
-      BankName :this.BankName,
-      cardType:this.cardType,
-      cvvCode: this.cvvCode,
+      cardNumber: this.paymentForm.value.cardNumber,
+      cardHolderName: this.paymentForm.value.cardHolderName,
+      expiryDate: this.paymentForm.value.expiryDate,
+      BankName :this.paymentForm.value.bankName,
+      cardType:this.paymentForm.value.cardType,
+      cvvCode: this.paymentForm.value.cvvCode,
     };
-    this.paymentMode = paymentDetails
-    console.log(this.paymentMode)
+    this.cardData = paymentDetails
+    console.log(this.cardData)
 
+  }
+  Onfocsu(){
+    console.log('hello')
+    if (this.paymentForm.invalid) {
+      return;
+  }
   }
   selectAddress(addressType:any ,id:any){
     console.log('address',addressType ,id )
@@ -130,7 +150,12 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
     }
   }
   openModal(template: TemplateRef<void>) {
+    if (!this.selectedPayment) {
+        this.toastr.info('Please Select Approdiate Paymenent Method')
+    }
+    else{
     this.modalRef = this.modalService.show(template);
+    }
   }
   newaddmodal(newaddress: TemplateRef<void>){
     this.modalRef = this.modalService.show(newaddress);
@@ -214,23 +239,28 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
       "products":this.products,
       "totalprice":this.updateprices,
       "userId":this.id,
-      "paymentType":this.paymentMode
+      "paymentType":this.cardData
 
     }
   
    console.log(data)
+ 
    this.generatebillPdf()
-   if(this.paymenttype === 'Card'){
+   if(this.selectedPayment === 'Card'){
+    if (this.paymentForm.invalid) {
+      return;
+  }
     this.pay(this.updateprices)
    }
    
    this.comApi.orderCreate(data).subscribe((reponse:any)=>{
     let order = reponse
     console.log('createorder' ,order)
+    this.modalRef?.hide()
     this.route.navigateByUrl('myorder')
    })
    
-
+  
  
   }
   Add_address(){
@@ -268,9 +298,9 @@ export class ShopCheckoutComponent implements OnInit ,OnDestroy {
           name: this.billdetail.firstName+this.billdetail.lastName,
           email: this.billdetail.email,
           contact: this.billdetail.mobileNo,
-          cardNumber:this.cardNumber,
-          cvvv:this.cvvCode,
-          expiryDate:this.expiryDate,
+          cardNumber:this.cardData.cardNumber,
+          cvvv:this.cardData.cvvCode,
+          expiryDate:this.cardData.expiryDate,
         },
         notes: {
           address: this.billdetail.Address[0].Country+

@@ -98,3 +98,7 @@ tbody, td, tfoot, th, thead, tr {
     left: -9999px;
     top: 0;
   }  
+  .error{
+    color: firebrick;
+     
+}
