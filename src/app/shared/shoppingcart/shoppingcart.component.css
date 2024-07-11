@@ -143,7 +143,7 @@ img{
 .card-product .product-action-btn {
     display: flex;
     flex-direction: column;
-    opacity: 0;
+    opacity: inherit;
     position: absolute;
     right: 0;
     top: 0;

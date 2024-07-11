@@ -47,7 +47,7 @@ export class ShoppingcartComponent  implements OnInit {
  
   
   ngOnInit() {
-    this.userData=(JSON.parse(localStorage.getItem('user')!))
+    this.userData=(JSON.parse( sessionStorage.getItem('user')!))
     console.log('...', this.userData?.userId)
    
   
@@ -60,7 +60,7 @@ export class ShoppingcartComponent  implements OnInit {
   addcart(productId: any) {  
     console.log(productId);
     
-    this.userData = JSON.parse(localStorage.getItem('user')!);
+    this.userData = JSON.parse( sessionStorage.getItem('user')!);
     
     if (this.auth.isLoggedIn()) {
       if (this.userData?.userId != null) {
@@ -94,7 +94,7 @@ export class ShoppingcartComponent  implements OnInit {
   }
   
   Wishlist(productId: any) {
-    this.userData = JSON.parse(localStorage.getItem('user')!);
+    this.userData = JSON.parse( sessionStorage.getItem('user')!);
   
     if (this.auth.isLoggedIn()) {
       if (this.userData?.userId != null) {

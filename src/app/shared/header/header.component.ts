@@ -33,12 +33,15 @@ constructor(public router: Router ,private comApi:CommonService ,private auth:Au
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
   ngOnInit(): void {
+    this.navigateToLogin();
+    this.navigateTocart();
+    this.navigateTowishLlist();
     this.getallCatgoery();
     this.getCategory();
     this.getsubCategory();
-    this.userData=(JSON.parse(localStorage.getItem('user')!))
-    console.log(this.userData?.userId)
-    this.userData = JSON.parse(localStorage.getItem('user')!);
+    this.userData=this.auth.userValue
+    console.log("header",this.userData)
+   // this.userData = JSON.parse( sessionStorage.getItem('user')!);
     
     if (this.userData?.userId != null) {
       this.comApi.getproducttocart(this.userData.userId).pipe(first())
@@ -102,4 +105,14 @@ constructor(public router: Router ,private comApi:CommonService ,private auth:Au
     });
 
   }
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+  navigateTowishLlist(): void {
+    this.router.navigate(['/wishlist']);
+  }
+  navigateTocart(): void {
+    this.router.navigate(['/cart']);
+  }
 }
+

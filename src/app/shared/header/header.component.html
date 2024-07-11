@@ -1,33 +1,28 @@
-
- <header class="py-lg-5 py-4 px-0 border-bottom border-bottom-lg-0" 
- *ngIf="router.url !== '/login' && router.url !== '/singup' && router.url !=='/reset-password'
+<header class="py-lg-5 py-4 px-0 border-bottom border-bottom-lg-0" *ngIf="router.url !== '/login' && router.url !== '/singup' && router.url !=='/reset-password'
  && router.url !== '/forgot-password'">
-    <div class="container-fluid">
-       <div class="row w-100 align-items-center g-0 gx-lg-3">
-          <div class="col-xxl-9 col-lg-8">
-             <div class="d-flex align-items-center">
+   <div class="container-fluid">
+      <div class="row w-100 align-items-center g-0 gx-lg-3">
+         <div class="col-xxl-9 col-lg-8">
+            <div class="d-flex align-items-center">
                <a class="navbar-brand d-none d-lg-block" routerLink="/">
                   <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
                   <span class="fw-bold">Shoppingbuzz</span>
-                </a>
-                <div class=" w-100 ms-4  d-none d-lg-block ">
-                   <form action="#">
-                      <div class="input-group">
-                         <select class="form-select">
-                            <option selected>All Categories</option>
-                            <option  *ngFor="let data of categoryData?.category; let i = index"
-                            > <a routerLink="product/{{data._id}}"> {{ data?.categoryname}}</a>  
+               </a>
+               <div class=" w-100 ms-4  d-none d-lg-block ">
+                  <form action="#">
+                     <div class="input-group">
+                        <select class="form-select">
+                           <option selected>All Categories</option>
+                           <option *ngFor="let data of categoryData?.category; let i = index"> <a
+                                 routerLink="product/{{data._id}}"> {{ data?.categoryname}}</a>
                            </option>
-                           
-                         </select>
-                              <input type="text" class="form-control"
-                              [(ngModel)]="searchValue"
-                              [ngModelOptions]=" 
-                              {standalone: true}" 
-                              (keyup)="searchProduct(searchValue)"
-                              placeholder="Job title, keywords, or company">
-                            
-                         <!-- <button   (click)="seachbyInput()" class="input-group-text bg-transparent" type="submit">
+
+                        </select>
+                        <input type="text" class="form-control" [(ngModel)]="searchValue" [ngModelOptions]=" 
+                              {standalone: true}" (keyup)="searchProduct(searchValue)"
+                           placeholder="Job title, keywords, or company">
+
+                        <!-- <button   (click)="seachbyInput()" class="input-group-text bg-transparent" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                class="feather feather-search">
@@ -35,130 +30,130 @@
                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
                          </button> -->
-                      </div>
-                   </form>
-                </div>
-             </div>
-             <div class="d-flex justify-content-between w-100 d-lg-none">
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <div class="d-flex justify-content-between w-100 d-lg-none">
                <a class="navbar-brand" routerLink="/">
                   <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
                   <span class="fw-bold">Shoppingbuzz</span>
-                </a>
-                <div class="d-flex align-items-center lh-1">
-                   <div class="list-inline me-4">
+               </a>
+               <div class="d-flex align-items-center lh-1">
+                  <div class="list-inline me-4">
                      <div class="list-inline-item">
-                        <a routerLink="wishlist" class="text-muted position-relative">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                              class="feather feather-heart">
+                        <a (click)="navigateTowishLlist()" class="text-muted position-relative">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="feather feather-heart">
                               <path
                                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                               </path>
                            </svg>
-                           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                          {{wishListCount}}
-                           <span class="visually-hidden">unread messages</span>
+                           <span
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                              {{wishListCount}}
+                              <span class="visually-hidden">unread messages</span>
                            </span>
                         </a>
                      </div>
                      <div class="list-inline-item">
-                        <a  routerLink="login">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                              class="feather feather-user">
+                        <a (click)="navigateToLogin()">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="feather feather-user">
                               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                               <circle cx="12" cy="7" r="4"></circle>
                            </svg>
                         </a>
                      </div>
                      <div class="list-inline-item">
-                        <a class="text-muted position-relative "  routerLink="cart" role="button" >
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                              class="feather feather-shopping-bag">
+                        <a class="text-muted position-relative " (click)="navigateTocart()" role="button">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="feather feather-shopping-bag">
                               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                               <line x1="3" y1="6" x2="21" y2="6"></line>
                               <path d="M16 10a4 4 0 0 1-8 0"></path>
                            </svg>
-                           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                             {{ cartCount}}
-                           <span class="visually-hidden">unread messages</span>
+                           <span
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                              {{ cartCount}}
+                              <span class="visually-hidden">unread messages</span>
                            </span>
                         </a>
                      </div>
-                   </div>
-               
-                   <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
-                      data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
-                      aria-label="Toggle navigation">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                         class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
-                         <path
-                            d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
-                      </svg>
-                   </button>
-                </div>
-             </div>
-          </div>
-          <div class="col-xxl-3 col-lg-4 d-flex align-items-center ">
-             
-             <!-- <button type="button" class="btn btn-outline-gray-400 text-muted d-none d-lg-block" data-bs-toggle="modal"
+                  </div>
+
+                  <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
+                     data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
+                     aria-label="Toggle navigation">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                        class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
+                        <path
+                           d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                     </svg>
+                  </button>
+               </div>
+            </div>
+         </div>
+         <div class="col-xxl-3 col-lg-4 d-flex align-items-center ">
+
+            <!-- <button type="button" class="btn btn-outline-gray-400 text-muted d-none d-lg-block" data-bs-toggle="modal"
                 data-bs-target="#locationModal">
              <i class="feather-icon icon-map-pin me-2"></i>Pick Location
              </button> -->
-             <div class="list-inline ms-auto d-lg-block d-none">
-                <div class="list-inline-item">
-                   <a routerLink="wishlist" class="text-muted position-relative">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-heart">
-                         <path
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                         </path>
-                      </svg>
-                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                     {{wishListCount}}
-                      <span class="visually-hidden">unread messages</span>
-                      </span>
-                   </a>
-                </div>
-                <div class="list-inline-item">
-                   <a  routerLink="login">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-user">
-                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                         <circle cx="12" cy="7" r="4"></circle>
-                      </svg>
-                   </a>
-                </div>
-                <div class="list-inline-item">
-                   <a class="text-muted position-relative "  routerLink="cart" role="button" >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-shopping-bag">
-                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                         <line x1="3" y1="6" x2="21" y2="6"></line>
-                         <path d="M16 10a4 4 0 0 1-8 0"></path>
-                      </svg>
-                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+            <div class="list-inline ms-auto d-lg-block d-none">
+               <div class="list-inline-item">
+                  <a (click)="navigateTowishLlist()" class="text-muted position-relative">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-heart">
+                        <path
+                           d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                     </svg>
+                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                        {{wishListCount}}
+                        <span class="visually-hidden">unread messages</span>
+                     </span>
+                  </a>
+               </div>
+               <div class="list-inline-item">
+                  <a (click)="navigateToLogin()">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-user">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                     </svg>
+                  </a>
+               </div>
+               <div class="list-inline-item">
+                  <a class="text-muted position-relative" (click)="navigateTocart()"  role="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                     </svg>
+                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                         {{ cartCount}}
-                      <span class="visually-hidden">unread messages</span>
-                      </span>
-                   </a>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
-  </header>
+                        <span class="visually-hidden">unread messages</span>
+                     </span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
 
-  
-  <nav class="navbar navbar-expand-lg bg-primary  navbar-light navbar-default py-0 pb-lg-4" 
-  aria-label="Offcanvas navbar large"
-  *ngIf="router.url !== '/login' && router.url !== '/singup' && router.url !=='/forgot-password'
-  &&router.url !=='/reset-password'"
-  >
+
+<nav class="navbar navbar-expand-lg bg-primary  navbar-light navbar-default py-0 pb-lg-4"
+   aria-label="Offcanvas navbar large" *ngIf="router.url !== '/login' && router.url !== '/singup' && router.url !=='/forgot-password'
+  &&router.url !=='/reset-password'">
    <div class="container">
       <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar-default" aria-labelledby="navbar-defaultLabel">
          <div class="offcanvas-header pb-1">
@@ -172,18 +167,9 @@
                      <input class="form-control rounded" type="search" placeholder="Search for products" />
                      <span class="input-group-append">
                         <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                           <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-search"
-                           >
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="feather feather-search">
                               <circle cx="11" cy="11" r="8"></circle>
                               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                            </svg>
@@ -192,47 +178,50 @@
                   </div>
                </form>
                <div class="mt-2">
-                  <button type="button" class="btn btn-outline-gray-400 text-muted w-100" data-bs-toggle="modal" data-bs-target="#locationModal">
+                  <button type="button" class="btn btn-outline-gray-400 text-muted w-100" data-bs-toggle="modal"
+                     data-bs-target="#locationModal">
                      <i class="feather-icon icon-map-pin me-2"></i>
                      Pick Location
                   </button>
                </div>
             </div>
             <div class="d-none d-lg-block">
-              
+
                <i class="bi bi-bag text-white" style="font-size: 25px; margin: 10px;"></i>
-            
-         </div>
-           
+
+            </div>
+
             <div>
-               <ul class="navbar-nav align-items-center" >
-                  <li class="nav-item dropdown w-100 w-lg-auto" *ngFor="let  categorydata of categoryData?.category;let i = index">
-                     <a class="nav-link dropdown-toggle"   routerLink="product/{{categorydata._id}}"  role="button"
-                      data-bs-toggle="dropdown" aria-expanded="false">  {{ categorydata.categoryname}}</a>
+               <ul class="navbar-nav align-items-center">
+                  <li class="nav-item dropdown w-100 w-lg-auto"
+                     *ngFor="let  categorydata of categoryData?.category;let i = index">
+                     <a class="nav-link dropdown-toggle" [routerLink]="['/product', categorydata._id]" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false"> {{ categorydata.categoryname}}</a>
                      <ul class="dropdown-menu">
-                       
-                           <li class="dropdown-submenu dropend" *ngFor="let data of subcategoryData?.subcategory;let i = index">
-										<a class="dropdown-item dropdown-list-group-item dropdown-toggle" 
-                              routerLink="product/{{data._id}}"
-                           *ngIf="categorydata._id == data.CategoryId._id"
-                              
-                              >{{ data?.subcategoryname}}</a>
-										<ul class="dropdown-menu">
-											<li *ngFor="let categoryData_ of compareCategory?.product;let i = index"
-                                 ><a routerLink="product/{{categoryData_._id}}" 
-                                 *ngIf="data._id == categoryData_.SubCategoryId._id" class="dropdown-item" href="pages/account-orders.html">
+
+                        <li class="dropdown-submenu dropend"
+                           *ngFor="let data of subcategoryData?.subcategory;let i = index">
+                           <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
+                             [routerLink]="['/product', data._id]"  *ngIf="categorydata._id == data.CategoryId._id">{{
+                              data?.subcategoryname}}</a>
+                           <ul class="dropdown-menu">
+                              <li *ngFor="let categoryData_ of compareCategory?.product;let i = index"><a
+                                    [routerLink]="['/product', categoryData_._id]" 
+                                    *ngIf="data._id == categoryData_.SubCategoryId._id" class="dropdown-item"
+                                    href="pages/account-orders.html">
                                     {{categoryData_?.productname}}</a></li>
-											</ul>
-									</li>
-                        
+                           </ul>
+                        </li>
+
                      </ul>
-                     
+
                   </li>
-                
-                  
+
+
                </ul>
             </div>
          </div>
       </div>
    </div>
 </nav>
+<router-outlet></router-outlet>

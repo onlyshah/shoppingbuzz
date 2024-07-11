@@ -18,7 +18,7 @@ export class AuthService implements OnInit, OnDestroy {
       private router: Router,
       private http: HttpClient
   ) {
-      this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+      this.userSubject = new BehaviorSubject(JSON.parse( sessionStorage.getItem('userData')!));
      // window.addEventListener('beforeunload', this.clearTokenOnClose);
 
   }
@@ -40,7 +40,7 @@ export class AuthService implements OnInit, OnDestroy {
     return this.http.post<any>(environment.baseUrl+'login',data)
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
+             sessionStorage.setItem('userData', JSON.stringify(user));
             this.userSubject.next(user);
             console.log("userSubject",this.userSubject)
             return user;
@@ -50,7 +50,7 @@ export class AuthService implements OnInit, OnDestroy {
 logout() {
   this.loggedInStatus = false;
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+     sessionStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/login']);
 }

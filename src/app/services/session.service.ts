@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SessionService {
-  private sessionExpiry = (JSON.parse(localStorage.getItem('user')!));
+  private sessionExpiry = (JSON.parse( sessionStorage.getItem('user')!));
   private sessionTimeout: any;
 
   constructor() {
@@ -17,7 +17,7 @@ export class SessionService {
   }
 
   resetSession() {
-    const storedExpiry = localStorage.getItem(this.sessionExpiry);
+    const storedExpiry =  sessionStorage.getItem(this.sessionExpiry);
     if (storedExpiry) {
       this.sessionExpiry = parseInt(storedExpiry, 10);
       if (this.sessionExpiry > Date.now()) {
@@ -34,7 +34,7 @@ export class SessionService {
   endSession() {
     clearTimeout(this.sessionTimeout);
     this.sessionExpiry = 0;
-    localStorage.removeItem('user');
+     sessionStorage.removeItem('user');
   }
 
   isSessionActive(): boolean {
@@ -42,6 +42,6 @@ export class SessionService {
   }
 
   saveSession() {
-    localStorage.setItem('user', this.sessionExpiry.toString());
+     sessionStorage.setItem('user', this.sessionExpiry.toString());
   }
 }
