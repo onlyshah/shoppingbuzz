@@ -25,6 +25,7 @@ import { ForgotPasswordComponent } from './shared/forgot-password/forgot-passwor
 import { ResetPasswordComponent } from './shared/reset-password/reset-password.component';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 
@@ -60,6 +61,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CarouselModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    TooltipModule
+    
   ],
   providers: [BsModalService,
     AuthGuard,

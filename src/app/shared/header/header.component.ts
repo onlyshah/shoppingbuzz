@@ -12,6 +12,7 @@ import { debounce } from 'lodash';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
+
   categoryData:any;
   subcategoryData:any;
   getcatname:any;
@@ -114,5 +115,8 @@ constructor(public router: Router ,private comApi:CommonService ,private auth:Au
   navigateTocart(): void {
     this.router.navigate(['/cart']);
   }
+  navigateTomyOrder() {
+    this.router.navigate(['/myorder']);
+    }
 }
 
