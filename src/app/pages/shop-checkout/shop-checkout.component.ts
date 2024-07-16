@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
 declare var Razorpay: any;
 @Component({
   selector: 'app-shop-checkout',
@@ -71,7 +72,7 @@ cardData:any
       this.data.products.forEach((el:any) => {
         this.productquantity = el.quantity
         this.updateprices +=el.quantity*el.productId.price
-        console.log(this.updateprices)
+        console.log(this.updateprices,this.productquantity)
         this.orderData= {
          "productId":el.productId._id,
          "quantity":el.quantity,
@@ -110,11 +111,13 @@ cardData:any
   onSelecteCOD(mode:any){
     
     this.selectedPayment =  mode
+    this.cardData = this.selectedPayment
     console.log(this.selectedPayment)
 
   }
   onSelectepayment(mode:any){
     this.selectedPayment  =  mode
+    
     console.log(this.selectedPayment)
     this.submitted= true
     if (this.paymentForm.invalid) {
@@ -130,7 +133,7 @@ cardData:any
       cvvCode: this.paymentForm.value.cvvCode,
     };
     this.cardData = paymentDetails
-    console.log(this.cardData)
+    console.log("cardData",this.cardData)
 
   }
   Onfocsu(){
@@ -202,14 +205,14 @@ cardData:any
       }
 
      
-      this.PDFbill = pdf.output('blob');
+      //this.PDFbill = pdf.output('blob');
       
       console.log(this.PDFbill);
       console.log(this.PDFbill)
-      this.sendbilltoEmail()
+     // this.sendbilltoEmail()
 
       // Save the PDF with a specific name
-      this.PDFbill = pdf.save(this.billdetail.firstName+this.billdetail.lastName)
+      //this.PDFbill = pdf.save(this.billdetail.firstName+this.billdetail.lastName)
         // Show the "Pay Now" button again
         this.payNowButton.nativeElement.classList.remove('d-none');
     }).catch(error => {
@@ -246,19 +249,49 @@ cardData:any
    console.log(data)
  
    this.generatebillPdf()
-   if(this.selectedPayment === 'Card'){
+    if(this.selectedPayment === 'Card'){
     if (this.paymentForm.invalid) {
       return;
-  }
+     }
     this.pay(this.updateprices)
+    console.log("createOrder",data)
+     this.comApi.orderCreate(data).subscribe((reponse:any)=>{
+      let order = reponse
+      console.log('createorder' ,order)
+      this.modalRef?.hide()
+      this.route.navigateByUrl('myorder')
+     })
+   }
+   else{
+    let productId:any = [];
+    let userId = this.auth.userValue.userId
+    data.products.forEach((element:any) => {
+      productId.push(element.productId)
+    }
+    
+  );
+    
+  
+    console.log("createOrder",data ,userId ,productId)
+     this.comApi.orderCreate(data).subscribe((reponse:any)=>{
+      let order = reponse
+      console.log('createorder' ,order)
+      this.comApi.deletecartItemByuserId(userId).pipe(first())
+      .subscribe({
+        next: (res: any) => {
+           console.log('deleted',res)
+        },
+      });
+      this.modalRef?.hide()
+
+     
+      // this.comApi.deletecartItem()
+      this.route.navigateByUrl('myorder')
+     })
    }
    
-   this.comApi.orderCreate(data).subscribe((reponse:any)=>{
-    let order = reponse
-    console.log('createorder' ,order)
-    this.modalRef?.hide()
-    this.route.navigateByUrl('myorder')
-   })
+   
+ 
    
   
  

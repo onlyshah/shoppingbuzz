@@ -98,6 +98,14 @@ export class CommonService implements OnInit {
       return response;
   }));
   }
+  deletecartItemByuserId(userId:any):  Observable<any>{
+    return this.http.delete(environment.baseUrl+'cart/deleteByuId/'+ userId).pipe(map((response:any) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      this.subjectOBJ.asObservable();
+      this.subjectOBJ.next(response);
+      return response;
+  }));
+  }
   SearchData(data:any): Observable<any> {
     return this.http.get(`${environment.baseUrl}search?searchValue=${data}`)
     .pipe(map((response:any) => {

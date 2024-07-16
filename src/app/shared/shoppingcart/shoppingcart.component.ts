@@ -60,8 +60,8 @@ export class ShoppingcartComponent  implements OnInit {
   addcart(productId: any) {  
     console.log(productId);
     
-    this.userData = JSON.parse( sessionStorage.getItem('user')!);
-    
+    this.userData = this.auth.userValue
+   console.log(this.auth.isLoggedIn(), this.userData?.userId )
     if (this.auth.isLoggedIn()) {
       if (this.userData?.userId != null) {
         var value = {
@@ -74,7 +74,7 @@ export class ShoppingcartComponent  implements OnInit {
         console.log(value);
         
         this.comApi.addtocart(value).subscribe((response: any) => {
-          console.log(response);
+          console.log("addcard",response);
           
           this.comApi.getproducttocart(this.userData.userId).pipe(first())
           .subscribe({
