@@ -13,8 +13,12 @@ export class CommonService implements OnInit {
 
   private wishlistCountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   wishlistCount$: Observable<number> = this.wishlistCountSubject.asObservable();
+
   private searchSubject = new BehaviorSubject<any[]>([]);
   public searchData$: Observable<any[]> = this.searchSubject.asObservable();
+
+  private orderStatussubject = new BehaviorSubject<any[]>([]);
+  public orderStatussubjec$: Observable<any[]> = this.orderStatussubject.asObservable();
  
   constructor(private http: HttpClient) {}
   
@@ -124,6 +128,14 @@ export class CommonService implements OnInit {
     console.log("*****",results)
     this.searchSubject.next(results);
     console.log(results)
+  }
+  updateOrderStatus(orderId:any,data:any){
+    return this.http.delete(environment.baseUrl+'order/update-status/'+ orderId ,data).pipe(map((response:any) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      this.orderStatussubject.asObservable();
+      this.orderStatussubject.next(response);
+      return response;
+  }));
   }
  
 }

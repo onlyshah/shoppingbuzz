@@ -1,12 +1,10 @@
-
- 
-  <section class="mb-lg-9 mb-8 mt-6">
+<section class="mb-lg-9 mb-8 mt-6">
     <div class="container">
      
       <div class="row">
-        <div class="col-lg-8 col-md-7 card" >
-
-          <div class="py-3 card-body">
+        <div class="col-lg-8 col-md-7" >
+           <div class="card">
+          <div class="card-body">
     
             <ul class="list-group list-group-flush"  *ngFor="let data of data;  let i = index">
            
@@ -17,17 +15,17 @@
                    <img [src]="imagePath+data?.productId.productImage" alt="Ecommerce"
                       class="img-fluid"></div>
                   <div class="col-4 col-md-3">
-                    <!-- title -->
+                 
                     <a href="shop-single.html" class="text-inherit"><h6 class="mb-0">{{data?.productId.productname}}</h6></a>
                     <span><small class="text-muted"> <i class="bi bi-currency-rupee"></i>{{data?.productId.price}}</small>
                       
                     </span>
-                    <!-- text -->
+                   
                   
                   </div>
-                  <!-- input group -->
+                 
                   <div class="col-2 col-md-3 col-lg-2">
-                       <!-- input -->
+                   
                   <div class="input-group input-spinner  ">
                     <div class="input-group input-spinner  ">
                       <button type="submit" (click)="quantity('max' ,i ,data.quantity ,data.productId._id)
@@ -41,18 +39,18 @@
 
                   </div>
                   <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                    <div class="mt-2 small lh-1"> <a (click)="deletecartItem(data?.productId._id)"
+                    <div class="mt-2 mr-5 small lh-1"> <a (click)="deletecartItem(data?.productId._id)"
                       class="text-decoration-none text-inherit"> <span
                           class="me-1 align-text-bottom">
                           <i _ngcontent-bgi-c10="" class="bi bi-trash"></i>
-                          </span><span class="text-muted">Delete</span></a></div>
+                          </span><span class="text-muted d-none">Delete</span></a></div>
                   </div>
                   <div class="col-2 text-lg-end text-start text-md-end col-md-2">
                     <div class="mt-2 small lh-1"> <a (click)="movetoWishList(data?.productId._id)"
                       class="text-decoration-none text-inherit"> <span
                           class="me-1 align-text-bottom">
                           <i class="bi bi-heart"></i>
-                          </span><span class="text-muted">Save to List</span></a></div>
+                          </span><span class="text-muted d-none">Save to List</span></a></div>
                   </div>
                 </div>
                
@@ -61,20 +59,19 @@
             </ul>
 
           </div>
-          
+        </div>
         </div>
 
-        <!-- sidebar -->
         <div class="col-lg-4 col-lg-4 col-md-5">
-          <!-- card -->
+   
           <div class="mb-5 card">
             <div class="card-body p-6">
-              <!-- heading -->
+             
               <h2 class="h5 mb-4">Summary</h2>
               <div class="card mb-2">
-                <!-- list group -->
+               
                 <ul class="list-group list-group-flush" *ngFor="let data of data;  let i = index">
-                  <!-- list group item -->
+               
                   <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="me-auto">
                       <div>Item Subtotal</div>
@@ -91,7 +88,7 @@
 
               </div>
               <div class="d-grid mb-1 mt-4">
-                <!-- btn -->
+             
                 <button routerLink="../checkout/{{userId}}" class="btn btn-primary btn-lg d-flex justify-content-between align-items-center" type="submit">
                   Go to Checkout <span class="fw-bold"><i class="bi bi-currency-rupee"></i>{{updateprices}}</span></button>
               </div>
