@@ -16,7 +16,10 @@ export class MyorderComponent  implements OnInit{
   orderData:any;
   modalRef?: BsModalRef;
   message?: string;
+  msg:any
   modalData:any=[]
+  data:any;
+  type:any
   constructor(private comApi:CommonService ,private auth:AuthService,
     private modalService: BsModalService
   ){
@@ -27,42 +30,78 @@ export class MyorderComponent  implements OnInit{
     this.comApi.getOrder(this.userId).subscribe((response:any)=>{
         this.orderData = response;
         console.log("getorder",this.orderData)
+        this.orderData = response.filter((order: any) => !order.cancel);
+        console.log("Filtered Orders:", this.orderData);
+        console.log(this.orderData[0].status[0].return)
       
-        console.log()
 
        
     })
   }
    
-  openModal(template: TemplateRef<void> , orderId:any) {
+  openModal(template: TemplateRef<void>, orderId: any, type: any) {
+    // Clear previous modal data
+    this.modalData = null;
+    this.type = null;
+
+    // Open modal with new template
     this.modalRef = this.modalService.show(template, { class: 'modal-xl' });
-     this.modalData.push(this.orderData.find((order:any) => order.id === orderId));
-     console.log('modal',this.modalData)
-  }
-  confirm(): void {
-    this.message = 'Confirmed!';
-    this.modalRef?.hide();
-  }
-  decline(): void {
-    this.message = 'Declined!';
-    this.modalRef?.hide();
-  }
+
+    // Set modal data with new order data
+    this.modalData = this.orderData.find((order: any) => order.id === orderId);
+    console.log('modal', this.modalData, type);
+
+    // Set the new type
+    this.type = type;
+}
+
   cancel_return(orderId:BigInteger){
-   let userId:BigInteger
-   let orderid:any
-   orderid = orderId
-   userId = this.modalData.userId
-   let data ={
-    userId:userId,
-    canscel:true,
-    return:false,
-    received:false
+   let orderid:any = orderId
+   console.log('orderId', orderid)
+  //  let userId:BigInteger = this.modalData[0].userId
+  //  let products= this.modalData[0].products
+   if( this.type === 'Cancel'){
+    this.data ={
+      // userId:userId,
+      // products:products,
+      cancel:true,
+      return:false,
+      received:false,
+      message: this.msg
+     }
+     console.log('data',this.data)
+     this.comApi.updateOrderStatus(orderid ,this.data).pipe(first())
+     .subscribe({
+       next: (res: any) => {
+          console.log('deleted',res)
+       },
+     });
+    
    }
-   this.comApi.updateOrderStatus(orderid ,data).pipe(first())
+   if( this.type === 'Return'){
+   this.data ={
+    // userId:userId,
+    // products:products,
+    cancel:false,
+    return:true,
+    received:false,
+    message: this.msg
+   }
+   console.log('data',this.data)
+   this.comApi.updateOrderStatus(orderid ,this.data).pipe(first())
    .subscribe({
      next: (res: any) => {
         console.log('deleted',res)
+        
      },
    });
+  }
+
+ 
+  }
+  Closed(){
+   this.data ={}
+   this.modalData = []
+   this.modalRef?.hide()
   }
 }

@@ -238,15 +238,22 @@ cardData:any
   }
 
   onOrder(){
+  let status:any =[{
+      cancel:false,
+      return:false,
+      received:false,
+      message:null
+     }]
     let data= {
       "products":this.products,
       "totalprice":this.updateprices,
       "userId":this.id,
-      "paymentType":this.cardData
+      "paymentType":this.cardData,
+       "status":status
 
     }
   
-   console.log(data)
+  // console.log("createdata",data)
  
    this.generatebillPdf()
     if(this.selectedPayment === 'Card'){
@@ -254,7 +261,7 @@ cardData:any
       return;
      }
     this.pay(this.updateprices)
-    console.log("createOrder",data)
+   console.log("createOrder",data)
      this.comApi.orderCreate(data).subscribe((reponse:any)=>{
       let order = reponse
       console.log('createorder' ,order)
@@ -267,9 +274,7 @@ cardData:any
     let userId = this.auth.userValue.userId
     data.products.forEach((element:any) => {
       productId.push(element.productId)
-    }
-    
-  );
+    } );
     
   
     console.log("createOrder",data ,userId ,productId)
@@ -283,8 +288,6 @@ cardData:any
         },
       });
       this.modalRef?.hide()
-
-     
       // this.comApi.deletecartItem()
       this.route.navigateByUrl('myorder')
      })

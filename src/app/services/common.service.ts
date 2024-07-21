@@ -130,7 +130,7 @@ export class CommonService implements OnInit {
     console.log(results)
   }
   updateOrderStatus(orderId:any,data:any){
-    return this.http.delete(environment.baseUrl+'order/update-status/'+ orderId ,data).pipe(map((response:any) => {
+    return this.http.put(environment.baseUrl+'order/update-status/'+ orderId ,data).pipe(map((response:any) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       this.orderStatussubject.asObservable();
       this.orderStatussubject.next(response);

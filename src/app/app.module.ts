@@ -26,7 +26,7 @@ import { ResetPasswordComponent } from './shared/reset-password/reset-password.c
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 
@@ -61,7 +61,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     CarouselModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    TooltipModule
+    TooltipModule,
+    TabsModule
+    
     
   ],
   providers: [BsModalService,
