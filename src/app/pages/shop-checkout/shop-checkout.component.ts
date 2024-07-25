@@ -63,7 +63,7 @@ cardData:any
       City: [],
       State: [],
       Postcode: [],
-      addressType: ['office']
+      addressType: ['office' ,]
     });
     this.comApi.getproducttocart(this.id).subscribe((response:any)=>{
       this.data = response;

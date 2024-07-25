@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -62,7 +62,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     TooltipModule,
-    TabsModule
+    TabsModule,
+    NgxSpinnerModule 
     
     
   ],
@@ -74,6 +75,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
       multi: true
     }
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], //
   bootstrap: [AppComponent],
   exports:[]
 })

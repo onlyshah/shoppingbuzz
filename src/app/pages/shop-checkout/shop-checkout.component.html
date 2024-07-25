@@ -8,7 +8,7 @@
           <div class="mb-8">
 
             <h1 class="fw-bold mb-0">Checkout</h1>
-            <p class="mb-0">Already have an account? Click here to <a href="#!">Sign in</a>.</p>
+            <!-- <p class="mb-0">Already have an account? Click here to <a href="#!">Sign in</a>.</p> -->
           </div>
         </div>
       </div>
@@ -99,7 +99,8 @@
                           <form [formGroup]="paymentForm">
                             <div class="d-flex mb-4">
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentType" id="creditdebitcard"
+                                <input class="form-check-input" type="radio" name="paymentType" 
+                                id="creditdebitcard"
                                   [(ngModel)]="selectedPayment"
                                   [ngModelOptions]="{standalone: true}"
                                   value="Card" (change)="onSelectepayment('Card')" required>
