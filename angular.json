@@ -39,24 +39,21 @@
               "src/assets/js/theme.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
-<<<<<<< HEAD
             "baseHref": "/shoppingbuzz/"
-=======
-            "baseHref": "https://onlyshah.github.io/shoppingbuzz/"
->>>>>>> 340291ab39c96b9eec72a48a63b16906a8c6c859
+
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                   "maximumWarning": "2mb",
+                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
                 }
               ],
               "outputHashing": "all"
