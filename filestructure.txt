@@ -1,7 +1,7 @@
-|-- .angular
 |-- .editorconfig
 |-- .gitignore
 |-- angular.json
+|-- ng
 |-- npm
 |-- package-lock.json
 |-- package.json

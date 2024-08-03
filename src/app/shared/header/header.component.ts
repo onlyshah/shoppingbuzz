@@ -34,9 +34,6 @@ constructor(public router: Router ,private comApi:CommonService ,private auth:Au
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
   ngOnInit(): void {
-    // this.navigateToLogin();
-    this.navigateTocart();
-    this.navigateTowishLlist();
     this.getallCatgoery();
     this.getCategory();
     this.getsubCategory();
