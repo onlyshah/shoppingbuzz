@@ -39,7 +39,11 @@
               "src/assets/js/theme.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
+<<<<<<< HEAD
             "baseHref": "/shoppingbuzz/"
+=======
+            "baseHref": "https://onlyshah.github.io/shoppingbuzz/"
+>>>>>>> 340291ab39c96b9eec72a48a63b16906a8c6c859
           },
           "configurations": {
             "production": {
