@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const environment = {\n  production: false,\n  baseUrl: 'http://localhost:3000/',\n  ImgUrl: 'http://localhost:3000/',\n  subcategoryImage: 'subcategoryImage',\n  categoryImages: 'categoryImages',\n  productImages: 'productImages'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
