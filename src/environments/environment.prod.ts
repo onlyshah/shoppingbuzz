@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
-    baseUrl:'http://localhost:3000/',
-    ImgUrl:'http://localhost:3000/uploads/',
+    baseUrl:'https://c873-2405-201-2015-50e6-40b-fec1-9ae5-a14c.ngrok-free.app/',
+    ImgUrl:'https://c873-2405-201-2015-50e6-40b-fec1-9ae5-a14c.ngrok-free.app/getcardcarousel/uploads/',
     subcategoryImage:'subcategoryImage',
     categoryImages:'categoryImages',
     productImages:'productImages'
