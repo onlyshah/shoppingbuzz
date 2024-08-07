@@ -20,57 +20,51 @@ export class CommonService implements OnInit {
   private orderStatussubject = new BehaviorSubject<any[]>([]);
   public orderStatussubjec$: Observable<any[]> = this.orderStatussubject.asObservable();
 
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Accept': '*/*'
-  });
-
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
 
-  private getOptions(): { headers: HttpHeaders } {
-    return { headers: this.headers };
-  }
+
+  
 
   getCategory(): Observable<any> {
-    return this.http.get(environment.baseUrl + 'getcategory', this.getOptions());
+    return this.http.get(environment.baseUrl + 'getcategory');
   }
 
   getSubCategory(): Observable<any> {
-    return this.http.get(environment.baseUrl + 'viewSubcategory', this.getOptions());
+    return this.http.get(environment.baseUrl + 'viewSubcategory', );
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.baseUrl + 'getall', this.getOptions());
+    return this.http.get(environment.baseUrl + 'getall', );
   }
 
   getCarousel(): Observable<any> {
-    return this.http.get(environment.baseUrl + 'getcarousle', this.getOptions());
+    return this.http.get(environment.baseUrl + 'getcarousle', );
   }
 
   getCardCarousel(): Observable<any> {
-    return this.http.get(environment.baseUrl + 'getcardcarousel', this.getOptions());
+    return this.http.get(environment.baseUrl + 'getcardcarousel', );
   }
 
   addToCart(data: any): Observable<any> {
-    return this.http.post(environment.baseUrl + 'cart/addtocart', data, this.getOptions());
+    return this.http.post(environment.baseUrl + 'cart/addtocart', data, );
   }
 
   onUpdateCart(data: any): Observable<any> {
-    return this.http.put(environment.baseUrl + 'cart/updatecart', data, this.getOptions());
+    return this.http.put(environment.baseUrl + 'cart/updatecart', data, );
   }
 
   getProduct(): Observable<any> {
-    return this.http.get(environment.baseUrl + 'viewProducts', this.getOptions());
+    return this.http.get(environment.baseUrl + 'viewProducts', );
   }
 
   addToWishlist(data: any): Observable<any> {
-    return this.http.post(environment.baseUrl + 'wishlist/createwishlist', data, this.getOptions());
+    return this.http.post(environment.baseUrl + 'wishlist/createwishlist', data, );
   }
 
   getProductToCart(userId: any): Observable<any> {
-    return this.http.get(environment.baseUrl + 'cart/getcart/' + userId, this.getOptions())
+    return this.http.get(environment.baseUrl + 'cart/getcart/' + userId, )
       .pipe(map((response: any) => {
         const productCount = response.productCount;
         this.cardCountSubject.next(productCount);
@@ -80,7 +74,7 @@ export class CommonService implements OnInit {
   }
 
   getWishlist(userId: any): Observable<any> {
-    return this.http.get(environment.baseUrl + 'wishlist/getwishlist/' + userId, this.getOptions())
+    return this.http.get(environment.baseUrl + 'wishlist/getwishlist/' + userId, )
       .pipe(map((response: any) => {
         const listCount = response.ListCount;
         this.wishlistCountSubject.next(listCount);
@@ -90,16 +84,16 @@ export class CommonService implements OnInit {
   }
 
   orderCreate(order: any): Observable<any> {
-    return this.http.post(environment.baseUrl + 'order/createorder', order, this.getOptions());
+    return this.http.post(environment.baseUrl + 'order/createorder', order, );
   }
 
   getOrder(userId: any): Observable<any> {
-    return this.http.get(environment.baseUrl + 'order/getorderbyuserId/' + userId, this.getOptions());
+    return this.http.get(environment.baseUrl + 'order/getorderbyuserId/' + userId, );
   }
 
   deleteWishlistProd(userId: any, productId: any): Observable<any> {
     console.log(productId);
-    return this.http.delete(environment.baseUrl + 'wishlist/deletewishlist/' + userId + '/' + productId, this.getOptions())
+    return this.http.delete(environment.baseUrl + 'wishlist/deletewishlist/' + userId + '/' + productId, )
       .pipe(map((response: any) => {
         this.subjectOBJ.next(response);
         return response;
@@ -107,7 +101,7 @@ export class CommonService implements OnInit {
   }
 
   deleteCartItem(userId: any, productId: any): Observable<any> {
-    return this.http.delete(environment.baseUrl + 'cart/deletecartitem/' + userId + '/' + productId, this.getOptions())
+    return this.http.delete(environment.baseUrl + 'cart/deletecartitem/' + userId + '/' + productId, )
       .pipe(map((response: any) => {
         this.subjectOBJ.next(response);
         return response;
@@ -115,7 +109,7 @@ export class CommonService implements OnInit {
   }
 
   deleteCartItemByUserId(userId: any): Observable<any> {
-    return this.http.delete(environment.baseUrl + 'cart/deleteByuId/' + userId, this.getOptions())
+    return this.http.delete(environment.baseUrl + 'cart/deleteByuId/' + userId, )
       .pipe(map((response: any) => {
         this.subjectOBJ.next(response);
         return response;
@@ -123,7 +117,7 @@ export class CommonService implements OnInit {
   }
 
   searchData(data: any): Observable<any> {
-    return this.http.get(`${environment.baseUrl}search?searchValue=${data}`, this.getOptions())
+    return this.http.get(`${environment.baseUrl}search?searchValue=${data}`, )
       .pipe(map((response: any) => {
         this.searchSubject.next(response);
         return response;
@@ -141,7 +135,7 @@ export class CommonService implements OnInit {
   }
 
   updateOrderStatus(orderId: any, data: any): Observable<any> {
-    return this.http.put(environment.baseUrl + 'order/update-status/' + orderId, data, this.getOptions())
+    return this.http.put(environment.baseUrl + 'order/update-status/' + orderId, data, )
       .pipe(map((response: any) => {
         this.orderStatussubject.next(response);
         return response;
