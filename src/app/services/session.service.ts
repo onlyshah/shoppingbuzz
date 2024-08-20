@@ -4,37 +4,37 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SessionService {
-  private sessionExpiry = (JSON.parse( sessionStorage.getItem('user')!));
+  private sessionExpiry: number = 0; 
   private sessionTimeout: any;
 
   constructor() {
-    this.resetSession();
+    this.resetSession();  // Check if there's an existing session on service initialization
   }
 
   startSession(duration: number) {
     this.sessionExpiry = Date.now() + duration;
     this.sessionTimeout = setTimeout(() => this.endSession(), duration);
+    this.saveSession();  // Save the session expiry in session storage
   }
 
   resetSession() {
-    const storedExpiry =  sessionStorage.getItem(this.sessionExpiry);
+    const storedExpiry = sessionStorage.getItem('sessionExpiry');
     if (storedExpiry) {
       this.sessionExpiry = parseInt(storedExpiry, 10);
       if (this.sessionExpiry > Date.now()) {
         const remainingTime = this.sessionExpiry - Date.now();
         this.sessionTimeout = setTimeout(() => this.endSession(), remainingTime);
       } else {
-        this.endSession();
+        this.endSession();  // End session if expired
       }
-    } else {
-      this.sessionExpiry = 0;
     }
   }
 
   endSession() {
     clearTimeout(this.sessionTimeout);
     this.sessionExpiry = 0;
-     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('sessionExpiry');
+    sessionStorage.removeItem('user');  // Clear user data as well
   }
 
   isSessionActive(): boolean {
@@ -42,6 +42,7 @@ export class SessionService {
   }
 
   saveSession() {
-     sessionStorage.setItem('user', this.sessionExpiry.toString());
+    sessionStorage.setItem('sessionExpiry', this.sessionExpiry.toString());
   }
 }
+

@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           console.log(res);
+          this.sessionService.startSession(600000); // 10 minutes
           this.router.navigateByUrl('');
         },
         complete: () => {

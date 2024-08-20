@@ -10,6 +10,7 @@ import { MyorderComponent } from './pages/myorder/myorder.component';
 import { AuthGuard } from './services/auth.guard';
 import { ForgotPasswordComponent } from './shared/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './shared/reset-password/reset-password.component';
+import { PageNotFoundComponent } from './pages/page-not-found-component/page-not-found.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path:'cart', component:ShopcartdetailsComponent ,canActivate: [AuthGuard]},
   {path:'wishlist', component:MywishlistComponent ,canActivate: [AuthGuard]},
   {path:'checkout/:userId', component:ShopCheckoutComponent ,canActivate: [AuthGuard]},
-  {path:'myorder',component:MyorderComponent ,canActivate: [AuthGuard]}
+  {path:'myorder',component:MyorderComponent ,canActivate: [AuthGuard]},
+  { path: '**', component: PageNotFoundComponent }  // 404 Page
   
   
 ];
