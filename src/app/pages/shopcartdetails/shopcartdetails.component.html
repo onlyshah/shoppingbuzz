@@ -1,7 +1,16 @@
 <section class="mb-lg-9 mb-8 mt-6">
     <div class="container">
-     
-      <div class="row">
+      <div class="row" *ngIf="data?.length <=0 && this.status === 404" >
+        <div class="col-sm-12 col-sm-8 col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h1>Hey it feels so lightweight.</h1>
+              <p>please add to cart && and enjoy </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="data?.length>0 && this.status !== 404">
         <div class="col-lg-8 col-md-7" >
            <div class="card">
           <div class="card-body">

@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <div class="d-none d-md-block table-responsive-xxl border-0" *ngIf="orderData != null">
+        <div class="d-none d-md-block table-responsive-xxl border-0"*ngIf="orderData?.length >0">
           <h3>Orders</h3>
           <table class="table mb-0 text-nowrap table-centered">
             <thead class="bg-light text-capitalize">
@@ -65,7 +65,7 @@
           </table>
         </div>
 
-        <div class="d-block d-md-none m-3"  *ngIf="orderData != null">
+        <div class="d-block d-md-none m-3"  *ngIf="orderData?.length >0">
           <ng-container *ngFor="let data of orderData">
             <ng-container *ngIf="!data.status[0].cancel && !data.status[0].return">
               <div *ngFor="let order of data.products" class="card mb-3">
@@ -97,16 +97,16 @@
       
       <tab heading="Returned Orders">
         <div class="row" *ngIf="returnorderData?.length <=0" >
-          <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="col-sm-12 mb-3 mb-sm-0">
             <div class="card">
               <div class="card-body">
                 <h1>Hey it feels so lightweight.</h1>
-                <p>please wish your  something and enjoy yo</p>
+                <p>No Return is done</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="d-none d-md-block table-responsive-xxl border-0" *ngIf="returnorderData != null">
+        <div class="d-none d-md-block table-responsive-xxl border-0" *ngIf="returnorderData?.length >0" >
           <h3>Returned Orders</h3>
           <table class="table mb-0 text-nowrap table-centered">
             <thead class="bg-light text-capitalize">
@@ -148,7 +148,7 @@
           </table>
         </div>
 
-        <div class="d-block d-md-none m-3" *ngIf="returnorderData != null">
+        <div class="d-block d-md-none m-3" *ngIf="returnorderData?.length >0" >>
           <ng-container *ngFor="let data of returnorderData">
             <ng-container *ngIf="data.status[0].return">
               <div *ngFor="let order of data.products" class="card mb-3">

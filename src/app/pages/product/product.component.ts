@@ -36,6 +36,7 @@ export class ProductComponent implements OnInit {
   pushproductdata: any = []
   pushsubcategoryData: any = []
   ngOnInit (): void {
+    this.spinner.show();
     this.getalldetail()
     this.router.params.subscribe((response: any) => {
       this.id = '' + response?._id
@@ -62,7 +63,13 @@ export class ProductComponent implements OnInit {
           (id: any) => id._id === this.id
         )
         console.log('pushproductdata', this.pushproductdata)
-      })
+        this.spinner.hide();
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.spinner.hide(); // Hide the spinner if there is an error
+      }
+    )
     })
   }
 }

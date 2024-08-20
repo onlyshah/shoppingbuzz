@@ -1,12 +1,19 @@
 <section class="mt-8 mb-14">
     <div class="container">
+      <div class="row" *ngIf="wishlist?.length <=0">
+        <div class="col-lg-12">
+          <h1>Hey it feels so lightweight.</h1>
+          <p>please wish your  something and enjoy yo</p>
+        </div>
+      </div>
       <!-- row -->
-      <div class="row">
+      <div class="row" class="d-none d-md-block table-responsive-xxl border-0"
+       *ngIf="wishlist?.length>0" >
         <div class="col-lg-12">
           <div class="mb-8">
             <!-- heading -->
             <h1 class="mb-1">My Wishlist</h1>
-            <p>There are 5 products in this wishlist.</p>
+            <p>There are {{wishlist.length}} products in this wishlist.</p>
           </div>
           <div>
             <!-- table -->
@@ -72,6 +79,29 @@
           </div>
         </div>
 
+      </div>
+      <div class="d-block d-md-none m-3" *ngIf="wishlist?.length>0">
+        <ng-container  *ngFor="let data of wishlist" >
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <img  [src]="imagePath+data.productId?.productImage"class="img-fluid rounded me-3" style="width: 50px;">
+                <div>
+                  <h5 class="card-title"><a [routerLink]="['/product',data.productId._id]">{{data.productId.productname}}</a></h5>
+                  <p class="card-text mb-0"><small class="text-muted">{{data.productId.brand}}</small></p>
+                </div>
+              </div>
+              <p class="card-text"><strong>Price:</strong> {{data.productId.price}}</p>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+              <button (click)="addtocart(data.productId._id)" 
+                class="btn btn-danger"><i class="bi bi-trash fs-4"></i></button>
+              <button (click)="deleteWishlist(data.productId._id)" 
+              class="btn btn-primary"><i class="bi bi-cart2 fs-4"></i></button>
+        
+            </div>
+          </div>
+        </ng-container>
       </div>
 
 
