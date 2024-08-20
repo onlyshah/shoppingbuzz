@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -20,25 +21,40 @@ export class MyorderComponent  implements OnInit{
   modalData:any=[]
   data:any;
   type:any
+  returnorderData: any;
+  keys: string[];
   constructor(private comApi:CommonService ,private auth:AuthService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ){
 
   }
 
   ngOnInit() {
-    this.comApi.getOrder(this.userId).subscribe((response:any)=>{
-        this.orderData = response;
-        console.log("getorder",this.orderData)
-        this.orderData = response.filter((order: any) => !order.cancel);
-        console.log("Filtered Orders:", this.orderData);
-        console.log(this.orderData[0].status[0].return)
-      
+    // Show spinner while fetching orders
+    this.spinner.show();
 
-       
-    })
+    this.comApi.getOrder(this.userId).subscribe(
+      (response: any) => {
+        this.orderData = response;
+        console.log('getorder', this.orderData);
+        this.orderData = response.filter((order: any) => !order.cancel);
+        this.returnorderData = response.filter((order: any) => order.return);
+        this.keys = Object.keys(this.orderData[0].products[0]);
+        console.log('Filtered Orders:', this.returnorderData);
+        console.log(this.orderData[0].status[0].return);
+        
+      },
+      () => {
+        // Hide spinner in case of error
+        this.spinner.hide();
+      },
+      () => {
+        // Hide spinner after data is loaded
+        this.spinner.hide();
+      }
+    );
   }
-   
   openModal(template: TemplateRef<void>, orderId: any, type: any) {
     // Clear previous modal data
     this.modalData = null;
@@ -55,50 +71,59 @@ export class MyorderComponent  implements OnInit{
     this.type = type;
 }
 
-  cancel_return(orderId:BigInteger){
-   let orderid:any = orderId
-   console.log('orderId', orderid)
-  //  let userId:BigInteger = this.modalData[0].userId
-  //  let products= this.modalData[0].products
-   if( this.type === 'Cancel'){
-    this.data ={
-      // userId:userId,
-      // products:products,
-      cancel:true,
-      return:false,
-      received:false,
-      message: this.msg
-     }
-     console.log('data',this.data)
-     this.comApi.updateOrderStatus(orderid ,this.data).pipe(first())
-     .subscribe({
-       next: (res: any) => {
-          console.log('deleted',res)
-       },
-     });
-    
-   }
-   if( this.type === 'Return'){
-   this.data ={
-    // userId:userId,
-    // products:products,
-    cancel:false,
-    return:true,
-    received:false,
-    message: this.msg
-   }
-   console.log('data',this.data)
-   this.comApi.updateOrderStatus(orderid ,this.data).pipe(first())
-   .subscribe({
-     next: (res: any) => {
-        console.log('deleted',res)
-        
-     },
-   });
+cancel_return(orderId: BigInteger) {
+  let orderid: any = orderId;
+  console.log('orderId', orderid);
+
+  // Show spinner during the update
+  this.spinner.show();
+
+  if (this.type === 'Cancel') {
+    this.data = {
+      cancel: true,
+      return: false,
+      received: false,
+      message: this.msg,
+    };
+    console.log('data', this.data);
+    this.comApi.updateOrderStatus(orderid, this.data).pipe(first()).subscribe({
+      next: (res: any) => {
+        console.log('deleted', res);
+      },
+      complete: () => {
+        // Hide spinner after update
+        this.spinner.hide();
+      },
+      error: () => {
+        // Hide spinner if there is an error
+        this.spinner.hide();
+      },
+    });
   }
 
- 
+  if (this.type === 'Return') {
+    this.data = {
+      cancel: false,
+      return: true,
+      received: false,
+      message: this.msg,
+    };
+    console.log('data', this.data);
+    this.comApi.updateOrderStatus(orderid, this.data).pipe(first()).subscribe({
+      next: (res: any) => {
+        console.log('deleted', res);
+      },
+      complete: () => {
+        // Hide spinner after update
+        this.spinner.hide();
+      },
+      error: () => {
+        // Hide spinner if there is an error
+        this.spinner.hide();
+      },
+    });
   }
+}
   Closed(){
    this.data ={}
    this.modalData = []

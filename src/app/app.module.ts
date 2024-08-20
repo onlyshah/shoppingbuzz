@@ -66,6 +66,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule 
     
     
+    
   ],
   providers: [BsModalService,
     AuthGuard,

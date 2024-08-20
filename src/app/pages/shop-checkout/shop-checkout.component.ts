@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 declare var Razorpay: any;
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-shop-checkout',
   templateUrl: './shop-checkout.component.html',
@@ -40,7 +41,8 @@ cardData:any
   constructor(private comApi:CommonService ,private auth:AuthService,
     private route: Router , private router: ActivatedRoute 
     ,private modalService: BsModalService ,private fb:FormBuilder,
-    private toastr:ToastrService
+    private spinner: NgxSpinnerService,
+    private toster : ToastrService
     
   ) {}
    
@@ -154,7 +156,7 @@ cardData:any
   }
   openModal(template: TemplateRef<void>) {
     if (!this.selectedPayment) {
-        this.toastr.info('Please Select Approdiate Paymenent Method')
+        this.toster.info('Please Select Approdiate Paymenent Method')
     }
     else{
     this.modalRef = this.modalService.show(template);
@@ -315,6 +317,9 @@ cardData:any
 
   }
   pay(amount: number) {
+    // Show the spinner before starting the payment process
+    this.spinner.show();
+  
     this.auth.createOrder(amount).subscribe((order: any) => {
       const options = {
         key: 'rzp_test_MiheZxloav4xYh',
@@ -326,26 +331,28 @@ cardData:any
         handler: (response: any) => {
           this.auth.verifyPayment(response).subscribe((res) => {
             console.log('Payment success:', res);
+            // Hide the spinner once payment is verified successfully
+            this.spinner.hide();
           }, (error) => {
             console.error('Payment verification failed:', error);
+            // Hide the spinner if payment verification fails
+            this.spinner.hide();
           });
         },
         prefill: {
-          name: this.billdetail.firstName+this.billdetail.lastName,
+          name: this.billdetail.firstName + this.billdetail.lastName,
           email: this.billdetail.email,
           contact: this.billdetail.mobileNo,
-          cardNumber:this.cardData.cardNumber,
-          cvvv:this.cardData.cvvCode,
-          expiryDate:this.cardData.expiryDate,
+          cardNumber: this.cardData.cardNumber,
+          cvvv: this.cardData.cvvCode,
+          expiryDate: this.cardData.expiryDate,
         },
         notes: {
-          address: this.billdetail.Address[0].Country+
-                   this.billdetail.Address[0].State+
-                   this.billdetail.Address[0].City+
-                   this.billdetail.Address[0].Postcode+
+          address: this.billdetail.Address[0].Country +
+                   this.billdetail.Address[0].State +
+                   this.billdetail.Address[0].City +
+                   this.billdetail.Address[0].Postcode +
                    this.billdetail.Address[0].Street
-                   
-
         },
         theme: {
           color: '#3399cc'
@@ -353,6 +360,16 @@ cardData:any
       };
       const rzp1 = new Razorpay(options);
       rzp1.open();
+  
+      // Hide the spinner if Razorpay payment window is closed (user interaction)
+      rzp1.on('payment.failed', (response: any) => {
+        console.error('Payment failed:', response);
+        this.spinner.hide();
+      });
+    }, (error) => {
+      console.error('Order creation failed:', error);
+      // Hide the spinner if order creation fails
+      this.spinner.hide();
     });
   }
 }

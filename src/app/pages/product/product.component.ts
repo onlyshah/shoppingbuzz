@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Route, Router } from '@angular/router'
+import { NgxSpinnerService } from 'ngx-spinner'
 import { CommonService } from 'src/app/services/common.service'
 import { environment } from 'src/environments/environment'
-import { filter } from 'rxjs'
 
 @Component({
   selector: 'app-product',
@@ -19,7 +19,8 @@ export class ProductComponent implements OnInit {
   constructor (
     private router: ActivatedRoute,
     private comApi: CommonService,
-    private route: Router
+    private route: Router,
+    private spinner: NgxSpinnerService // 
   ) {
     this.comApi.searchData$.subscribe(results => {
       this.searchData = results;

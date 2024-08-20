@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -14,8 +15,11 @@ export class LoginComponent implements OnInit {
   login: boolean = true;
   singUp: boolean = false;
 
-  constructor(private auth:AuthService, private fb: FormBuilder, private sessionService: SessionService,
-    public router: Router) { }
+  constructor(private auth:AuthService, private fb: FormBuilder, 
+    private sessionService: SessionService,
+    public router: Router,
+    private spinner: NgxSpinnerService
+  ) { }
   loginForm!: FormGroup;
   submitted = false;
   loginData:any;
@@ -39,27 +43,34 @@ export class LoginComponent implements OnInit {
   togglePasswordVisibility(): void {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
-  submitLogin(){
-    this.submitted = true;  
-    // //stop here if form is invalid
-      if (this.loginForm.invalid) {
-          return;
-      }
-   this.auth.login(this.loginForm.value)
-   .pipe(first())
-   .subscribe({
-       next: (res:any) => {
-           //get return url from query parameters or default to home page
-          console.log(res)
-          this.sessionService.startSession(600000);
-          this.sessionService.saveSession();
-          this.router.navigateByUrl('');
-       },
-      
-   });
-   
-  }
+  submitLogin() {
+    console.log('login')
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
 
+    // Show the spinner before making the API call
+    this.spinner.show();
+
+    this.auth
+      .login(this.loginForm.value)
+      .pipe(first())
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.router.navigateByUrl('');
+        },
+        complete: () => {
+          // Hide the spinner after the API call completes
+          this.spinner.hide();
+        },
+        error: () => {
+          // Hide the spinner if there is an error
+          this.spinner.hide();
+        },
+      });
+  }
   buildsignupForm(){
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
@@ -95,22 +106,29 @@ export class LoginComponent implements OnInit {
  
   
 
-  onsignupSubmit(){
-    console.log(this.signupForm.value)
-    this.submitted = true;  
-    // //stop here if form is invalid
-      if (this.signupForm.invalid) {
-          return;
-      }
-    this.auth.SignUp(this.signupForm.value).subscribe((response:any)=>{
+ 
+onsignupSubmit() {
+  console.log(this.signupForm.value);
+  this.submitted = true;
+  if (this.signupForm.invalid) {
+    return;
+  }
+
+  // Show the spinner before making the API call
+  this.spinner.show();
+
+  this.auth.SignUp(this.signupForm.value).subscribe(
+    (response: any) => {
       this.signupData = response;
       console.log(this.signupData);
-      
       this.router.navigateByUrl('/login');
-      
-    })
-   // console.log(this.signupForm.value)
-  }
+    },
+    () => {
+      // Hide the spinner after the API call completes
+      this.spinner.hide();
+    }
+  );
+}
   
   showlogin(){
     this.singUp  = false;
