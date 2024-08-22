@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './shopcartdetails.component.html',
   styleUrls: ['./shopcartdetails.component.css']
 })
-export class ShopcartdetailsComponent  implements OnInit{
+export class ShopcartdetailsComponent  implements OnInit ,OnDestroy{
   data:any =[];
   show = false;
   imagePath = environment.baseUrl;
@@ -44,8 +44,8 @@ export class ShopcartdetailsComponent  implements OnInit{
   });
  
   }
-
-  ngOnInit(): void {
+ 
+ngOnInit(): void {
     this.spinner.show(); // Show spinner when data fetching starts
     this.comApi.getproducttocart(this.userId).subscribe((response: any) => {
       this.data = response.products;
@@ -165,7 +165,18 @@ export class ShopcartdetailsComponent  implements OnInit{
       });
   }
    
-  
+  ngOnDestroy(): void {
+   
+    this.data =[];
+    this.show = false;
+    this.updateprices =null;
+    this.userId = null
+    this.productquantity =null
+    this.upprice = null;
+    this.downprice =null;
+    this.quantityplus =null;
+    this.quantityminus = null;
+  }  
   
  
 

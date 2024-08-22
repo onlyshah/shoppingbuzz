@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnInit, Output, Renderer2, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnDestroy, OnInit, Output, Renderer2, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AuthGuard } from 'src/app/services/auth.guard';
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 providedIn:'root'
 })
 
-export class ShoppingcartComponent  implements OnInit {
+export class ShoppingcartComponent  implements OnInit,OnDestroy {
   imagePath = environment.baseUrl;
  userId = this.auth.userValue?.userId
   @Input() categorytdata:any
@@ -44,7 +44,7 @@ export class ShoppingcartComponent  implements OnInit {
       
 
      }
- 
+
   
   ngOnInit() {
     this.userData=(JSON.parse( sessionStorage.getItem('user')!))
@@ -126,6 +126,21 @@ export class ShoppingcartComponent  implements OnInit {
       // alert('You must be logged in to add items to the wishlist');
     }
   }
+  ngOnDestroy(): void {
+   
+  this.userId =  null
+  this.categorytdata =[]
+  this.subcategorytdata =[]
+  this.pushproductdata =[]
+  this.getCategoryData =[]
+  this.routeId =null
+  this.item =null
+  this.userData =[]
+  this.getSearchData =[]
+  this.cartcount =0;
+  this.wishlistcount = 0;
+  }
+ 
  
 }
 

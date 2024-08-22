@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { first, switchMap } from 'rxjs';
@@ -11,7 +11,7 @@ import { debounce } from 'lodash';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit ,OnDestroy{
 
   categoryData:any;
   subcategoryData:any;
@@ -115,5 +115,20 @@ constructor(public router: Router ,private comApi:CommonService ,private auth:Au
   navigateTomyOrder() {
     this.router.navigate(['/myorder']);
     }
+    ngOnDestroy(): void {
+      this.wishListCount = null
+      this.cartCount = null,
+      this.categoryData =null
+      this.subcategoryData =null;
+      this.getcatname = null;
+      this.compareCategory =null;
+      this.userData = null;
+      this.searchStatus= false;
+      this.productList = null;
+      this.searchValue =null;
+      this.debouncedSearch =null;
+    
+     }
+    
 }
 

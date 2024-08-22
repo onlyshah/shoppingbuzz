@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,7 +11,7 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit,OnDestroy {
   login: boolean = true;
   singUp: boolean = false;
 
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private spinner: NgxSpinnerService
   ) { }
+ 
   loginForm!: FormGroup;
   submitted = false;
   loginData:any;
@@ -98,15 +99,6 @@ export class LoginComponent implements OnInit {
  get addressControls() {
   return (this.signupForm.get('Address') as FormArray).controls;
 }
-
-
-
-
- 
-
- 
-  
-
  
 onsignupSubmit() {
   console.log(this.signupForm.value);
@@ -139,6 +131,15 @@ onsignupSubmit() {
   showSingup(){
     this.login = false;
     this.singUp = true;
+  }
+  ngOnDestroy(): void {
+    this.login = false;
+    this.singUp = true;
+    this.submitted = false;
+    this.loginData = [];
+    this.signupData = [];
+  
+
   }
 
 }

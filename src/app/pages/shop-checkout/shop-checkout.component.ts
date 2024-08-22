@@ -311,11 +311,7 @@ cardData:any
     })
 
   }
-  ngOnDestroy(): void {
-   this.orderData = [],
-   this.data= []
-
-  }
+ 
   pay(amount: number) {
     // Show the spinner before starting the payment process
     this.spinner.show();
@@ -372,6 +368,11 @@ cardData:any
       this.spinner.hide();
     });
   }
+  ngOnDestroy(): void {
+    this.orderData = [],
+    this.data= []
+ 
+   }
 }
 
 

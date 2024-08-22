@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/services/common.service';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.css'],
   
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,OnDestroy {
   @ViewChild('swiper') swiperRef: ElementRef | undefined;
   categoryData: any;
   getcatname: any;
@@ -152,5 +152,17 @@ itemsPerSlidetwoOnMobile(): number {
     return 3; // Show 2 items per slide on larger screens
   }
 
+}
+ngOnDestroy(): void {
+  this.categoryData = [];
+  this.getcatname = [];
+  this.compareCategory = [];
+  this.wishData = [];
+  this.userId =null;
+  this.tDeal = [];
+  this.bSelling = [];
+  this.featuredData = [];
+  this.getcarouselvalue =[];
+  this.cardcarouselData= [];
 }
 }

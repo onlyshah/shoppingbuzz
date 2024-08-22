@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Route, Router } from '@angular/router'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { CommonService } from 'src/app/services/common.service'
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment'
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit ,OnDestroy {
   userId: any
   updateprices: any
   imagePath = environment.baseUrl
@@ -71,6 +71,18 @@ export class ProductComponent implements OnInit {
       }
     )
     })
+  }
+  ngOnDestroy(): void {
+    this.userId = null
+    this.updateprices = null
+    this.productList = []
+    this.searchData =[]
+    this.id = null
+   this.getproductData =[]
+  this.getCategoryData =[]
+  this.pushcategoryData = []
+  this.category = null
+  this.pushproductdata = []
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './myorder.component.html',
   styleUrls: ['./myorder.component.css']
 })
-export class MyorderComponent  implements OnInit{
+export class MyorderComponent  implements OnInit ,OnDestroy{
   userId = this.auth.userValue.userId;
   imagePath = environment.baseUrl
   orderData:any;
@@ -29,6 +29,7 @@ export class MyorderComponent  implements OnInit{
   ){
 
   }
+
 
   ngOnInit() {
     // Show spinner while fetching orders
@@ -129,4 +130,15 @@ cancel_return(orderId: BigInteger) {
    this.modalData = []
    this.modalRef?.hide()
   }
+  ngOnDestroy(): void {
+  this.userId = null;
+  this.orderData=[];
+  this.message = '';
+  this.msg =''
+  this.modalData =[]
+  this.data = [];
+  this.type =null;
+  this.returnorderData = [];
+  this.keys = [];
+}
 }

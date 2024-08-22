@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './mywishlist.component.html',
   styleUrls: ['./mywishlist.component.css']
 })
-export class MywishlistComponent  implements OnInit{
+export class MywishlistComponent  implements OnInit ,OnDestroy{
   userId = this.auth.userValue.userId
   wishlist:any;
   imagePath = environment.baseUrl;
@@ -93,5 +93,11 @@ export class MywishlistComponent  implements OnInit{
           this.spinner.hide();
         },
       });
+  }
+  ngOnDestroy(): void {
+   this.wishlist = []
+   this.userId = null
+   this.status = null
+
   }
 }
