@@ -54,10 +54,34 @@
                         </a>
                      </div>
                      <div class="list-inline-item">
-                        <a (click)="navigateToLogin()">
-                           <i class="bi bi-person-circle fs-4"></i>
-                        </a>
-                     </div>
+                        <div class="dropdown">
+                          <a class="profile-link" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle fs-4"></i>
+                            <p class="mb-0">Profile</p>
+                          </a>
+                          
+                          <ul class="dropdown-menu dropdown-menu-end" 
+                          aria-labelledby="profileDropdown">
+                            <div class="px-4 py-3"  *ngIf="this.auth.userValue === null">
+                              <h6>Welcome</h6>
+                              <p class="mb-2">To access account and manage orders</p>
+                              <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
+                            </div>
+                            <div class="px-4 py-3"  *ngIf="this.auth.userValue != null">
+                              <h6>Welcome</h6>
+                              <p class="mb-2 mb-0 d-none d-xl-block small">{{this.auth.userValue.firstName}}{{this.auth.userValue.lastName
+                           }}</p>
+                            </div>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Support_shoppingbuzz.com</a></li>
+                            <li *ngIf="this.auth.userValue != null"><hr class="dropdown-divider"></li>
+                           <li *ngIf="this.auth.userValue != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
+                           <li *ngIf="this.auth.userValue != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
+                           </ul>
+                        </div>
+                      </div>
                      <div class="list-inline-item">
                         <a class="text-muted position-relative" 
                      
@@ -110,15 +134,34 @@
                   </div>
                </div>
                <div class="list-inline-item">
-                  <div class="text-center">
-                     <a (click)="navigateToLogin()" class="text-muted position-relative">
-                     <div>
-                        <i class="bi bi-person-circle fs-4"></i>
-                     </div>
-                     <p class="mb-0 d-none d-xl-block small">Login</p>
-                  </a>
+                  <div class="dropdown">
+                     <a  class="text-muted position-relative" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle fs-4 mx-2"></i>
+                        <p class="mb-0">Profile</p>
+                      </a>
+                    
+                    <ul class="dropdown-menu dropdown-menu-end" 
+                    aria-labelledby="profileDropdown">
+                      <div class="px-4 py-3"  *ngIf="this.auth.userValue === null">
+                        <h6>Welcome</h6>
+                        <p class="mb-2">To access account and manage orders</p>
+                        <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
+                      </div>
+                      <div class="px-4 py-3"  *ngIf="this.auth.userValue != null">
+                        <h6>Welcome</h6>
+                        <p class="mb-2 mb-0 d-none d-xl-block small">{{this.auth.userValue.firstName}}{{this.auth.userValue.lastName
+                     }}</p>
+                      </div>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Support_shoppingbuzz.com</a></li>
+                      <li *ngIf="this.auth.userValue != null"><hr class="dropdown-divider"></li>
+                     <li *ngIf="this.auth.userValue != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
+                     <li *ngIf="this.auth.userValue != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
+                     </ul>
                   </div>
-               </div>
+                </div>
                
                <div class="list-inline-item">
                   <a class="text-muted position-relative" 

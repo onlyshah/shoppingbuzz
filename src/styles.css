@@ -28,3 +28,40 @@
 .slick-initialized .slick-slide {
     display: block;
 }
+.navbar .dropdown .dropdown-toggle:after {
+    background-repeat: no-repeat;
+    background-size: .625rem .625rem;
+    border: none;
+    color: var(--fc-gray-600);
+    content: "\f12f";
+    float: right;
+    font-family: feather-icons !important;
+    margin-left: .375rem;
+    display: none;
+  }
+  @media (max-width: 992px) {
+    .img-fluid, .img-thumbnail {
+      display: block;
+      width: 150px;
+      height: 150px;
+      object-fit: inherit;
+      object-position: inherit;
+  }
+  .navbar .dropdown .dropdown-toggle:after {
+    background-repeat: no-repeat;
+    background-size: .625rem .625rem;
+    border: none;
+    color: var(--fc-gray-600);
+    content: "\f12f";
+    float: right;
+    font-family: feather-icons !important;
+    margin-left: .375rem;
+    display: none;
+  }
+  .py-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    width: 280px;
+}
+
+}

@@ -341,4 +341,9 @@
 .dropdown-flyout .dropdown-item {
     padding: 14px 18px
 }
+.py-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    width: 280px;
+}
 

@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit ,OnDestroy{
     
 
 
-constructor(public router: Router ,private comApi:CommonService ,private auth:AuthService,
+constructor(public router: Router ,private comApi:CommonService ,public auth:AuthService,
   ){
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
