@@ -52,7 +52,9 @@ logout() {
     // remove user from local storage to log user out
      sessionStorage.removeItem('user');
     this.userSubject.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['']).then(() => {
+      location.reload();
+  });
 }
 getUser(id:any){
  return this.http.get(environment.baseUrl+'getuser/'+id)
