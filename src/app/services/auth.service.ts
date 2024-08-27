@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit, OnDestroy {
+export class AuthService  {
 
   private userSubject: BehaviorSubject<any>;
   private loggedInStatus = false;
@@ -21,14 +21,7 @@ export class AuthService implements OnInit, OnDestroy {
       this.userSubject = new BehaviorSubject(JSON.parse( sessionStorage.getItem('userData')!));
      // window.addEventListener('beforeunload', this.clearTokenOnClose);
 
-  }
-
- 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-   }
-
-    
+  }    
   public get userValue() {
       return this.userSubject.value;
   }
@@ -41,6 +34,7 @@ export class AuthService implements OnInit, OnDestroy {
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
              sessionStorage.setItem('userData', JSON.stringify(user));
+             console.log('authsession',sessionStorage.getItem('userData'))
             this.userSubject.next(user);
             console.log("userSubject",this.userSubject)
             return user;
@@ -50,7 +44,7 @@ export class AuthService implements OnInit, OnDestroy {
 logout() {
   this.loggedInStatus = false;
     // remove user from local storage to log user out
-     sessionStorage.removeItem('user');
+     sessionStorage.removeItem('userData');
     this.userSubject.next(null);
     this.router.navigate(['']).then(() => {
       location.reload();
@@ -66,14 +60,13 @@ billsendtoEmail(data:any){
     return this.http.post(environment.baseUrl+'email',data)
   }
   isLoggedIn() {
+
     return this.loggedInStatus;
   }
   // private clearTokenOnClose = () => {
   //   this.logout();
   // }
-  ngOnDestroy(): void {
-    //window.removeEventListener('beforeunload', this.clearTokenOnClose);
-  }
+
   sendResetLink(data:any): Observable<any>{
     return this.http.post(environment.baseUrl+'forgotpassword',data)
   }

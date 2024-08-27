@@ -114,11 +114,11 @@ export class CommonService implements OnInit {
     return this.http.get(`${environment.baseUrl}search?searchValue=${data}`)
     .pipe(map((response:any) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      // this.searchSubject.asObservable();
-      // this.searchSubject.next(response);
-      // return response;
+      this.searchSubject.asObservable();
       this.searchSubject.next(response);
       return response;
+      // this.searchSubject.next(response);
+      // return response;
   }));
   }
   getSearchObservable(): Observable<any> {

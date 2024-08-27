@@ -49,7 +49,7 @@ ngOnInit(): void {
     this.spinner.show(); // Show spinner when data fetching starts
     this.comApi.getproducttocart(this.userId).subscribe((response: any) => {
       this.data = response.products;
-      console.log('data', this.data);
+      console.log('data', this.data );
       this.updateprices = 0;
       this.data.forEach((el: any) => {
         this.productquantity = el.quantity;

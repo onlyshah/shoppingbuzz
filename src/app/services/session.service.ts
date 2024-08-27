@@ -18,7 +18,8 @@ export class SessionService {
   }
 
   resetSession() {
-    const storedExpiry = sessionStorage.getItem('user');
+    const storedExpiry = sessionStorage.getItem('userData');
+    console.log('storedExpiry', storedExpiry)
     if (storedExpiry) {
       this.sessionExpiry = parseInt(storedExpiry, 10);
       if (this.sessionExpiry > Date.now()) {
@@ -33,8 +34,8 @@ export class SessionService {
   endSession() {
     clearTimeout(this.sessionTimeout);
     this.sessionExpiry = 0;
-   // sessionStorage.removeItem('user');
-    sessionStorage.removeItem('user');  // Clear user data as well
+   // sessionStorage.removeItem('userData');
+    sessionStorage.removeItem('userData');  // Clear user data as well
   }
 
   isSessionActive(): boolean {
@@ -42,7 +43,7 @@ export class SessionService {
   }
 
   saveSession() {
-    sessionStorage.setItem('user', this.sessionExpiry.toString());
+    sessionStorage.setItem('userData', this.sessionExpiry.toString());
   }
 }
 

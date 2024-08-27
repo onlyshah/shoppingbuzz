@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { first, switchMap } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
-import { debounce } from 'lodash';
+declare var $: any;
 
 
 @Component({
@@ -37,8 +37,9 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     this.getallCatgoery();
     this.getCategory();
     this.getsubCategory();
-    this.userData=this.auth.userValue
-    console.log("header",this.userData)
+    this.userData =this.auth.userValue;
+ 
+    //console.log("header",this.userData)
    // this.userData = JSON.parse( sessionStorage.getItem('user')!);
     
     if (this.userData?.userId != null) {
@@ -89,20 +90,38 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     })
 
   }
-  searchProduct(searchValue:any){
-    console.log(searchValue)
-  //  this.debouncedSearch(searchValue);
-    this.comApi.SearchData(searchValue).pipe(first())
-    .subscribe({
-      next: (res: any) => {
-        let data = res
-        console.log('searchValue',res)
-        this.comApi.updateSearchResults(data);
-        this.router.navigateByUrl('product')
-      },
-    });
-
+  searchProduct(searchValue: any) {
+    const minLength = 5;  // Define minimum length
+    const maxLength = 50; // Define maximum length
+  
+    // Check if the search value length is within the allowed range
+    if (searchValue.length >= minLength && searchValue.length <= maxLength) {
+      console.log(searchValue);
+  
+      this.comApi.SearchData(searchValue).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            let data = res;
+            console.log('searchValue', res);
+            this.comApi.updateSearchResults(data);
+            
+            // Dismiss the offcanvas
+            const offcanvasElement = document.getElementById('navbar-default'); // Make sure your offcanvas has this ID
+            if (offcanvasElement) {
+              offcanvasElement.classList.remove('show'); // Hide the offcanvas
+              document.body.classList.remove('offcanvas-open'); // Remove the backdrop
+            }
+  
+            // Navigate to the product page
+            this.router.navigateByUrl('product');
+          },
+        });
+    } else {
+      console.log(`Search value must be between ${minLength} and ${maxLength} characters.`);
+      // Optionally, display an error message to the user here
+    }
   }
+  
   navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
