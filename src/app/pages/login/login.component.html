@@ -34,57 +34,58 @@
             <p>Welcome back to FreshCart! Enter your email to get started.</p>
           </div>
 
-          <form [formGroup]="loginForm"  (ngSubmit)="submitLogin()">
+          <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
             <div class="row g-3">
-              <!-- row -->
-
+              <!-- Email Field -->
               <div class="col-12">
-                <!-- input -->
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
-                  <div *ngIf="(loginerror['email'].touched || submitted) && loginerror['email'].errors" class="error text-capitalize">
-                    <div *ngIf="loginerror['email'].errors['required']">Field is required</div>
-                    <div *ngIf="loginerror['email'].errors['email']">Email must be a valid email address</div>
+                  <input type="email" formControlName="email" 
+                  class="form-control" id="email"
+                   placeholder="Enter email">
+                  <div *ngIf="(loginerror['email'].touched || submitted) && loginerror['email'].invalid" class="error text-capitalize">
+                    <div *ngIf="loginerror['email'].errors?.['required']">Field is required</div>
+                    <div *ngIf="loginerror['email'].errors?.['pattern']">Email must be a valid email address</div>
+                    
                   </div>
                 </div>
               </div>
+          
+              <!-- Password Field -->
               <div class="col-12">
-                <!-- input -->
                 <div class="form-group">
                   <label for="password">Password</label>
                   <div class="password-field position-relative">
-                  <input [type]="passwordFieldType" formControlName="password" class="form-control" id="password" placeholder="Enter password">
-                  <span  class="position-absolute top-50 end-0 translate-middle-y pe-2" (click)="togglePasswordVisibility()">
-                    <i [ngClass]="passwordFieldType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-                  </span>
-                 </div>
-                 
-                 <div *ngIf="(loginerror['password'].touched || submitted) && loginerror['password'].errors" class="error text-capitalize">
-                  <div *ngIf="loginerror['password'].errors['required']">Field is required</div>
-                  <div *ngIf="loginerror['password'].errors['minlength']">Password must be at least 10 characters long</div>
+                    <input [type]="passwordFieldType" formControlName="password" class="form-control" id="password" placeholder="Enter password">
+                    <span class="position-absolute top-50 end-0 translate-middle-y pe-2" (click)="togglePasswordVisibility()">
+                      <i [ngClass]="passwordFieldType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                    </span>
+                  </div>
+                  <div *ngIf="(loginerror['password'].touched || submitted) && loginerror['password'].invalid" class="error text-capitalize">
+                    <div *ngIf="loginerror['password'].errors?.['required']">Field is required</div>
+                    <div *ngIf="loginerror['password'].errors?.['minlength']">Password must be at least 10  characters long</div>
+                    <div *ngIf="loginerror['password'].errors?.['maxlength'] ">Password must be at  Max 15 characters long</div>
+                  </div>
                 </div>
-            </div>
+              </div>
           
-
-              </div>
+              <!-- Forgot Password and Submit Button -->
               <div class="d-flex justify-content-between">
-                <!-- form check -->
-                <div class="form-check">
-                  <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
-                  </label> -->
-                </div>
-                <div> Forgot password? <a routerLink="/forgot-password">Reset It</a></div>
+                <div></div>
+                <div>Forgot password? <a routerLink="/forgot-password">Reset It</a></div>
               </div>
-              <!-- btn -->
-              <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign In</button>
+          
+              <!-- Submit Button -->
+              <div class="col-12 d-grid">
+                <button type="submit" class="btn btn-primary">Sign In</button>
               </div>
-              <!-- link -->
-              <div>Don’t have an account? <a routerLink="/singup"> Sign Up</a></div>
+          
+              <!-- Sign Up Link -->
+              <div>Don’t have an account? <a routerLink="/signup">Sign Up</a></div>
             </div>
           </form>
+          
+          
         </div>
       </div>
     </div>
@@ -107,102 +108,132 @@
           </div>
           <form [formGroup]="signupForm" (ngSubmit)="onsignupSubmit()">
             <div class="row g-3 mb-3">
+              
+              <!-- First Name -->
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <input type="text" class="form-control" formControlName="firstName" placeholder="First name" aria-label="First name" required>
-                <div *ngIf="(form['firstName'].touched || submitted) && form['firstName'].errors" class="error text-capitalize">
-                  <div *ngIf="form['firstName'].errors['required']">Field is required</div>
+                <input type="text" class="form-control" formControlName="firstName" placeholder="First name" aria-label="First name">
+                <div *ngIf="(signupForm.get('firstName')?.touched || submitted) && signupForm.get('firstName')?.errors" class="error text-capitalize">
+                  <div *ngIf="signupForm.get('firstName')?.errors?.['required']">Field is required</div>
+                  <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">First name cannot exceed 50 characters</div>
+                  <div *ngIf="signupForm.get('firstName')?.errors?.['pattern']">Only letters and spaces are allowed</div>
                 </div>
               </div>
+              
+              <!-- Last Name -->
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <input type="text" formControlName="lastName" class="form-control" placeholder="Last name" aria-label="Last name" required>
-                <div *ngIf="(form['lastName'].touched || submitted) && form['lastName'].errors" class="error text-capitalize">
-                  <div *ngIf="form['lastName'].errors['required']">Field is required</div>
+                <input type="text" formControlName="lastName" class="form-control" placeholder="Last name" aria-label="Last name">
+                <div *ngIf="(signupForm.get('lastName')?.touched || submitted) && signupForm.get('lastName')?.errors" class="error text-capitalize">
+                  <div *ngIf="signupForm.get('lastName')?.errors?.['required']">Field is required</div>
+                  <div *ngIf="signupForm.get('lastName')?.errors?.['maxlength']">Last name cannot exceed 50 characters</div>
+                  <div *ngIf="signupForm.get('lastName')?.errors?.['pattern']">Only letters and spaces are allowed</div>
                 </div>
               </div>
+              
+              <!-- Mobile Number -->
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <input type="text" formControlName="mobileNo" class="form-control" placeholder="mobile number" aria-label="mobile number" required>
-                <div *ngIf="(form['mobileNo'].touched || submitted) && form['mobileNo'].errors" class="error text-capitalize">
-                  <div *ngIf="form['mobileNo'].errors['required']">Field is required</div>
-                  <div *ngIf="form['mobileNo'].errors['pattern']">Mobile number must be 10 digits</div>
+                <input type="text" formControlName="mobileNo" class="form-control" placeholder="Mobile number" aria-label="Mobile number">
+                <div *ngIf="(signupForm.get('mobileNo')?.touched || submitted) && signupForm.get('mobileNo')?.errors" class="error text-capitalize">
+                  <div *ngIf="signupForm.get('mobileNo')?.errors?.['required']">Field is required</div>
+                  <div *ngIf="signupForm.get('mobileNo')?.errors?.['pattern']">Mobile number must be between 10 and 15 digits</div>
                 </div>
               </div>
+              
+              <!-- Email -->
               <div class="col-lg-6 col-md-6 col-sm-6">
-                <input type="email" class="form-control" id="inputEmail4" formControlName="email" placeholder="Email" required>
-                <div *ngIf="(form['email'].touched || submitted) && form['email'].errors" class="error text-capitalize">
-                  <div *ngIf="form['email'].errors['required']">Field is required</div>
-                  <div *ngIf="form['email'].errors['email']">Email must be a valid email address</div>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" aria-label="Email">
+                <div *ngIf="(signupForm.get('email')?.touched || submitted) && signupForm.get('email')?.errors" class="error text-capitalize">
+                  <div *ngIf="signupForm.get('email')?.errors?.['required']">Field is required</div>
+                  <div *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email address</div>
                 </div>
               </div>
+              
             </div>
-            <div formArrayName="Address">
-            <div class="row g-3 mb-3"   *ngFor="let address of addressControls; let i = index" [formGroupName]="i">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <input formControlName="Country" placeholder="Country" class="form-control">
-                <div *ngIf="(address.get('Country')?.touched || submitted) && address.get('Country')?.errors" class="error text-capitalize">
-                  <div *ngIf="address.get('Country')?.errors?.['required']">Field is required</div>
-
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <input formControlName="State" placeholder="State" class="form-control">
-                <div *ngIf="(address.get('State')?.touched || submitted) && address.get('State')?.errors" class="error text-capitalize">
-                  <div *ngIf="address.get('State')?.errors?.['required']">Field is required</div>
-
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <input formControlName="City" placeholder="City" class="form-control">
-                <div *ngIf="(address.get('City')?.touched || submitted) && address.get('City')?.errors" class="error text-capitalize">
-                  <div *ngIf="address.get('City')?.errors?.['required']">Field is required</div>
-
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <input formControlName="Street" placeholder="Street" class="form-control">
-                <div *ngIf="(address.get('Street')?.touched || submitted) && address.get('Street')?.errors" class="error text-capitalize">
-                  <div *ngIf="address.get('Street')?.errors?.['required']">Field is required</div>
-
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <input formControlName="Postcode" placeholder="Postcode" class="form-control">
-                <div *ngIf="(address.get('Postcode')?.touched || submitted) && address.get('Postcode')?.errors" class="error text-capitalize">
-                  <div *ngIf="address.get('Postcode')?.errors?.['required']">Field is required</div>
-
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <input formControlName="addresstype" placeholder="Address Type" class="form-control">
-                <div *ngIf="(address.get('addresstype')?.touched || submitted) && address.get('addresstype')?.errors" class="error text-capitalize">
-                  <div *ngIf="address.get('addresstype')?.errors?.['required']">Field is required</div>
-
-                </div>
-              </div>
           
-            </div>
-          </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-            
-              <div class="password-field position-relative">
-              <input [type]="passwordFieldType" formControlName="password" class="form-control" id="password" placeholder="Enter password">
-              <span  class="position-absolute top-50 end-0 translate-middle-y pe-2" (click)="togglePasswordVisibility()">
-                <i [ngClass]="passwordFieldType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-              </span>
-            
-            </div>
-            <div *ngIf="(form['password'].touched || submitted) && form['password'].errors" class="error text-capitalize">
-              <div *ngIf="form['password'].errors['required']">Field is required</div>
-              <div *ngIf="form['password'].errors['minlength']">Password must be at least 10 characters long</div>
-            </div>
-          </div>
-             
-             
-              <div class="col-12 d-grid">
-                <button type="submit" class="btn btn-primary">Register</button>
+            <!-- Address Fields -->
+            <div formArrayName="Address">
+              <div class="row g-3 mb-3" *ngFor="let address of addressControls; let i = index" [formGroupName]="i">
+                
+                <!-- Country -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <input formControlName="Country" placeholder="Country" class="form-control">
+                  <div *ngIf="(address.get('Country')?.touched || submitted) && address.get('Country')?.errors" class="error text-capitalize">
+                    <div *ngIf="address.get('Country')?.errors?.['required']">Field is required</div>
+                    <div *ngIf="address.get('Country')?.errors?.['pattern']">Only letters and spaces are allowed</div>
+                  </div>
+                </div>
+                
+                <!-- State -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <input formControlName="State" placeholder="State" class="form-control">
+                  <div *ngIf="(address.get('State')?.touched || submitted) && address.get('State')?.errors" class="error text-capitalize">
+                    <div *ngIf="address.get('State')?.errors?.['required']">Field is required</div>
+                    <div *ngIf="address.get('State')?.errors?.['pattern']">Only letters and spaces are allowed</div>
+                  </div>
+                </div>
+                
+                <!-- City -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <input formControlName="City" placeholder="City" class="form-control">
+                  <div *ngIf="(address.get('City')?.touched || submitted) && address.get('City')?.errors" class="error text-capitalize">
+                    <div *ngIf="address.get('City')?.errors?.['required']">Field is required</div>
+                    <div *ngIf="address.get('City')?.errors?.['pattern']">Only letters and spaces are allowed</div>
+                  </div>
+                </div>
+                
+                <!-- Street -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <input formControlName="Street" placeholder="Street" class="form-control">
+                  <div *ngIf="(address.get('Street')?.touched || submitted) && address.get('Street')?.errors" class="error text-capitalize">
+                    <div *ngIf="address.get('Street')?.errors?.['required']">Field is required</div>
+                    <div *ngIf="address.get('Street')?.errors?.['pattern']">Only letters, numbers, and spaces are allowed</div>
+                  </div>
+                </div>
+                
+                <!-- Postcode -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <input formControlName="Postcode" placeholder="Postcode" class="form-control">
+                  <div *ngIf="(address.get('Postcode')?.touched || submitted) && address.get('Postcode')?.errors" class="error text-capitalize">
+                    <div *ngIf="address.get('Postcode')?.errors?.['required']">Field is required</div>
+                    <div *ngIf="address.get('Postcode')?.errors?.['pattern']">Postcode must be between 5 and 10 digits</div>
+                  </div>
+                </div>
+                
+                <!-- Address Type -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <input formControlName="addresstype" placeholder="Address Type" class="form-control">
+                  <div *ngIf="(address.get('addresstype')?.touched || submitted) && address.get('addresstype')?.errors" class="error text-capitalize">
+                    <div *ngIf="address.get('addresstype')?.errors?.['required']">Field is required</div>
+                    <div *ngIf="address.get('addresstype')?.errors?.['pattern']">Only letters and spaces are allowed</div>
+                  </div>
+                </div>
+                
               </div>
-              <p><small>By continuing, you agree to our <a href="#!"> Terms of Service</a> & <a href="#!">Privacy Policy</a></small></p>
-           
+            </div>
+          
+            <!-- Password -->
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="password-field position-relative">
+                <input [type]="passwordFieldType" formControlName="password" class="form-control" placeholder="Enter password">
+                <span class="position-absolute top-50 end-0 translate-middle-y pe-2" (click)="togglePasswordVisibility()">
+                  <i [ngClass]="passwordFieldType === 'password' ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                </span>
+              </div>
+              <div *ngIf="(signupForm.get('password')?.touched || submitted) && signupForm.get('password')?.errors" class="error text-capitalize">
+                <div *ngIf="signupForm.get('password')?.errors?.['required']">Field is required</div>
+                <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 10 characters long</div>
+                <div *ngIf="signupForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters</div>
+              </div>
+            </div>
+          
+            <!-- Submit Button -->
+            <div class="col-12 d-grid mt-3">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          
+            <!-- Terms and Privacy Policy -->
+            <p><small>By continuing, you agree to our <a href="#!"> Terms of Service</a> & <a href="#!">Privacy Policy</a></small></p>
           </form>
+          
           
         </div>
       </div>

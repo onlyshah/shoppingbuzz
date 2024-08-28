@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit,OnDestroy {
   constructor(private auth:AuthService, private fb: FormBuilder, 
     private sessionService: SessionService,
     public router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toster : ToastrService
   ) { }
  
   loginForm!: FormGroup;
@@ -31,12 +33,13 @@ export class LoginComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.buildloginForm();
     this.buildsignupForm();
+    
 
   }
   buildloginForm(){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
     });
   }
   get loginerror() { return this.loginForm?.controls }
@@ -49,7 +52,9 @@ export class LoginComponent implements OnInit,OnDestroy {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
+
     }
+    else{
 
     // Show the spinner before making the API call
     this.spinner.show();
@@ -59,7 +64,7 @@ export class LoginComponent implements OnInit,OnDestroy {
       .pipe(first())
       .subscribe({
         next: (res: any) => {
-          console.log(res);
+          console.log("res",res);
           this.sessionService.startSession(600000); // 10 minutes
           this.router.navigate(['']).then(() => {
             location.reload();
@@ -69,27 +74,29 @@ export class LoginComponent implements OnInit,OnDestroy {
           // Hide the spinner after the API call completes
           this.spinner.hide();
         },
-        error: () => {
-          // Hide the spinner if there is an error
+        error: (error:any) => {
+          // Hide the spinner if there is an error error.error
+          this.toster.error(error.error.message)
           this.spinner.hide();
         },
       });
-  }
+  }}
   buildsignupForm(){
     this.signupForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: ['', [Validators.required, Validators.minLength(10)]],
-      firstName:['',[Validators.required]],
-      lastName:['',[Validators.required]],
-      mobileNo:['',[Validators.required]],
+      firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]], // Only letters and spaces
+      lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]], // Only letters and spaces
+      mobileNo: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]], // 10 to 15 digits
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(20)]],
       Address: this.fb.array([
         this.fb.group({
-          Country: ['', Validators.required],
-          State:['', Validators.required],
-          City: ['', Validators.required],
-          Street: ['', Validators.required],
-          Postcode: ['', Validators.required],
-          addresstype: ['', Validators.required],
+          Country: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]], // Only letters and spaces
+          State: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]], // Only letters and spaces
+          City: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]], // Only letters and spaces
+          Street: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9, -]*$')]], // Letters, numbers, and spaces
+          Postcode: ['', [Validators.required, Validators.pattern('^[0-9]{5,10}$')]], // 5 to 10 digits
+          addresstype: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]] // Only letters and spaces
+    
         
       
         })
