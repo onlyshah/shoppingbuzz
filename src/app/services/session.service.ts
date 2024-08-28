@@ -43,7 +43,8 @@ export class SessionService {
   }
 
   saveSession() {
-    sessionStorage.setItem('userData', this.sessionExpiry.toString());
+    // sessionStorage.setItem('userData', this.sessionExpiry.toString());
+    sessionStorage.getItem('userData');
   }
 }
 

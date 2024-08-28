@@ -65,15 +65,16 @@
                              
                              <ul class="dropdown-menu dropdown-menu-end" 
                              aria-labelledby="profileDropdown">
-                               <div class="px-4 py-3"  *ngIf="this.auth?.userValue === null">
+                               <div class="px-4 py-3"  *ngIf="this.userData === null">
                                  <h6>Welcome</h6>
                                  <p class="mb-2">To access account and manage orders</p>
                                  <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
                                </div>
-                               <div class="px-4 py-3"  *ngIf="this.auth?.userValue != null">
+                               <div class="px-4 py-3"  *ngIf="this.userData != null">
                                  <h6>Hello!</h6>
                                  <p class="mb-2 mb-0  small">{{ this.userData?.firstName}}{{ this.userData?.lastName
                               }}</p>
+                                  <p class="mb-2 mb-0  small">{{ this.userData?.email}}</p>
                                </div>
                                <li><hr class="dropdown-divider"></li>
                                <li><a class="dropdown-item" href="#">Contact Us</a></li>

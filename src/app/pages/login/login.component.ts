@@ -61,7 +61,9 @@ export class LoginComponent implements OnInit,OnDestroy {
         next: (res: any) => {
           console.log(res);
           this.sessionService.startSession(600000); // 10 minutes
-          this.router.navigateByUrl('');
+          this.router.navigate(['']).then(() => {
+            location.reload();
+        });
         },
         complete: () => {
           // Hide the spinner after the API call completes
