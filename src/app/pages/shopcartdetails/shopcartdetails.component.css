@@ -1,0 +1,9 @@
+@media (min-width: 320px) and (max-width: 768px) {
+    .input-group {
+        align-items: stretch;
+        display: block;
+        flex-wrap: wrap;
+        position: relative;
+        width: 220%;
+    }
+}
