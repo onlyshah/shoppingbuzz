@@ -15,12 +15,35 @@ export class SessionService {
     this.initializeIdleDetection(); // Initialize idle detection
   }
 
+  // startSession(duration: number) {
+  //   this.sessionExpiry = Date.now() + duration;
+  //   this.sessionTimeout = setTimeout(() => this.endSession(), duration);
+  //   let userData = sessionStorage.getItem('userData')
+  //   // if (userData !== null) { 
+  //   //   const parsedData = JSON.parse(userData);  // Safely parse the userData
+  //   //   if (typeof parsedData === 'object' && parsedData !== null) {
+  //   //     this.saveSession(parsedData);  // Proceed with saving the session
+  //   //   } 
+  //   //  }
+  //   this.saveSession(userData);  //  // Save the session expiry in session storage
+  // }
   startSession(duration: number) {
     this.sessionExpiry = Date.now() + duration;
     this.sessionTimeout = setTimeout(() => this.endSession(), duration);
-    let userData = sessionStorage.getItem('userData')
-    this.saveSession(userData);  //  // Save the session expiry in session storage
+  
+    let userData = sessionStorage.getItem('userData');
+  
+    if (userData !== null) {
+      const parsedData = JSON.parse(userData);  // Safely parse the userData
+      
+      // Ensure parsedData is an object before modifying it
+      if (typeof parsedData === 'object' && parsedData !== null) {
+        parsedData.sessionExpiry = this.sessionExpiry;  // Add sessionExpiry to the parsed data
+        this.saveSession(parsedData);  // Save the session expiry in session storage
+      } 
+    }
   }
+  
 
   resetSession() {
     const storedExpiry = sessionStorage.getItem('userData');
@@ -48,7 +71,7 @@ export class SessionService {
   }
 
   saveSession(userData:any) {
-    userData.sessionExpiry = this.sessionExpiry;
+    //userData.sessionExpiry = this.sessionExpiry;
     sessionStorage.setItem('userData', JSON.stringify(userData));
   }
 

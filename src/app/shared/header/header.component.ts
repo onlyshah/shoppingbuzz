@@ -48,7 +48,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
         next: (res: any) => {
           this.cartCount = res.productCount;
           console.log('cartCount',this.cartCount)
-         // this.comApi.setCartCount(this.cartCount);
+          this.comApi.setCardCount(this.cartCount);
         },
       });
     }
@@ -58,7 +58,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
         next: (res: any) => {
           this.wishListCount = res.ListCount;
           console.log('wishlistcount',this.wishListCount)
-          //this.comApi.setwishlistCartCount(this.wishlistcount);
+          this.comApi.setWishlistCount(this.wishListCount);
         },
       });
     }
