@@ -18,12 +18,14 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.sessionService.isSessionActive() && this.authService.isLoggedIn()) {
-      return true;  // Allow navigation if session is active and user is logged in
+     // Check if the session is active and the user is logged in
+     if (this.sessionService.isSessionActive() && this.authService.isLoggedIn()) {
+      return true;  // Allow access to the route
     } else {
-      this.sessionService.endSession();  // End session if inactive
-      this.router.navigate(['/login']);  // Redirect to login page
-      return false;  // Block navigation
+      // End the session and redirect to login if session is inactive or user is not logged in
+      this.sessionService.endSession();  
+      this.router.navigate(['/login'])// Optionally pass the return URL
+      return false;  // Block access to the route
     }
   }
 }
