@@ -11,10 +11,12 @@ import { AuthGuard } from './services/auth.guard';
 import { ForgotPasswordComponent } from './shared/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './shared/reset-password/reset-password.component';
 import { PageNotFoundComponent } from './pages/page-not-found-component/page-not-found.component';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-  {path:'' ,component:HomeComponent},
+  {path:'' ,component:AppComponent},
+  //{path:'home' ,component:HomeComponent},
   {path:'login', component:LoginComponent},
   {path:'singup', component:LoginComponent},  
   {path:'forgot-password', component:ForgotPasswordComponent},

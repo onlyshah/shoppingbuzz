@@ -8,22 +8,19 @@
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 
-::ng-deep .navbar .dropdown .dropdown-toggle:after {
+/* ::ng-deep .navbar .dropdown .dropdown-toggle:after {
     background-repeat: no-repeat;
     background-size: .625rem .625rem;
     border: none;
     color: var(--fc-gray-600);
-    content: "\f12f";
+    content: ">";
     float: right;
     font-family: feather-icons !important;
     line-height: 2;
     margin-left: .375rem;
-}
+} */
 
 
-::ng-deep .navbar .dropdown .dropdown-toggle:after {
-   display: none;
-}
 
 .dropdown-item {
     font-size: smaller;
@@ -84,7 +81,7 @@
     background-size: .625rem .625rem;
     border: none;
     color: var(--fc-gray-600);
-    content: "\f12f";
+    content: "";
     float: right;
     font-family: feather-icons !important;
     line-height: 2;

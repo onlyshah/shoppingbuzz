@@ -263,11 +263,13 @@
                         data-bs-toggle="dropdown" aria-expanded="false"> 
                         {{ categorydata.categoryname}}</a>
                      <ul class="dropdown-menu">
-                        <a class="nav-link dropdown-toggle d-block" [routerLink]="['/product',
+                        <li class="dropdown-submenu dropend">
+                        <a class="dropdown-item dropdown-list-group-item dropdown-toggle" [routerLink]="['/product',
                         categorydata._id]" role="button"
                     data-bs-dismiss="offcanvas"
                           data-bs-toggle="dropdown" aria-expanded="false"> 
                           {{ categorydata.categoryname}} All</a>
+                        </li>
                         <li class="dropdown-submenu dropend"
                            *ngFor="let data of subcategoryData?.subcategory;let i = index">
                            <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
@@ -282,7 +284,7 @@
                                  data-bs-dismiss="offcanvas"
                                     [routerLink]="['/product', categoryData_._id]" 
                                     *ngIf="data._id === categoryData_.SubCategoryId._id" class="dropdown-item"
-                                    href="pages/account-orders.html">
+                                    >
                                     {{categoryData_?.productname}}</a></li>
                            </ul>
                         </li>

@@ -39,7 +39,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     this.getsubCategory();
     this.userData =this.auth.userValue;
  
-    console.log("header",this.userData.firstName)
+    console.log("header",this.userData?.firstName)
    // this.userData = JSON.parse( sessionStorage.getItem('user')!);
     
     if (this.userData?.userId != null) {

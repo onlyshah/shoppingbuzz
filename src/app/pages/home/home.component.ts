@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   };
 
   constructor(
-    private comApi: CommonService,
+    public comApi: CommonService,
     private router: Router,
     private spinner: NgxSpinnerService
   ) { }
