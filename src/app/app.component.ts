@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent implements OnInit {
   title = 'shoppingbuzz.com';
   isOnline:any;
-  constructor(public router: Router ,public comApi:CommonService ,private auth:AuthService,
+  constructor(public router: Router ,public comApi:CommonService ,public auth:AuthService,
     private networkService: NetworkService,
     private toster : ToastrService
   ){

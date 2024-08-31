@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit ,OnDestroy{
+export class HeaderComponent implements OnInit ,OnDestroy ,OnChanges{
 
   categoryData:any;
   subcategoryData:any;
@@ -19,11 +19,13 @@ export class HeaderComponent implements OnInit ,OnDestroy{
   compareCategory:any;
   @Input() cartCount: any;
   @Input() wishListCount: any;
+  @Input() loginInfo: any
   userData: any;
   searchStatus: boolean;
   productList: any;
   searchValue:any;
   debouncedSearch: any;
+  userInitial:any
  
     
     
@@ -33,15 +35,10 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
   ){
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
-  ngOnInit(): void {
-    this.getallCatgoery();
-    this.getCategory();
-    this.getsubCategory();
-    this.userData =this.auth.userValue;
- 
-    console.log("header",this.userData?.firstName)
-   // this.userData = JSON.parse( sessionStorage.getItem('user')!);
-    
+  ngOnChanges(): void {
+    this.userData = this.loginInfo
+    this.userInitial = this.getUserInitial(this.userData.firstName, this.userData.lastName);
+    console.log('userInitial' ,this.userInitial)
     if (this.userData?.userId != null) {
       this.comApi.getproducttocart(this.userData.userId).pipe(first())
       .subscribe({
@@ -62,6 +59,20 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
         },
       });
     }
+   
+  }
+  getUserInitial(firstName: string, lastName: string): string {
+    // Return the first character of the first and last name
+    return firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
+  }
+  ngOnInit(): void {
+    this.getallCatgoery();
+    this.getCategory();
+    this.getsubCategory();
+    
+   
+   // this.userData = JSON.parse( sessionStorage.getItem('user')!);
+    
    
     
     

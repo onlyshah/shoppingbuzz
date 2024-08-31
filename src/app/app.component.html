@@ -1,4 +1,7 @@
-<app-header [cartCount]="comApi.cardCount$| async" [wishListCount]="comApi.wishlistCount$ |async" ></app-header>
+<app-header [cartCount]="comApi.cardCount$| async" 
+[wishListCount]="comApi.wishlistCount$ |async"
+[loginInfo]="this.auth.userValue"
+ ></app-header>
 <main>
 <app-home *ngIf="router.url === '/'"></app-home>
 </main>

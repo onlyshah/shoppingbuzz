@@ -29,7 +29,13 @@
        
         <div class="col-12 col-md-12 col-sm-12 offset-lg-1 col-lg-4 order-lg-2 order-1">
           <div class="mb-lg-9 mb-5">
-            <h1 class="mb-1 h2 fw-bold">Sign in to Shoppingbuzz</h1>
+            <h1 class="mb-1 h2 fw-bold"> 
+              <a class="navbar-brand d-block d-lg-none" routerLink="/">
+                <span class="fw-bold">Sign into </span>
+                <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+                <span class="fw-bold">Shoppingbuzz</span>
+              </a>
+            </h1>
             <p>Welcome back to FreshCart! Enter your email to get started.</p>
           </div>
 
@@ -80,7 +86,7 @@
               </div>
           
               <!-- Sign Up Link -->
-              <div>Don’t have an account? <a routerLink="/signup">Sign Up</a></div>
+              <div>Don’t have an account? <a routerLink="../singup">Sign Up</a></div>
             </div>
           </form>
           
@@ -96,8 +102,14 @@
       <div class="row justify-content-center align-items-center">
          <div class="col-sm-12 col-md-12 col-md-12">
           <div class="mb-lg-9 mb-5">
-            <h1 class="mb-1 h2 fw-bold">Get Start Shopping</h1>
-            <p>Welcome to FreshCart! Enter your email to get started.</p>
+              <h1 class="mb-1 h2 fw-bold"> 
+                <a class="navbar-brand d-block d-lg-none" routerLink="/">
+                  <span class="fw-bold">Get Start Shopping</span>
+                  <i class="bi bi-cart4" style="font-size: 35px; color: #0aad0a;"></i>
+                  <span class="fw-bold">Shoppingbuzz</span>
+                </a>
+              </h1>
+            <p>Welcome to Shoppingbuzz! Enter your details to get started.</p>
           </div>
           <form [formGroup]="signupForm" (ngSubmit)="onsignupSubmit()">
             <div class="row g-3 mb-3">
