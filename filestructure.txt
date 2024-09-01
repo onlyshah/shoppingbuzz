@@ -1,3 +1,4 @@
+|-- .angular
 |-- .editorconfig
 |-- .gitignore
 |-- angular.json
@@ -35,6 +36,11 @@
                 |-- mywishlist.component.html
                 |-- mywishlist.component.spec.ts
                 |-- mywishlist.component.ts
+            |-- page-not-found-component
+                |-- page-not-found.component.css
+                |-- page-not-found.component.html
+                |-- page-not-found.component.spec.ts
+                |-- page-not-found.component.ts
             |-- product
                 |-- product.component.css
                 |-- product.component.html
@@ -59,6 +65,8 @@
             |-- auth.service.ts
             |-- common.service.spec.ts
             |-- common.service.ts
+            |-- network.service.spec.ts
+            |-- network.service.ts
             |-- session.service.spec.ts
             |-- session.service.ts
         |-- shared
@@ -97,6 +105,9 @@
         |-- css
             |-- theme.min.css
         |-- images
+            |-- appbutton
+                |-- appstore-btn.svg
+                |-- googleplay-btn.svg
             |-- fp-g.svg
         |-- js
             |-- theme.min.js
