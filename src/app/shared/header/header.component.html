@@ -14,10 +14,11 @@
                <div class=" w-100 ms-4  d-none d-lg-block ">
                   <form action="#">
                      <div class="input-group">
-                        <select class="form-select">
+                        <select class="form-select" (change)="onCategoryChange($event)">
                            <option selected>All Categories</option>
-                           <option *ngFor="let data of categoryData?.category; let i = index"> <a
-                                 routerLink="product/{{data._id}}"> {{ data?.categoryname}}</a>
+                           <option *ngFor="let data of categoryData?.category;  let i = index" [value]="data._id"> <a
+                              [routerLink]="['/product',
+                              data._id]"> {{ data?.categoryname}}</a>
                            </option>
 
                         </select>

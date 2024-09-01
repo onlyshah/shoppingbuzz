@@ -37,7 +37,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
   }
   ngOnChanges(): void {
     this.userData = this.loginInfo
-    this.userInitial = this.getUserInitial(this.userData.firstName, this.userData.lastName);
+    this.userInitial = this.getUserInitial(this.userData?.firstName, this.userData?.lastName);
     console.log('userInitial' ,this.userInitial)
     if (this.userData?.userId != null) {
       this.comApi.getproducttocart(this.userData.userId).pipe(first())
@@ -63,7 +63,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
   }
   getUserInitial(firstName: string, lastName: string): string {
     // Return the first character of the first and last name
-    return firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
+    return firstName?.charAt(0).toUpperCase() + lastName?.charAt(0).toUpperCase();
   }
   ngOnInit(): void {
     this.getallCatgoery();
@@ -132,7 +132,12 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
       // Optionally, display an error message to the user here
     }
   }
-  
+  onCategoryChange(event: any) {
+    const selectedCategoryId = event.target.value;
+    if (selectedCategoryId) {
+      this.router.navigate(['/product', selectedCategoryId]);
+    }
+  }
   navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
