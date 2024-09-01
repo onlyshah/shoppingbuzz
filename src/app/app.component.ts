@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent implements OnInit {
   title = 'shoppingbuzz.com';
   isOnline:any;
+  private hasShownSlowConnectionToast: boolean = false; 
   constructor(public router: Router ,public comApi:CommonService ,public auth:AuthService,
     private networkService: NetworkService,
     private toster : ToastrService
@@ -31,9 +32,11 @@ export class AppComponent implements OnInit {
     }
     //this.toster.error(error.error.message)
   });
-  if (this.networkService.checkConnectionSpeed()) {
-  this.toster.error('You have a slow internet connection, including potential slow 5G')
-}
+  const connectionStatus = this.networkService.checkConnectionSpeed();
+  if (this.networkService.checkConnectionSpeed() && connectionStatus.isSlow && !this.hasShownSlowConnectionToast) {
+    this.toster.error(`You have a slow internet connection, slow with Speed (${connectionStatus.speed}), including potential slow 5G`);
+    this.hasShownSlowConnectionToast = true; // Set the flag to prevent future toasts
+  }
   }
 
   
