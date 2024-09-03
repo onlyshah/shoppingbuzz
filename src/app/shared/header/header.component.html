@@ -73,12 +73,12 @@
                              
                              <ul class="dropdown-menu dropdown-menu-end" 
                              aria-labelledby="profileDropdown">
-                               <div class="px-4 py-3"  *ngIf="userData === null">
+                               <div class="px-4 py-3 w-300"  *ngIf="userData === null">
                                  <h6>Welcome</h6>
                                  <p class="mb-2">To access account and manage orders</p>
                                  <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
                                </div>
-                               <div class="px-4 py-3"  *ngIf="userData !== null">
+                               <div class="px-4 py-3 w-300"  *ngIf="userData !== null">
                                  <h6>Hello!</h6>
                                  <p class="mb-2 mb-0  small">{{ userData?.firstName}}{{ userData?.lastName
                               }}</p>
@@ -166,14 +166,14 @@
                     <!-- Dropdown menu -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                       <!-- When userData is null (user is not logged in) -->
-                      <div class="px-4 py-3" *ngIf="userData === null">
+                      <div class="px-4 py-3 w-300" *ngIf="userData === null">
                         <h6>Welcome</h6>
                         <p class="mb-2">To access account and manage orders</p>
                         <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
                       </div>
                 
                       <!-- When userData is not null (user is logged in) -->
-                      <div class="px-4 py-3" *ngIf="userData !== null">
+                      <div class="px-4 py-3 w-300" *ngIf="userData !== null">
                         <h6>Hello!</h6>
                         <p class="mb-2 mb-0 small">{{ userData?.firstName }} {{ userData?.lastName }}</p>
                         <p class="mb-2 mb-0 small">{{ userData?.email }}</p>

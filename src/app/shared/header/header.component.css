@@ -144,3 +144,14 @@
 .input-group:hover {
     border-color: #0aad0a;
 }
+.w-300{
+    width: 300px;
+}
+
+@media (min-width:320px)and (max-width: 375px)  {
+    .py-3 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        width: 200px;
+    }
+}
