@@ -12,63 +12,101 @@
       </div>
       <div class="row" *ngIf="data?.length>0 && this.status !== 404">
         <div class="col-lg-8 col-md-7" >
-           <div class="card">
-          <div class="card-body">
-    
-            <ul class="list-group list-group-flush"  *ngFor="let data of data;  let i = index">
-           
-              <li class="list-group-item py-3  py-lg-0 px-0 border-bottom mb-3">
-              
-                <div class="row align-items-center">
-                  <div class="col-3 col-md-3 col-sm-3">
-                   <img [src]="imagePath+data?.productId.productImage" alt="Ecommerce"
-                      class="img-fluid icon-shape icon-xxl"></div>
-                  <div class="col-3 col-md-3 col-sm-3">
-                 
-                    <a href="shop-single.html" class="text-inherit"><h6 class="mb-0">{{data?.productId.productname}}</h6></a>
-                    <span><small class="text-muted"> <i class="bi bi-currency-rupee"></i>{{data?.productId.price}}</small>
-                      
-                    </span>
-                   
+          <div class="card  d-none d-md-block" >
+         <div class="card-body">
+   
+           <ul class="list-group list-group-flush"  *ngFor="let data of data;  let i = index">
+          
+             <li class="list-group-item py-3  py-lg-0 px-0 border-bottom mb-3">
+             
+               <div class="row align-items-center">
+                 <div class="col-3 col-md-3 col-sm-3">
+                  <img [src]="imagePath+data?.productId.productImage" alt="Ecommerce"
+                     class="img-fluid icon-shape icon-xxl"></div>
+                 <div class="col-3 col-md-3 col-sm-3">
+                
+                   <a class="text-inherit"><h6 class="mb-0">{{data?.productId.productname}}</h6></a>
+                   <span><small class="text-muted"> <i class="bi bi-currency-rupee"></i>{{data?.productId.price}}</small>
+                     
+                   </span>
                   
-                  </div>
                  
-                  <div class="col-2 col-md-2 col-sm-2">
-                   
-                  <div class="input-group input-spinner">
-                    <div class="input-group input-spinner  ">
-                      <button type="submit" (click)="quantity('max' ,i ,data.quantity ,data.productId._id)
-                      " value="-" 
-                      class="button-minus  btn  btn-sm " data-field="quantity"><i class="bi bi-plus-lg"></i></button>
-                      <input type="number" min="1" max="10" value="{{data.quantity}}" name="quantity" class="quantity-field form-control-sm form-input   ">
-                      <button type="submit" (click)="quantity('min' ,i ,data.quantity ,data.productId._id)" value="+" class="button-plus btn btn-sm " data-field="quantity"><i class="bi bi-dash-lg"></i></button>
-                    </div>
-                  </div>
-                 
-
-                  </div>
-                  <div class="col-2 col-md-2 col-sm-2">
-                    <div class="small lh-1 mx-5"> <a (click)="deletecartItem(data?.productId._id)"
-                      class="text-decoration-none text-inherit"> <span
-                          class="align-text-bottom">
-                          <i  class="bi bi-trash fs-4"></i>
-                          </span><span class="text-muted d-none">Delete</span></a></div>
-                  </div>
-                  <div class="col-2 col-md-2">
-                    <div class="small lh-1 mx-3"> <a (click)="movetoWishList(data?.productId._id)"
-                      class="text-decoration-none text-inherit"> <span
-                          class="align-text-bottom">
-                          <i class="bi bi-heart fs-4"></i>
-                          </span><span class="text-muted d-none">Save to List</span></a></div>
-                  </div>
-                </div>
+                 </div>
+                
+                 <div class="col-2 col-md-2 col-sm-2">
+                  
+                 <div class="input-group input-spinner">
+                   <div class="input-group input-spinner  ">
+                     <button type="submit" (click)="quantity('max' ,i ,data.quantity ,data.productId._id)
+                     " value="-" 
+                     class="button-minus  btn  btn-sm " data-field="quantity"><i class="bi bi-plus-lg"></i></button>
+                     <input type="number" min="1" max="10" value="{{data.quantity}}" name="quantity" class="quantity-field form-control-sm form-input   ">
+                     <button type="submit" (click)="quantity('min' ,i ,data.quantity ,data.productId._id)" value="+" class="button-plus btn btn-sm " data-field="quantity"><i class="bi bi-dash-lg"></i></button>
+                   </div>
+                 </div>
+                
+ 
+                 </div>
+                 <div class="col-2 col-md-2 col-sm-2">
+                   <div class="small lh-1 mx-5"> <a (click)="deletecartItem(data?.productId._id)"
+                     class="text-decoration-none text-inherit"> <span
+                         class="align-text-bottom">
+                         <i  class="bi bi-trash fs-4"></i>
+                         </span><span class="text-muted d-none">Delete</span></a></div>
+                 </div>
+                 <div class="col-2 col-md-2">
+                   <div class="small lh-1 mx-3"> <a (click)="movetoWishList(data?.productId._id)"
+                     class="text-decoration-none text-inherit"> <span
+                         class="align-text-bottom">
+                         <i class="bi bi-heart fs-4"></i>
+                         </span><span class="text-muted d-none">Save to List</span></a></div>
+                 </div>
+               </div>
+              
+             </li>
+ 
+           </ul>
+          
+         </div>
+       </div>
+       <div class="d-block d-md-none m-3">
+         <ng-container  *ngFor="let data of data;  let i = index" >
+           <div class="card mb-3">
+             <div class="card-body">
+               <div class="d-flex align-items-center">
+                 <img  [src]="imagePath+data.productId?.productImage"class="img-fluid rounded me-3" style="width: 50px;">
+                 <div>
+                   <a class="text-inherit"><h6 class="mb-0">{{data?.productId.productname}}</h6></a>
+                   <span><small class="text-muted"> <i class="bi bi-currency-rupee"></i>{{data?.productId.price}}</small>
+                   </span>
                
-              </li>
-
-            </ul>
-
-          </div>
-        </div>
+                
+               <div class="input-group input-spinner">
+                 <div class="input-group input-spinner  ">
+                   <button type="submit" (click)="quantity('max' ,i ,data.quantity ,data.productId._id)
+                   " value="-" 
+                   class="button-minus  btn  btn-sm " data-field="quantity"><i class="bi bi-plus-lg"></i></button>
+                   <input type="number" min="1" max="10" value="{{data.quantity}}" name="quantity" class="quantity-field form-control-sm form-input   ">
+                   <button type="submit" (click)="quantity('min' ,i ,data.quantity ,data.productId._id)" value="+" class="button-plus btn btn-sm " data-field="quantity"><i class="bi bi-dash-lg"></i></button>
+                 </div>
+               </div>
+             </div>
+           </div>
+             </div>
+             <div class="card-footer bg-transparent border-success">
+           
+             
+                     <a (click)="deletecartItem(data?.productId._id)"  
+                     class="m-2"><i class="bi bi-cart2 fs-4"></i></a>
+                     <a (click)="movetoWishList(data?.productId._id)" 
+                       class="m-2"><i class="bi bi-trash fs-4"></i></a>
+                   </div> 
+           </div>
+             
+         
+         
+         </ng-container>
+       </div>
         </div>
 
         <div class="col-lg-4 col-lg-4 col-md-5">

@@ -2,9 +2,12 @@
 [wishListCount]="comApi.wishlistCount$ |async"
 [loginInfo]="this.auth.userValue"
  ></app-header>
-<main>
+
 <app-home *ngIf="router.url === '/'"></app-home>
-</main>
-<app-footer></app-footer>
 <router-outlet>
 </router-outlet>
+
+<app-footer
+*ngIf="router.url !== '/login' && router.url !== '/singup' && router.url !=='/reset-password'
+ && router.url !== '/forgot-password' &&  router.url !== '**'"
+></app-footer>

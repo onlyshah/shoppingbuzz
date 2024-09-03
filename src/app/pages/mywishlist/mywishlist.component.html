@@ -21,21 +21,13 @@
               <table class="table text-nowrap table-with-checkbox">
                 <thead class="table-light">
                   <tr>
-                    <th>
-                      <!-- form check -->
-                      <div class="form-check">
-                        <!-- input --><input class="form-check-input" type="checkbox" value="" id="checkAll">
-                        <!-- label --><label class="form-check-label" for="checkAll">
-
-                        </label>
-                      </div>
-                    </th>
                     <th></th>
                     <th>Product</th>
                     <th>Amount</th>
                     <th>Status</th>
+                    <th>Stock</th>
                     <th>Actions</th>
-                    <th>Remove</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -44,8 +36,7 @@
                     <td class="align-middle">
                       <!-- form check -->
                       <div class="form-check">
-                        <!-- input --><input class="form-check-input" type="checkbox" value="" 
-                        id="chechboxSix">
+                     
                         <!-- label --><label class="form-check-label" for="chechboxSix">
 
                         </label>
@@ -65,11 +56,13 @@
                     <td class="align-middle">{{data.productId.price}}</td>
                     <td class="align-middle"><span class="badge bg-success">In Stock</span></td>
                     <td class="align-middle">
-                      <a class="btn btn-primary btn-sm" (click)="addtocart(data.productId._id)">Add to Cart</a>
-                    </td>
-                    <td class="align-middle "><a (click)="deleteWishlist(data.productId._id)" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
-                        <i class="bi bi-trash"></i>
-                      </a></td>
+                      <a class="" (click)="addtocart(data.productId._id)">
+                        <i class="bi bi-cart2 fs-4"></i>
+                       </a>
+                    
+                    <a (click)="deleteWishlist(data.productId._id)" 
+                      class=""><i class="bi bi-trash fs-2"></i></a>
+                  </td>
                   </tr>
 
                 </tbody>
@@ -82,7 +75,7 @@
       </div>
       <div class="d-block d-md-none m-3" *ngIf="wishlist?.length>0">
         <ng-container  *ngFor="let data of wishlist" >
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-body">
               <div class="d-flex align-items-center">
                 <img  [src]="imagePath+data.productId?.productImage"class="img-fluid rounded me-3" style="width: 50px;">
@@ -94,10 +87,11 @@
               <p class="card-text"><strong>Price:</strong> {{data.productId.price}}</p>
             </div>
             <div class="card-footer bg-transparent border-success">
-              <button (click)="addtocart(data.productId._id)" 
-                class="btn btn-danger"><i class="bi bi-trash fs-4"></i></button>
-              <button (click)="deleteWishlist(data.productId._id)" 
-              class="btn btn-primary"><i class="bi bi-cart2 fs-4"></i></button>
+              <a (click)="addtocart(data.productId._id)"  
+              class="m-2"><i class="bi bi-cart2 fs-4"></i></a>
+              <a (click)="deleteWishlist(data.productId._id)" 
+                class="m-2"><i class="bi bi-trash fs-4"></i></a>
+            
         
             </div>
           </div>
