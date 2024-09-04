@@ -155,3 +155,19 @@
         width: 200px;
     }
 }
+@media (min-width:320px)and (max-width: 768px)  {
+    .user-avatar {
+        font-size: 1.1rem;
+        color: var(--bs-secondary-color) !important;
+        border: 1px solid #21313c;
+        border-radius: 50%;
+        width: 31px;
+        height: 30px;
+        padding: 3px;
+        margin-left: 0px;
+        display: inline-block;
+        font-family: bootstrap-icons !important;
+        font-weight: 400 !important;
+    }
+    
+}

@@ -59,8 +59,8 @@
                     
                         <div class="list-inline-item">
                            <div class="dropdown">
-                             <a  *ngIf="userData === null"  class="text-muted position-relative " role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-person-circle fs-4 mx-2"></i>
+                             <a  *ngIf="userData == null"  class="text-muted position-relative " role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-person-circle fs-4 mx-0"></i>
                      
                     </a>
                     
@@ -73,12 +73,12 @@
                              
                              <ul class="dropdown-menu dropdown-menu-end" 
                              aria-labelledby="profileDropdown">
-                               <div class="px-4 py-3 w-300"  *ngIf="userData === null">
+                               <div class="px-4 py-3 w-300"  *ngIf="userData == null">
                                  <h6>Welcome</h6>
                                  <p class="mb-2">To access account and manage orders</p>
                                  <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
                                </div>
-                               <div class="px-4 py-3 w-300"  *ngIf="userData !== null">
+                               <div class="px-4 py-3 w-300"  *ngIf="userData != null">
                                  <h6>Hello!</h6>
                                  <p class="mb-2 mb-0  small">{{ userData?.firstName}}{{ userData?.lastName
                               }}</p>
@@ -88,9 +88,9 @@
                                <li><a class="dropdown-item" href="#">Contact Us</a></li>
                                <li><hr class="dropdown-divider"></li>
                                <li><a class="dropdown-item" href="#">Support_shoppingbuzz.com</a></li>
-                               <li *ngIf="auth?.userValue != null"><hr class="dropdown-divider"></li>
-                              <li *ngIf="auth?.userValue != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
-                              <li *ngIf="auth?.userValue != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
+                               <li *ngIf="userData != null"><hr class="dropdown-divider"></li>
+                              <li *ngIf="userData != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
+                              <li *ngIf="userData != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
                               </ul>
                            </div>
                          </div>
@@ -156,24 +156,24 @@
                     </a>
                     
                     <!-- Show this if userData is not null (logged in) -->
-                    <a *ngIf="userData !== null" class="text-muted position-relative" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a *ngIf="userData != null" class="text-muted position-relative" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                       <div class="user-avatar ">
                         {{ userInitial }}
                       </div>
-                      <p class="mb-0">{{ userData.firstName }} {{ userData.lastName }}</p>
+                      <p class="mb-0">{{ userData?.firstName }} {{ userData?.lastName }}</p>
                     </a>
                     
                     <!-- Dropdown menu -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                       <!-- When userData is null (user is not logged in) -->
-                      <div class="px-4 py-3 w-300" *ngIf="userData === null">
+                      <div class="px-4 py-3 w-300" *ngIf="userData == null">
                         <h6>Welcome</h6>
                         <p class="mb-2">To access account and manage orders</p>
                         <button class="btn btn-outline-primary w-100" (click)="navigateToLogin()">LOGIN / SIGNUP</button>
                       </div>
                 
                       <!-- When userData is not null (user is logged in) -->
-                      <div class="px-4 py-3 w-300" *ngIf="userData !== null">
+                      <div class="px-4 py-3 w-300" *ngIf="userData != null">
                         <h6>Hello!</h6>
                         <p class="mb-2 mb-0 small">{{ userData?.firstName }} {{ userData?.lastName }}</p>
                         <p class="mb-2 mb-0 small">{{ userData?.email }}</p>
@@ -185,9 +185,9 @@
                       <li><a class="dropdown-item" href="#">Support_shoppingbuzz.com</a></li>
                       
                       <!-- Show additional options when user is logged in -->
-                      <li *ngIf="userData !== null"><hr class="dropdown-divider"></li>
-                      <li *ngIf="userData !== null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
-                      <li *ngIf="userData !== null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
+                      <li *ngIf="userData != null"><hr class="dropdown-divider"></li>
+                      <li *ngIf="userData != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
+                      <li *ngIf="userData != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
                     </ul>
                   </div>
                 </div>
