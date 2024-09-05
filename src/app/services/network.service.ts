@@ -19,7 +19,7 @@ export class NetworkService {
     window.addEventListener('offline', () => this.updateNetworkStatus(false));
     
     // Start periodic checks
-    setInterval(() => this.checkConnection(), this.checkInterval);
+   // setInterval(() => this.checkConnection(), this.checkInterval);
   }
 
   private updateNetworkStatus(isOnline: boolean) {
@@ -61,12 +61,12 @@ export class NetworkService {
     return { isSlow, speed };
   }
 
-  private checkConnection() {
-    // Perform a simple ping to check internet connectivity
-    fetch('https://e-commercebackend-6r5v.onrender.com/', { method: 'HEAD', mode: 'no-cors' })
-      .then(() => this.updateNetworkStatus(true))
-      .catch(() => this.updateNetworkStatus(false));
-  }
+  // private checkConnection() {
+  //   // Perform a simple ping to check internet connectivity
+  //   fetch('https://e-commercebackend-6r5v.onrender.com/', { method: 'HEAD', mode: 'no-cors' })
+  //     .then(() => this.updateNetworkStatus(true))
+  //     .catch(() => this.updateNetworkStatus(false));
+  // }
 
   private async measureSpeed() {
     const testFileUrl = 'https://e-commercebackend-6r5v.onrender.com/'; // Use a small file from a reliable source

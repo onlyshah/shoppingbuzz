@@ -3,7 +3,7 @@
   <div class="py-6 p-md-6 p-lg-10">
     
     <tabset>
-      <tab heading="Order" id="tab1">
+      <tab heading="Your Order" id="tab1">
         <div class="row" *ngIf="orderData?.length <=0" >
           <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="card">
@@ -30,7 +30,7 @@
             </thead>
             <tbody>
               <ng-container *ngFor="let data of orderData">
-                <ng-container *ngIf="!data.status[0].cancel && !data.status[0].return">
+                <ng-container *ngIf="!data.status.cancel && !data.status.return">
                   <tr *ngFor="let order of data.products">
                     <td class="align-middle border-top-0">
                       <a routerLink="product/{{data.id}}">
@@ -68,20 +68,34 @@
 
         <div class="d-block d-md-none m-3"  *ngIf="orderData?.length >0">
           <ng-container *ngFor="let data of orderData">
-            <ng-container *ngIf="!data.status[0].cancel && !data.status[0].return">
+            <ng-container *ngIf="!data.status.cancel && !data.status.return">
               <div *ngFor="let order of data.products" class="card mb-3">
-                <div class="card-body">
-                  <div class="d-flex align-items-center">
-                    <img [src]="imagePath + order.productImage" class="img-fluid rounded me-3" style="width: 50px;" alt="">
-                    <div>
-                      <h5 class="card-title mb-1">{{order.productName}}</h5>
-                      <p class="card-text mb-0"><small class="text-muted">{{order.brand}}</small></p>
-                    </div>
+                  <div class="card-body position-relative text-center">
+                    <div class="text-center position-relative">
+                      <img [src]="imagePath + order.productImage" class="icon-shape icon-xl"  alt="">
+           
+                  
                   </div>
-                  <p class="card-text mt-3"><strong>Quantity:</strong> {{order.quantity}}</p>
-                  <p class="card-text"><strong>Price:</strong> {{order.price}}</p>
-                  <p class="card-text"><strong>Total:</strong> {{order.price * order.quantity}}</p>
-                </div>
+                  <!-- heading -->
+                  <div class="text-small mb-1">
+                     <a class="text-decoration-none text-muted"><small>{{order.brand}}</small></a>
+                  </div>
+                  <div class="d-flex flex-wrap align-items-center">
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Product:</strong>{{order.productName}}</span>
+                    </div>
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Quantity:</strong> {{order.quantity}}</span>
+                    </div>
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Price:</strong> {{order.price}}</span>
+                    </div>
+                    <div class="mb-0">
+                      <span class="text-dark"><strong>Total:</strong> {{order.price * order.quantity}}</span>
+                    </div>
+                  </div>  
+                  </div>
+               
               </div>
               <div class="card mt-3 mb-3">
                 <div class="card-body">
@@ -95,14 +109,13 @@
           </ng-container>
         </div>
       </tab>
-      
-      <tab heading="Returned Orders">
+      <tab heading="Returned">
         <div class="row" *ngIf="returnorderData?.length <=0" >
           <div class="col-sm-12 mb-3 mb-sm-0">
             <div class="card">
               <div class="card-body">
                 <h1>Hey it feels so lightweight.</h1>
-                <p>No Return is done</p>
+                <p>Thank you for No Returns</p>
               </div>
             </div>
           </div>
@@ -123,10 +136,10 @@
             </thead>
             <tbody>
               <ng-container *ngFor="let data of returnorderData">
-                <ng-container *ngIf="data.status[0].return">
+                <ng-container *ngIf="data.status[0]?.return">
                   <tr *ngFor="let order of data.products">
                     <td class="align-middle border-top-0">
-                      <a routerLink="product/{{data.id}}">
+                      <a [routerLink]="['product', data.id]">
                         <img [src]="imagePath + order.productImage" class="icon-shape icon-xxl" alt="">
                         <span><small class="text-muted">{{order.productName}}</small></span>
                       </a>
@@ -145,6 +158,7 @@
                   </tr>
                 </ng-container>
               </ng-container>
+              
             </tbody>
           </table>
         </div>
@@ -160,16 +174,227 @@
                       <h5 class="card-title mb-1">{{order.productName}}</h5>
                       <p class="card-text mb-0"><small class="text-muted">{{order.brand}}</small></p>
                     </div>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <div class="mb-0 me-3">
+                        <span class="text-dark"><strong>Product:</strong>{{order.productName}}</span>
+                      </div>
+                      <div class="mb-0 me-3">
+                        <span class="text-dark"><strong>Quantity:</strong> {{order.quantity}}</span>
+                      </div>
+                      <div class="mb-0 me-3">
+                        <span class="text-dark"><strong>Price:</strong> {{order.price}}</span>
+                      </div>
+                      <div class="mb-0">
+                        <span class="text-dark"><strong>Total:</strong> {{order.price * order.quantity}}</span>
+                      </div>
+                    </div>  
                   </div>
-                  <p class="card-text mt-3"><strong>Quantity:</strong> {{order.quantity}}</p>
-                  <p class="card-text"><strong>Price:</strong> {{order.price}}</p>
-                  <p class="card-text"><strong>Total:</strong> {{order.price * order.quantity}}</p>
+                 </div>
+              </div>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <h5 class="card-title text-capitalize text-end fw-bolder">Paid Amount</h5>
+                  <h6 class="card-text text-end">{{data.totalPrice}}</h6>
+                  <button (click)="openModal(template, data.id, 'Cancel')" class="me-2 btn btn-primary">Cancel</button>
+                  <button (click)="openModal(template, data.id, 'Return')" class="btn btn-primary">Return</button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </tab>
+      <tab heading="Cancel">
+        <div class="row" *ngIf="cancelorderData?.length <=0" >
+          <div class="col-sm-12 mb-3 mb-sm-0">
+            <div class="card">
+              <div class="card-body">
+                <h1>Hey it feels so light weight.</h1>
+                <p>Thank for Not cancelling any order</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-none d-md-block table-responsive-xxl border-0" 
+        *ngIf="cancelorderData?.length >0" >
+          <h3>Cancel Orders</h3>
+          <table class="table mb-0 text-nowrap table-centered">
+            <thead class="bg-light text-capitalize">
+              <tr>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Brand</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let data of cancelorderData">
+                <ng-container *ngIf="data.status[0].cancel">
+                  <tr *ngFor="let order of data.products">
+                    <td class="align-middle border-top-0">
+                      <a [routerLink]="['product', data.id]">
+                        <img [src]="imagePath + order.productImage" class="icon-shape icon-xxl" alt="">
+                        <span><small class="text-muted">{{order.productName}}</small></span>
+                      </a>
+                    </td>
+                    <td class="align-middle border-top-0">
+                      <h6 class="mb-0">{{data.status[0].return ? 'Returned' : 'Active'}}</h6>
+                    </td>
+                    <td class="align-middle border-top-0">{{order.brand}}</td>
+                    <td class="align-middle border-top-0">{{order.quantity}}</td>
+                    <td class="align-middle border-top-0">
+                      <h6 class="mb-0">{{order.price}}</h6>
+                    </td>
+                    <td class="align-middle border-top-0">
+                      <h6 class="mb-0">{{order.price * order.quantity}}</h6>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-block d-md-none m-3" *ngIf="cancelorderData?.length >0" >>
+          <ng-container *ngFor="let data of cancelorderData">
+            <ng-container *ngIf="data.status[0].cancel">
+              <div *ngFor="let order of data.products" class="card mb-3">
+                <div class="card-body">
+                  <div class="card-bodycard-body position-relative text-center">
+                    <div class="text-center position-relative">
+                      <img [src]="imagePath + order.productImage" class="icon-shape icon-xl"  alt="">
+           
+                  
+                  </div>
+                  <!-- heading -->
+                  <div class="text-small mb-1">
+                     <a class="text-decoration-none text-muted"><small>{{order.brand}}</small></a>
+                  </div>
+                  <div class="d-flex flex-wrap align-items-center">
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Product:</strong>{{order.productName}}</span>
+                    </div>
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Quantity:</strong> {{order.quantity}}</span>
+                    </div>
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Price:</strong> {{order.price}}</span>
+                    </div>
+                    <div class="mb-0">
+                      <span class="text-dark"><strong>Total:</strong> {{order.price * order.quantity}}</span>
+                    </div>
+                  </div>  
+                  </div>
                 </div>
               </div>
               <div class="card mt-3 mb-3">
                 <div class="card-body">
                   <h5 class="card-title text-capitalize text-end fw-bolder">Paid Amount</h5>
                   <h6 class="card-text text-end">{{data.totalPrice}}</h6>
+                  <button (click)="openModal(template, data.id, 'Cancel')" class="me-2 btn btn-primary">Cancel</button>
+                  <button (click)="openModal(template, data.id, 'Return')" class="btn btn-primary">Return</button>
+                </div>
+              </div>
+               
+            </ng-container>
+          </ng-container>
+        </div>
+      </tab>
+      <tab heading="Received">
+        <div class="row" *ngIf="receivedorderData?.length <=0" >
+          <div class="col-sm-12 mb-3 mb-sm-0">
+            <div class="card">
+              <div class="card-body">
+                <h1>Hey it feels so lightweight.</h1>
+                <p>hope you enjoying shopping with us</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-none d-md-block table-responsive-xxl border-0" *ngIf="receivedorderData?.length >0" >
+          <h3>Received Orders</h3>
+          <table class="table mb-0 text-nowrap table-centered">
+            <thead class="bg-light text-capitalize">
+              <tr>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Brand</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let data of receivedorderData">
+                <ng-container *ngIf="data.status[0].received">
+                  <tr *ngFor="let order of data.products">
+                    <td class="align-middle border-top-0">
+                      <a [routerLink]="['product', data.id]">
+                        <img [src]="imagePath + order.productImage" class="icon-shape icon-xxl" alt="">
+                        <span><small class="text-muted">{{order.productName}}</small></span>
+                      </a>
+                    </td>
+                    <td class="align-middle border-top-0">
+                      <h6 class="mb-0">{{data.status[0].return ? 'Returned' : 'Active'}}</h6>
+                    </td>
+                    <td class="align-middle border-top-0">{{order.brand}}</td>
+                    <td class="align-middle border-top-0">{{order.quantity}}</td>
+                    <td class="align-middle border-top-0">
+                      <h6 class="mb-0">{{order.price}}</h6>
+                    </td>
+                    <td class="align-middle border-top-0">
+                      <h6 class="mb-0">{{order.price * order.quantity}}</h6>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-block d-md-none m-3" *ngIf="receivedorderData?.length >0" >
+          <ng-container *ngFor="let data of receivedorderData">
+            <ng-container *ngIf="data.status[0].received">
+              <div *ngFor="let order of data.products" class="card mb-3">
+                <div class="card-body">
+                  <div class="card-bodycard-body position-relative text-center">
+                    <div class="text-center position-relative">
+                      <img [src]="imagePath + order.productImage" class="icon-shape icon-xl"  alt="">
+           
+                  
+                  </div>
+                  <!-- heading -->
+                  <div class="text-small mb-1">
+                     <a class="text-decoration-none text-muted"><small>{{order.brand}}</small></a>
+                  </div>
+                  <div class="d-flex flex-wrap align-items-center">
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Product:</strong>{{order.productName}}</span>
+                    </div>
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Quantity:</strong> {{order.quantity}}</span>
+                    </div>
+                    <div class="mb-0 me-3">
+                      <span class="text-dark"><strong>Price:</strong> {{order.price}}</span>
+                    </div>
+                    <div class="mb-0">
+                      <span class="text-dark"><strong>Total:</strong> {{order.price * order.quantity}}</span>
+                    </div>
+                  </div>  
+                  </div>
+                </div>
+              </div>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <h5 class="card-title text-capitalize text-end fw-bolder">Paid Amount</h5>
+                  <h6 class="card-text text-end">{{data.totalPrice}}</h6>
+                  <button (click)="openModal(template, data.id, 'Cancel')" class="me-2 btn btn-primary">Cancel</button>
+                  <button (click)="openModal(template, data.id, 'Return')" class="btn btn-primary">Return</button>
                 </div>
               </div>
             </ng-container>
@@ -181,36 +406,58 @@
 </div>
 
 <ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="Closed()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="row" *ngFor="let data of modalData">
-      <div class="col-6" *ngFor="let order of data.products">
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex align-items-center">
-              <img [src]="imagePath + order.productImage" class="img-fluid rounded me-3" style="width: 50px;" alt="">
-              <div>
-                <h5 class="card-title mb-1">{{order.productName}}</h5>
-                <p class="card-text mb-0"><small class="text-muted">{{order.brand}}</small></p>
-              </div>
+  <div class="modal fade show" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-modal="true" role="dialog" style="display: block; padding-left: 0px;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fs-3 fw-bold">Are you sure you want to {{this.type}}</h5>
+  
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="Closed()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="row" *ngFor="let data of modalData">
+            <div class="col-12" *ngFor="let order of data.products">
+              <div class="card-body position-relative text-center">
+                <!-- badge -->
+                <div class="text-center position-relative">
+                    <img [src]="imagePath + order.productImage" class="icon-shape icon-xl" style="width: 50px;" alt="">
+         
+                
+                </div>
+                <!-- heading -->
+                <div class="text-small mb-1">
+                   <a class="text-decoration-none text-muted"><small>{{order.brand}}</small></a>
+                </div>
+                <div class="d-flex flex-wrap align-items-center">
+                  <div class="mb-0 me-3">
+                    <span class="text-dark"><strong>Product:</strong>{{order.productName}}</span>
+                  </div>
+                  <div class="mb-0 me-3">
+                    <span class="text-dark"><strong>Quantity:</strong> {{order.quantity}}</span>
+                  </div>
+                  <div class="mb-0 me-3">
+                    <span class="text-dark"><strong>Price:</strong> {{order.price}}</span>
+                  </div>
+                  <div class="mb-0">
+                    <span class="text-dark"><strong>Total:</strong> {{order.price * order.quantity}}</span>
+                  </div>
+                </div>  
+             </div>
+              
             </div>
-            <p class="card-text mt-3"><strong>Quantity:</strong> {{order.quantity}}</p>
-            <p class="card-text"><strong>Price:</strong> {{order.price}}</p>
-            <p class="card-text"><strong>Total:</strong> {{order.price * order.quantity}}</p>
-          </div>
+        
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-secondary" (click)="Closed()">Close</button>
+         <button type="button" class="btn btn-primary" (click)="cancel_return(data.id)">Save changes</button>
+        </div>
+      </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="Closed()">Close</button>
-    <button type="button" class="btn btn-primary" (click)="cancel_return(data.id)">Save changes</button>
-  </div>
+ 
 </ng-template>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box"

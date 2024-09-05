@@ -22,7 +22,9 @@ export class MyorderComponent  implements OnInit ,OnDestroy{
   data:any;
   type:any
   returnorderData: any;
+  cancelorderData: any;
   keys: string[];
+  receivedorderData: any;
   constructor(private comApi:CommonService ,private auth:AuthService,
     private modalService: BsModalService,
     private spinner: NgxSpinnerService
@@ -37,13 +39,43 @@ export class MyorderComponent  implements OnInit ,OnDestroy{
 
     this.comApi.getOrder(this.userId).subscribe(
       (response: any) => {
-        this.orderData = response;
-        console.log('getorder', this.orderData);
-        this.orderData = response.filter((order: any) => !order.cancel);
-        this.returnorderData = response.filter((order: any) => order.return);
-        this.keys = Object.keys(this.orderData[0].products[0]);
-        console.log('Filtered Orders:', this.returnorderData);
-        console.log(this.orderData[0].status[0].return);
+         const filteredOrders = response;
+         console.log('getorder', filteredOrders);
+         this.orderData = filteredOrders.filter((order:any) => 
+          order.status.every((status:any) => 
+            status.return === false && 
+            status.cancel === false &&
+            status.received === false
+          )
+      );
+      
+      // console.log(filteredOrders);
+      
+        this.cancelorderData=  response.map((order:any) => {
+          return {
+            ...order,
+            status: order.status.filter((status:any) => status.cancel === true)
+          };
+        }).filter((order:any) => order.status.length > 0);
+        // Filter for returned orders
+        this.returnorderData = response.map((order:any) => {
+          return {
+            ...order,
+            status: order.status.filter((status:any) => status.return === true)
+          };
+        }).filter((order:any) => order.status.length > 0);
+        
+        this.receivedorderData = response.map((order:any) => {
+          return {
+            ...order,
+            status: order.status.filter((status:any) => status.received === true)
+          };
+        }).filter((order:any) => order.status.length > 0);
+        // Log the filtered data
+        console.log('return:', this.returnorderData);
+        console.log('cancel:', this.cancelorderData);
+        
+       
         
       },
       () => {
@@ -62,10 +94,11 @@ export class MyorderComponent  implements OnInit ,OnDestroy{
     this.type = null;
 
     // Open modal with new template
-    this.modalRef = this.modalService.show(template, { class: 'modal-xl' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
 
     // Set modal data with new order data
-    this.modalData = this.orderData.find((order: any) => order.id === orderId);
+    this.modalData = [ this.orderData.find((order: any) => order.id === orderId)];
+  
     console.log('modal', this.modalData, type);
 
     // Set the new type
