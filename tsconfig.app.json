@@ -3,6 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "lib": ["dom", "es2015", "es2017"], // Add "dom" to the list of libraries
     "types": []
   },
   "files": [

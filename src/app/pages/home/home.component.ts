@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 
@@ -68,7 +69,8 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   constructor(
     public comApi: CommonService,
-    private router: Router,
+    public auth :AuthService,
+    public router: Router,
     private spinner: NgxSpinnerService
   ) { }
 

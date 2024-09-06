@@ -15,8 +15,8 @@ import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-  {path:'' ,component:AppComponent},
-  //{path:'home' ,component:HomeComponent},
+ // {path:'' ,component:AppComponent},
+  {path:'' ,component:HomeComponent},
   {path:'login', component:LoginComponent},
   {path:'singup', component:LoginComponent},  
   {path:'forgot-password', component:ForgotPasswordComponent},
