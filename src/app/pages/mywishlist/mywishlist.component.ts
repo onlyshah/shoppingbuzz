@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./mywishlist.component.css']
 })
 export class MywishlistComponent  implements OnInit ,OnDestroy{
-  userId = this.auth.userValue.userId
+  userId = this.auth.userValue?.userId
   wishlist:any;
   imagePath = environment.baseUrl;
   status: any;

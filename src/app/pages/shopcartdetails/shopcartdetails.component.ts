@@ -19,7 +19,7 @@ export class ShopcartdetailsComponent  implements OnInit ,OnDestroy{
   show = false;
   imagePath = environment.baseUrl;
   updateprices:any;
-  userId = this.auth.userValue.userId
+  userId = this.auth.userValue?.userId
   productquantity:any
   upprice:any;
   downprice:any;

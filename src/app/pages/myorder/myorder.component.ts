@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./myorder.component.css']
 })
 export class MyorderComponent  implements OnInit ,OnDestroy{
-  userId = this.auth.userValue.userId;
+  userId = this.auth.userValue?.userId;
   imagePath = environment.baseUrl
   orderData:any;
   modalRef?: BsModalRef;

@@ -273,7 +273,7 @@ cardData:any
    }
    else{
     let productId:any = [];
-    let userId = this.auth.userValue.userId
+    let userId = this.auth.userValue?.userId
     data.products.forEach((element:any) => {
       productId.push(element.productId)
     } );
