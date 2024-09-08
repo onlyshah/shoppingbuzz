@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
+    production: true,
     baseUrl:'https://e-commercebackend-6r5v.onrender.com/',
     ImgUrl:'https://e-commercebackend-6r5v.onrender.com/uploads/',
     subcategoryImage:'subcategoryImage',
