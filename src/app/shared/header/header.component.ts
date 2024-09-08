@@ -1,5 +1,5 @@
 import { AfterContentChecked, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { first, switchMap } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit ,OnDestroy ,OnChanges{
   searchValue:any;
   debouncedSearch: any;
   userInitial:any
+  show = false
  
     
     
@@ -36,6 +37,20 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
   ngOnChanges(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const url = event.url;
+        if (url.includes('/login') || url.includes('/signup') || url.includes('forgot-password')
+            || url.includes('reset-password') || url.includes('**')
+           )  {
+          this.show = false;
+        } else {
+          this.show = true;
+        }
+      }
+    });
+
+    console.log('url',this.show)
     this.userData = this.loginInfo
     this.userInitial = this.getUserInitial(this.userData?.firstName, this.userData?.lastName);
     console.log('userInitial' ,this.userInitial)

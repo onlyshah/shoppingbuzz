@@ -35,7 +35,9 @@ export class ForgotPasswordComponent {
       }
       this.auth.sendResetLink(data).subscribe((response:any) => {
         console.log(response);
+        this.router.navigateByUrl('/login')
         this.toastr.success(response.message);
+       
       },
       error => {
         this.toastr.error(error.error);

@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  constructor( public router: Router) { }
+  show: boolean;
+  constructor( public router: Router) {
+    this.show = this.router.url.includes('/reset-password/')
+   }
 
 }

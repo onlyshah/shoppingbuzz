@@ -171,3 +171,10 @@
     }
     
 }
+.showfooter {
+    display: block;
+  }
+  
+  .showfooter-hidden {
+    display: none;
+  }

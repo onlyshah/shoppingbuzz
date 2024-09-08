@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'singup', component:LoginComponent},  
   {path:'forgot-password', component:ForgotPasswordComponent},
-  {path:'reset-password', component:ResetPasswordComponent},
+  {path:'reset-password/:token', component:ResetPasswordComponent},
   {path:'product/:_id', component:ProductComponent ,canActivate: [AuthGuard]},
   {path:'product', component:ProductComponent ,canActivate: [AuthGuard]},
   {path:'cart', component:ShopcartdetailsComponent ,canActivate: [AuthGuard]},
