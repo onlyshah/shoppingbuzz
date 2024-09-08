@@ -47,6 +47,7 @@ export class ShopcartdetailsComponent  implements OnInit ,OnDestroy{
  
 ngOnInit(): void {
     this.spinner.show(); // Show spinner when data fetching starts
+    if(this.userId ! == undefined){
     this.comApi.getproducttocart(this.userId).subscribe((response: any) => {
       this.data = response.products;
       console.log('data', this.data );
@@ -65,6 +66,7 @@ ngOnInit(): void {
      // console.error(error.status);
       this.spinner.hide(); // Hide spinner if there's an error
     });
+  }
   }
  
   quantity(value: any, index: any, productId: any, proid: any) {
