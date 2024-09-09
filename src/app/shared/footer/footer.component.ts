@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +9,18 @@ import { Router } from '@angular/router';
 export class FooterComponent {
   show: boolean;
   constructor( public router: Router) {
-    this.show = this.router.url.includes('/reset-password/')
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const url = event.url;
+        if (url.includes('/login') || url.includes('/signup') || url.includes('forgot-password')
+            || url.includes('reset-password') || url.includes('**')
+           )  {
+          this.show = false;
+        } else {
+          this.show = true;
+        }
+      }
+    });
    }
 
 }
