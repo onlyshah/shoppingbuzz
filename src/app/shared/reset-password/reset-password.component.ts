@@ -33,18 +33,7 @@ export class ResetPasswordComponent implements OnInit {
       const resetLink:any = params.get('/reset-password/');
       const parts = resetLink.split('/reset-password/')[1];
       console.log('parts',parts)
-      if (parts) {
-        // Split by '+'
-        const emailHex = parts.split('+');
-        console.log('emailhex' ,emailHex)
-  
-        // Now decode the email from hex
-        const emailBuffer = Buffer.from(emailHex, 'hex');
-        console.log('emailBuffer' ,emailBuffer)
-        this.email = emailBuffer.toString('utf-8');
-        console.log('email' ,this.email)
-
-      }
+     
     });
     
   }
