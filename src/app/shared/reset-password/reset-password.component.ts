@@ -15,6 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   token: string = '';
   email:any
+  passwordFieldType: string = 'password';
 
   constructor(
     public router: Router,
@@ -50,7 +51,9 @@ export class ResetPasswordComponent implements OnInit {
 
     
   }
-
+  togglePasswordVisibility(): void {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
 
 
 
