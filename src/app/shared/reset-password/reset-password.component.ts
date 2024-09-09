@@ -72,6 +72,7 @@ export class ResetPasswordComponent implements OnInit {
         },
         (error) => {
           console.error('Error resetting password:', error);
+          this.toster.error(error.error.message)
         }
       );
     } else {
