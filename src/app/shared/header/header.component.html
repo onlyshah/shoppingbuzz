@@ -63,7 +63,9 @@
                      
                     </a>
                     
-                    <a  *ngIf="userData != null"  class="text-muted position-relative" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a  *ngIf="userData != null"  class="text-muted position-relative" 
+                    role="button" id="profileDropdown" data-bs-toggle="dropdown" 
+                    aria-expanded="false">
                      <div class="user-avatar">
                         {{ userInitial }}
                       </div>
@@ -278,14 +280,14 @@
                <ul class="navbar-nav align-items-center">
                   <li class="nav-item dropdown w-100 w-lg-auto" 
                      *ngFor="let  categorydata of categoryData?.category;let i = index">
-                     <a class="nav-link dropdown-toggle " [routerLink]="['/product',
-                      categorydata._id]" role="button"
+                     <a class="nav-link dropdown-toggle "  role="button"
                  
                         data-bs-toggle="dropdown" aria-expanded="false"> 
                         {{ categorydata.categoryname}}</a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-submenu dropend">
-                        <a class="dropdown-item dropdown-list-group-item dropdown-toggle" [routerLink]="['/product',
+                        <a class="dropdown-item dropdown-list-group-item dropdown-toggle" 
+                        [routerLink]="['/product',
                         categorydata._id]" role="button"
                     data-bs-dismiss="offcanvas"
                           data-bs-toggle="dropdown" aria-expanded="false"> 

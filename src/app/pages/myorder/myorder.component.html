@@ -258,7 +258,7 @@
           </table>
         </div>
 
-        <div class="d-block d-md-none m-3" *ngIf="cancelorderData?.length >0" >>
+        <div class="d-block d-md-none m-3" *ngIf="cancelorderData?.length >0" >
           <ng-container *ngFor="let data of cancelorderData">
             <ng-container *ngIf="data.status[0].cancel">
               <div *ngFor="let order of data.products" class="card mb-3">

@@ -46,8 +46,9 @@ export class ShopcartdetailsComponent  implements OnInit ,OnDestroy{
   }
  
 ngOnInit(): void {
+  console.log('hello', this.userId)
     this.spinner.show(); // Show spinner when data fetching starts
-    if(this.userId ! == undefined){
+    if(this.userId != undefined){
     this.comApi.getproducttocart(this.userId).subscribe((response: any) => {
       this.data = response.products;
       console.log('data', this.data );
@@ -71,10 +72,12 @@ ngOnInit(): void {
  
   quantity(value: any, index: any, productId: any, proid: any) {
     this.spinner.show(); // Show spinner when updating cart
+  
     if (value === 'max') {
       this.data[index].quantity += 1;
       this.quantityplus = this.data[index].quantity;
       console.log('id', proid, this.userId, this.data[index].quantity);
+      
       let data = {
         "userId": this.userId,
         "products": {
@@ -82,33 +85,44 @@ ngOnInit(): void {
           "quantity": this.quantityplus
         }
       };
+  
       this.comApi.onUpdatecart(data).subscribe((res: any) => {
-        let data = res;
-        console.log('cart update', data);
+        console.log('cart update', res);
         this.spinner.hide(); // Hide spinner after update
       }, (error) => {
         console.error('Error updating cart:', error);
         this.spinner.hide(); // Hide spinner if there's an error
       });
+  
     } else if (value === 'min') {
-      this.data[index].quantity -= 1;
-      this.quantityminus = this.data[index].quantity;
-      let data = {
-        "userId": this.userId,
-        "products": {
-          "productId": proid,
-          "quantity": this.quantityminus
-        }
-      };
-      this.comApi.onUpdatecart(data).subscribe((res: any) => {
-        let data = res;
-        console.log('cart update', data);
-        this.spinner.hide(); // Hide spinner after update
-      }, (error) => {
-        console.error('Error updating cart:', error);
-        this.spinner.hide(); // Hide spinner if there's an error
-      });
+      // Check if the quantity is greater than 1 before decreasing
+      if (this.data[index].quantity > 1) {
+        this.data[index].quantity -= 1;
+        this.quantityminus = this.data[index].quantity;
+  
+        let data = {
+          "userId": this.userId,
+          "products": {
+            "productId": proid,
+            "quantity": this.quantityminus
+          }
+        };
+  
+        this.comApi.onUpdatecart(data).subscribe((res: any) => {
+          console.log('cart update', res);
+          this.spinner.hide(); // Hide spinner after update
+        }, (error) => {
+          console.error('Error updating cart:', error);
+          this.spinner.hide(); // Hide spinner if there's an error
+        });
+      } else {
+        // Log a warning if the quantity is already 1 or less
+        console.warn('Quantity cannot be less than 1');
+        this.spinner.hide(); // Hide spinner as there's no change
+        return; // Stop further execution if quantity is already at minimum
+      }
     }
+  
     this.doTotalPrice(index, value);
   }
   doTotalPrice(index:any ,value:any) {
@@ -158,6 +172,7 @@ ngOnInit(): void {
       .subscribe({
         next: (res: any) => {
           console.log('deleted', res);
+          this.data =[]
           this.spinner.hide(); // Hide spinner after deletion
         },
         error: (error) => {

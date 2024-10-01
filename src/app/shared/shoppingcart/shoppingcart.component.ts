@@ -75,7 +75,7 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy {
         
         this.comApi.addtocart(value).subscribe((response: any) => {
           console.log("addcard",response);
-          
+          console.log('user',this.userData.userId)
           this.comApi.getproducttocart(this.userData.userId).pipe(first())
           .subscribe({
             next: (res: any) => {
