@@ -91,7 +91,7 @@
                                <li><a class="dropdown-item" href="#">Support_shoppingbuzz.com</a></li>
                                <li *ngIf="userData != null"><hr class="dropdown-divider"></li>
                               <li *ngIf="userData != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
-                              <li *ngIf="userData != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
+                              <li *ngIf="userData != null"><a class="dropdown-item" type="button" (click)="logout(this.userData?.userId)">Log Out</a></li>
                               </ul>
                            </div>
                          </div>
@@ -188,7 +188,7 @@
                       <!-- Show additional options when user is logged in -->
                       <li *ngIf="userData != null"><hr class="dropdown-divider"></li>
                       <li *ngIf="userData != null"><a class="dropdown-item" href="forgot-password.html">My Account</a></li>
-                      <li *ngIf="userData != null"><a class="dropdown-item" (click)="auth.logout()">Log Out</a></li>
+                      <li *ngIf="userData != null"><a class="dropdown-item" type="button" (click)="logout(this.userData?.userId)">Log Out</a></li>
                     </ul>
                   </div>
                 </div>

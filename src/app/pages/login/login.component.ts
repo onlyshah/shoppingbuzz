@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit,OnDestroy {
       .subscribe({
         next: (res: any) => {
           console.log("res",res);
-          this.sessionService.startSession(600000); // 10 minutes
+          this.sessionService.startSession(this.auth.userValue?.token); // 10 minutes
           this.router.navigate([''])
         },
         complete: () => {

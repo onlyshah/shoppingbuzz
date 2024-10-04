@@ -3,6 +3,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { first, switchMap } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
+import { data } from 'jquery';
+import { SessionService } from 'src/app/services/session.service';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 
@@ -33,6 +36,8 @@ export class HeaderComponent implements OnInit ,OnDestroy ,OnChanges{
 
 
 constructor(public router: Router ,private comApi:CommonService ,public auth:AuthService,
+  private session:SessionService,
+  private toster : ToastrService
   ){
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
@@ -80,6 +85,21 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     // Return the first character of the first and last name
     return firstName?.charAt(0).toUpperCase() + lastName?.charAt(0).toUpperCase();
   }
+  logout(userId: any) {
+    const data = { userId: userId };
+    console.log('logout', userId)
+    
+    this.auth.logoutUser(data).subscribe((res: any) => {
+      this.session.logout()
+      console.log('res', res)
+      this.toster.info(res.message)
+      this.router.navigate([''])
+      //   .then(() => {
+      //     location.reload();
+      // });
+    })
+  }
+  
   ngOnInit(): void {
     this.getallCatgoery();
     this.getCategory();
