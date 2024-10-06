@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit,OnDestroy {
         },
         error: (error:any) => {
           // Hide the spinner if there is an error error.error
-          this.toster.error(error.error.message)
+          this.toster.error(error.error?.message)
           this.spinner.hide();
         },
       });

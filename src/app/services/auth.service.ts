@@ -18,10 +18,10 @@ export class AuthService  {
       private router: Router,
       private http: HttpClient
   ) {
-    const storedUser = sessionStorage.getItem('userData');
-    this.userSubject = new BehaviorSubject(storedUser ? JSON.parse(storedUser) : null);
+    // const storedUser = sessionStorage.getItem('userData');
+    // this.userSubject = new BehaviorSubject(storedUser ? JSON.parse(storedUser) : null);
 
-      //this.userSubject = new BehaviorSubject(JSON.parse( sessionStorage.getItem('userData')!));
+    this.userSubject = new BehaviorSubject(JSON.parse( sessionStorage.getItem('userData')!));
      // window.addEventListener('beforeunload', this.clearTokenOnClose);
 
   }    

@@ -15,11 +15,18 @@ export class SessionService {
   // Start a session by saving the token
   startSession(token: string) {
     localStorage.setItem(this.tokenKey, token);  // Save the token in localStorage
+    this.auth.setUserValue(token); 
   }
 
   // Check if a session is active by verifying if the token exists in localStorage
   isSessionActive(): boolean {
-    return !!localStorage.getItem(this.tokenKey);  // Return true if token exists
+    //return !!localStorage.getItem(this.tokenKey);  // Return true if token exists
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      this.auth.setUserValue(token); // Ensure AuthService has the token
+      return true;
+    }
+    return false;
   }
 
   // End the session by clearing the token and redirecting to login
@@ -27,6 +34,7 @@ export class SessionService {
     sessionStorage.removeItem('userData');
     localStorage.removeItem('userData'); // Clear user data
     this.auth.clearUserValue(); // Clear token from AuthService
+    localStorage.removeItem(this.tokenKey); // Clear the token from localStorage
     this.router.navigate(['']); // Redirect to login
   }
 
@@ -35,10 +43,13 @@ export class SessionService {
     this.endSession();  // Clear token and end session
   }
 
-  // Check if session exists, redirect to login if no token is found
+  //Check if session exists, redirect to login if no token is found
   checkSession() {
     if (!this.isSessionActive()) {
-      this.router.navigate(['/login']);  // Redirect to login if no active session
+      this.router.navigate(['/']); // Redirect to login if no active session
+    } else {
+      // Optionally navigate to a default route if session is active
+      this.router.navigate(['/login']); // Navigate to the default page
     }
   }
 }

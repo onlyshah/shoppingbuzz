@@ -58,7 +58,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     console.log('url',this.show)
     this.userData = this.loginInfo
     this.userInitial = this.getUserInitial(this.userData?.firstName, this.userData?.lastName);
-    console.log('userInitial' ,this.userInitial)
+    console.log('userInitial' ,this.userInitial ,this.userData)
     if (this.userData?.userId != null) {
       this.comApi.getproducttocart(this.userData.userId).pipe(first())
       .subscribe({
@@ -90,7 +90,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     console.log('logout', userId)
     
     this.auth.logoutUser(data).subscribe((res: any) => {
-      this.session.logout()
+     // this.session.logout()
       console.log('res', res)
       this.toster.info(res.message)
       this.router.navigate([''])
@@ -107,13 +107,6 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
     
    
    // this.userData = JSON.parse( sessionStorage.getItem('user')!);
-    
-   
-    
-    
-  
-   
-    
     
   }
   getCategory(){
