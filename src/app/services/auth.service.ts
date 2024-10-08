@@ -13,15 +13,15 @@ export class AuthService  {
   private userSubject: BehaviorSubject<any>;
   private loggedInStatus = false;
  
-
+  storedUser :any
   constructor(
       private router: Router,
       private http: HttpClient
   ) {
-    // const storedUser = sessionStorage.getItem('userData');
-    // this.userSubject = new BehaviorSubject(storedUser ? JSON.parse(storedUser) : null);
+     this.storedUser = sessionStorage.getItem('userData');
+     this.userSubject = new BehaviorSubject(this.storedUser ? JSON.parse(this.storedUser) : null);
 
-    this.userSubject = new BehaviorSubject(JSON.parse( sessionStorage.getItem('userData')!));
+   // this.userSubject = new BehaviorSubject(JSON.parse( sessionStorage.getItem('userData')!));
      // window.addEventListener('beforeunload', this.clearTokenOnClose);
 
   }    
@@ -29,7 +29,7 @@ export class AuthService  {
       return this.userSubject.value;
   }
   public setUserValue(token: string) {
-    const userData = { token }; // Update the userSubject with the token
+    const userData = this. storedUser; // Update the userSubject with the token
     this.userSubject.next(userData); // Notify all subscribers of the new user value
     sessionStorage.setItem('userData', JSON.stringify(userData)); // Save to session storage
   }
@@ -84,8 +84,8 @@ billsendtoEmail(data:any){
   // store user details and jwt token in local storage to keep user logged in between page refreshes
  sessionStorage.removeItem('userData');
   this.userSubject.next(null);
- 
   return user;
+  
 }))
     
   }

@@ -57,8 +57,9 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
 
     console.log('url',this.show)
     this.userData = this.loginInfo
+    console.log('loginInfo' ,this.loginInfo)
     this.userInitial = this.getUserInitial(this.userData?.firstName, this.userData?.lastName);
-    console.log('userInitial' ,this.userInitial ,this.userData)
+    console.log('userInitial' ,this.userInitial)
     if (this.userData?.userId != null) {
       this.comApi.getproducttocart(this.userData.userId).pipe(first())
       .subscribe({

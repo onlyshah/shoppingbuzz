@@ -74,6 +74,7 @@ export class SessionService {
 
 //     if (userData !== null) {
 //       const parsedData = JSON.parse(userData);
+//       console.log('parsedData',parsedData)
 //       if (typeof parsedData === 'object' && parsedData !== null) {
 //         parsedData.sessionExpiry = this.sessionExpiry;  // Add sessionExpiry to the parsed data
 //         this.saveSession(parsedData);  // Save the session expiry in local storage
