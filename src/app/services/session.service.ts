@@ -6,53 +6,65 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class SessionService {
- 
-  constructor(private router: Router,private auth:AuthService) {
-    this.checkSession();  // Check if a valid session exists on service initialization
-  }
-  private tokenKey: any = this.auth.userValue?.token;;  // Key for storing the token in localStorage
+  private tokenKey: string = 'authToken';  // Key for storing the token in localStorage
 
-  // Start a session by saving the token
-  startSession(token: string) {
-    localStorage.setItem(this.tokenKey, token);  // Save the token in localStorage
-    this.auth.setUserValue(token); 
+  constructor(private router: Router, private auth: AuthService) {
+    this.checkSession();  // Check if there's an existing session on service initialization
   }
 
-  // Check if a session is active by verifying if the token exists in localStorage
+  // Start session by saving user data and token
+  startSession(userData: any) {
+    if (userData.token) {
+      // Store the token in localStorage
+      localStorage.setItem(this.tokenKey, userData.token);
+
+      // Store the user data in localStorage or sessionStorage
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      // Optionally, set the user value in AuthService
+      this.auth.setUserValue(userData);
+    } else {
+      console.error('No token found in user data.');
+    }
+  }
+
+  // End session by clearing the token and user data
+  endSession() {
+    localStorage.removeItem(this.tokenKey); // Clear token
+    localStorage.removeItem('userData'); // Clear user data
+    sessionStorage.removeItem('userData')
+    this.auth.clearUserValue(); // Clear user data from AuthService
+
+    this.router.navigate(['/login']); // Redirect to login page
+  }
+
+  // Check if the session is active by checking for the token and user data
   isSessionActive(): boolean {
-    //return !!localStorage.getItem(this.tokenKey);  // Return true if token exists
     const token = localStorage.getItem(this.tokenKey);
-    if (token) {
-      this.auth.setUserValue(token); // Ensure AuthService has the token
+    const userData = localStorage.getItem('userData');
+
+    if (token && userData) {
+      // Optionally, set the user value in AuthService if it's not already set
+      this.auth.setUserValue(JSON.parse(userData));
       return true;
     }
     return false;
   }
 
-  // End the session by clearing the token and redirecting to login
-  endSession() {
-    sessionStorage.removeItem('userData');
-    localStorage.removeItem('userData'); // Clear user data
-    this.auth.clearUserValue(); // Clear token from AuthService
-    localStorage.removeItem(this.tokenKey); // Clear the token from localStorage
-    this.router.navigate(['']); // Redirect to login
-  }
-
-  // Logout function to explicitly log out the user and end the session
-  logout() {
-    this.endSession();  // Clear token and end session
-  }
-
-  //Check if session exists, redirect to login if no token is found
+  // Check session and redirect if no session is active
   checkSession() {
     if (!this.isSessionActive()) {
-      this.router.navigate(['/']); // Redirect to login if no active session
-    } else {
-      // Optionally navigate to a default route if session is active
-      this.router.navigate(['/login']); // Navigate to the default page
+      this.router.navigate(['/']);  // Redirect to login if no session
     }
   }
+
+  // Optionally reset session (e.g., in case of re-login or new token)
+  resetSession(userData: any) {
+    this.endSession(); // Clear previous session
+    this.startSession(userData); // Start a new session
+  }
 }
+
 
 
 // export class SessionService {

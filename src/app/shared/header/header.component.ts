@@ -6,6 +6,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { data } from 'jquery';
 import { SessionService } from 'src/app/services/session.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 declare var $: any;
 
 
@@ -37,7 +38,8 @@ export class HeaderComponent implements OnInit ,OnDestroy ,OnChanges{
 
 constructor(public router: Router ,private comApi:CommonService ,public auth:AuthService,
   private session:SessionService,
-  private toster : ToastrService
+  private toster : ToastrService,
+  private spinner: NgxSpinnerService,
   ){
    // this.debouncedSearch = debounce(this.searchProduct, 300);
   }
@@ -85,22 +87,7 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
   getUserInitial(firstName: string, lastName: string): string {
     // Return the first character of the first and last name
     return firstName?.charAt(0).toUpperCase() + lastName?.charAt(0).toUpperCase();
-  }
-  logout(userId: any) {
-    const data = { userId: userId };
-    console.log('logout', userId)
-    
-    this.auth.logoutUser(data).subscribe((res: any) => {
-     // this.session.logout()
-      console.log('res', res)
-      this.toster.info(res.message)
-      this.router.navigate([''])
-      //   .then(() => {
-      //     location.reload();
-      // });
-    })
-  }
-  
+  }  
   ngOnInit(): void {
     this.getallCatgoery();
     this.getCategory();
@@ -179,6 +166,22 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
   navigateTomyOrder() {
     this.router.navigate(['/myorder']);
     }
+    logout(userId: any) {
+      this.spinner.show()
+      const data = { userId: userId };
+      this.auth.logout(data).subscribe((response:any)=>{
+        localStorage.removeItem('userData');
+        sessionStorage.removeItem('userData');
+        this.auth.clearUserValue(); // Clear user data from AuthService
+        this.toster.info(response.message)
+        this.spinner.hide()
+
+      })
+      console.log('logout', userId)
+       
+      
+     
+    }
     ngOnDestroy(): void {
       this.wishListCount = null
       this.cartCount = null,
@@ -191,6 +194,8 @@ constructor(public router: Router ,private comApi:CommonService ,public auth:Aut
       this.productList = null;
       this.searchValue =null;
       this.debouncedSearch =null;
+      this.cartCount = 0
+      this.wishListCount = 0
     
      }
     
