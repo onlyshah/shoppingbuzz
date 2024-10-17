@@ -19,7 +19,7 @@ export class CommonService implements OnInit {
 
   private orderStatussubject = new BehaviorSubject<any[]>([]);
   public orderStatussubjec$: Observable<any[]> = this.orderStatussubject.asObservable();
- 
+
   constructor(private http: HttpClient) {
   
   }
@@ -152,5 +152,12 @@ export class CommonService implements OnInit {
       return response;
   }));
   }
+  checkcart(data:any):Observable<any>{
+    return this.http.post(environment.baseUrl+'cart/checkcart',data)
+  }
+  checkWhislist(data:any): Observable<any>{
+    return this.http.post(environment.baseUrl+'wishlist/check-wishlist',data)
+  }
+
  
 }
