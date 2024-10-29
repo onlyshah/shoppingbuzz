@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, inject, input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 providedIn:'root'
 })
 
-export class ShoppingcartComponent  implements OnInit{
+export class ShoppingcartComponent  implements OnInit,OnDestroy{
   imagePath = environment.baseUrl;
  userId = this.auth.userValue?.userId
   @Input() categorytdata:any
@@ -25,37 +25,39 @@ export class ShoppingcartComponent  implements OnInit{
   @Input() getCategoryData:any
   @Input() routeId:any
   @Input() item:any
-
   userData:any
   @Input() getSearchData:any
   //@Input () dataitem :any
   cartcount: number;
   wishlistcount:number;
-  isInWishlist = false;
-  isInCart  = false;
+  @Input() isInWishlist  =  false;
+  @Input() isInCart  = false;
   
  
   
   constructor(private comApi:CommonService , private route: Router ,
-    private router: ActivatedRoute ,
+     private router: ActivatedRoute ,
     public auth:AuthService,
     public guard:AuthGuard,
     private spinner: NgxSpinnerService,
-    private toster : ToastrService,
-    private cdr: ChangeDetectorRef,  // Inject ChangeDetectorRef
+    private toster : ToastrService
     
   ) {
     console.log('searchitem',this.getSearchData)
      
+    
+      
+
      }
+  
 
   ngOnInit() {
     this.userData=(JSON.parse( sessionStorage.getItem('userData')!))
     console.log('...', this.userData?.userId)
     let data= { userId: this.userData?.userId, productId: this.item?._id }
+   
     this.checkWishlist(data);
     this.checkCart(data);
-  
 
    
    
