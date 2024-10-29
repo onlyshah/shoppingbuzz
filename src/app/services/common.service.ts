@@ -25,6 +25,22 @@ export class CommonService implements OnInit {
   
   }
   ngOnInit(): void {}
+  // Set methods to update the values
+  setCardCount(count: number): void {
+    this.cardCountSubject.next(count);
+  }
+
+  setWishlistCount(count: number): void {
+    this.wishlistCountSubject.next(count);
+  }
+ 
+  getCardCount(): number {
+    return this.cardCountSubject.getValue();
+  }
+
+  getWishlistCount(): number {
+    return this.wishlistCountSubject.getValue();
+  }
   getCatgeory() :Observable<any>{
     return this.http.get(environment.baseUrl + 'getcategory');
   }
