@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, inject, input } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 providedIn:'root'
 })
 
-export class ShoppingcartComponent  implements OnInit,OnDestroy{
+export class ShoppingcartComponent  implements OnInit,OnDestroy,AfterViewInit {
   imagePath = environment.baseUrl;
  userId = this.auth.userValue?.userId
   @Input() categorytdata:any
@@ -30,9 +30,10 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy{
   //@Input () dataitem :any
   cartcount: number;
   wishlistcount:number;
-  @Input() isInWishlist  =  false;
-  @Input() isInCart  = false;
-  
+
+  @Input() isInWishlist:any
+  isInCart:any
+
  
   
   constructor(private comApi:CommonService , private route: Router ,
@@ -44,38 +45,22 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy{
     
   ) {
     console.log('searchitem',this.getSearchData)
-     
-    
-      
-
      }
+  ngAfterViewInit(): void {
+    
+      console.log('Updated wishlist status:',this.isInWishlist);
   
+  }
+    
+ 
 
   ngOnInit() {
     this.userData=(JSON.parse( sessionStorage.getItem('userData')!))
     console.log('...', this.userData?.userId)
     let data= { userId: this.userData?.userId, productId: this.item?._id }
-   
-    this.checkWishlist(data);
-    this.checkCart(data);
-
+  
    
    
-  }
-  checkCart(data:any){
-    this.comApi.checkcart(data).subscribe((res:any)=>{
-      this.isInCart = res.success
-      console.log('checkcart',this.isInCart)
-
-    })
-  }
-  checkWishlist(data:any){
-    this.comApi.checkWhislist(data).subscribe((res:any)=>{
-      this.isInWishlist = res.success
-      console.log('checkwishlist',this.isInWishlist)
-
-    })
-
   }
  
  
@@ -94,13 +79,13 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy{
           }
         };
         console.log(value);
-        if (this.isInCart) {
-          // Remove from wishlist
-         // this.deleteWishlist(this.userData.userId ,productId);
-        } else {
-          // Add to wishlist
-          this.addTocart(value);
-        }
+        // if (this.isInCart) {
+        //   // Remove from wishlist
+        //  // this.deleteWishlist(this.userData.userId ,productId);
+        // } else {
+        //   // Add to wishlist
+        //   this.addTocart(value);
+        // }
       
       }
     } else {
@@ -114,7 +99,7 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy{
     this.comApi.addtocart(value).subscribe((response: any) => {
       console.log("addcard",response);
       console.log('user',this.userData.userId)
-      this.isInCart = true;
+      //this.isInCart = true;
       this.comApi.getproducttocart(this.userData.userId).pipe(first())
       .subscribe({
         next: (res: any) => {
@@ -138,13 +123,13 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy{
           }
         };
         console.log(value);
-        if (this.isInWishlist) {
-          // Remove from wishlist
-          this.deleteWishlist(this.userData.userId ,productId);
-        } else {
-          // Add to wishlist
-          this.addToWishlist(value);
-        }
+        // if (this.isInWishlist) {
+        //   // Remove from wishlist
+        //   this.deleteWishlist(this.userData.userId ,productId);
+        // } else {
+        //   // Add to wishlist
+        //   this.addToWishlist(value);
+        // }
        
       }
     } 
@@ -161,7 +146,7 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy{
     this.comApi.addtowishlist(value).subscribe((res: any) => {
       let wishlist = res;
       console.log('wishlist', wishlist);
-      this.isInWishlist = true;
+      //this.isInWishlist = true;
       this.comApi.getwishlist(this.userData.userId).pipe(first())
       .subscribe({
         next: (res: any) => {

@@ -20,6 +20,12 @@ export class CommonService implements OnInit {
   private orderStatussubject = new BehaviorSubject<any[]>([]);
   public orderStatussubjec$: Observable<any[]> = this.orderStatussubject.asObservable();
 
+  private wishliststatusSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  wishlistStatus$: Observable<any> = this.wishliststatusSubject.asObservable();
+
+  private cartstatusSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  cartStatus$: Observable<any> = this.cartstatusSubject.asObservable();
+
  
   constructor(private http: HttpClient) {
   
@@ -154,11 +160,23 @@ export class CommonService implements OnInit {
   }));
   }
   checkcart(data:any):Observable<any>{
-    return this.http.post(environment.baseUrl+'cart/checkcart',data)
+    return this.http.post(environment.baseUrl+'cart/checkcart',data).pipe(map((response: any) => {
+      const cart = response.success; // Assuming response contains productCount
+      this.cartstatusSubject.next(cart);
+      console.log('Updated cartStatus', this.cartstatusSubject.value);
+      return response;
+    }));
   }
   checkWhislist(data:any): Observable<any>{
-    return this.http.post(environment.baseUrl+'wishlist/check-wishlist',data)
+    return this.http.post(environment.baseUrl+'wishlist/check-wishlist',data).pipe(map((response: any) => {
+      const wishList = response.success; // Assuming response contains productCount
+      this.wishliststatusSubject.next(wishList);
+      console.log('Updated wishListStatus', this.wishliststatusSubject.value);
+      return response;
+    }));
   }
-
+  public get checkWhlistValue() {
+    return this.wishliststatusSubject.value;
+   }
  
 }

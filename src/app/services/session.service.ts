@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class SessionService {
-  private tokenKey: string = 'authToken';  // Key for storing the token in localStorage
+  private tokenKey: any;  // Key for storing the token in localStorage
 
   constructor(private router: Router, private auth: AuthService) {
     this.checkSession();  // Check if there's an existing session on service initialization
@@ -16,7 +16,10 @@ export class SessionService {
   startSession(userData: any) {
     if (userData.token) {
       // Store the token in localStorage
-      localStorage.setItem(this.tokenKey, userData.token);
+      this.tokenKey = userData.token
+      console.log('###',this.tokenKey)
+
+      localStorage.setItem('token',this.tokenKey);
 
       // Store the user data in localStorage or sessionStorage
       localStorage.setItem('userData', JSON.stringify(userData));
@@ -30,7 +33,7 @@ export class SessionService {
 
   // End session by clearing the token and user data
   endSession() {
-    localStorage.removeItem(this.tokenKey); // Clear token
+    localStorage.removeItem('token'); // Clear token
     localStorage.removeItem('userData'); // Clear user data
     sessionStorage.removeItem('userData')
     this.auth.clearUserValue(); // Clear user data from AuthService
@@ -40,8 +43,9 @@ export class SessionService {
 
   // Check if the session is active by checking for the token and user data
   isSessionActive(): boolean {
-    const token = localStorage.getItem(this.tokenKey);
+    const token = localStorage.getItem('token');
     const userData = localStorage.getItem('userData');
+    console.log('###',token,userData)
 
     if (token && userData) {
       // Optionally, set the user value in AuthService if it's not already set

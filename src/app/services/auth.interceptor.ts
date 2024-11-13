@@ -17,6 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.auth.userValue?this.auth.userValue.token:null;
+    //console.log(token,'##')
     if (token !== null) {
       const clonedRequest = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${token}`)
@@ -26,6 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (error.status === 401) {
             // Token is invalid or expired, redirect to login
             localStorage.removeItem('token'); // Remove invalid token
+            localStorage.removeItem(token); // Remove invalid token
             this.router.navigate(['/login']);
           }
           return throwError(error);

@@ -69,3 +69,34 @@
     //     this.idleTimeout = setTimeout(() => this.endSession(), this.idleDuration);
     //   }
     // }
+    isInWishlist  =  false;
+    isInCart  = false;
+    
+    this.checkWishlist(data);
+    this.checkCart(data);
+    this.isInWishlist
+    this.isInCart
+
+    checkCart(data:any){
+        this.comApi.checkcart(data).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            this.isInCart = res.success
+            //console.log('checkcart',this.isInCart)
+           
+          },
+        });
+      
+      }
+      checkWishlist(data:any){
+        this.comApi.checkWhislist(data).pipe(first())
+        .subscribe({
+          next: (res: any) => {
+            this.isInWishlist = res.success
+            console.log('checkwishlist',this.isInWishlist)
+           
+           
+          },
+        });
+      }
+     

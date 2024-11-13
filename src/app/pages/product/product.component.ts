@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Route, Router } from '@angular/router'
 import { NgxSpinnerService } from 'ngx-spinner'
+import { first } from 'rxjs'
 import { CommonService } from 'src/app/services/common.service'
 import { environment } from 'src/environments/environment'
 
@@ -15,6 +16,8 @@ export class ProductComponent implements OnInit ,OnDestroy {
   imagePath = environment.baseUrl
   productList: any
   searchData:any
+  userData: any
+  
 
   constructor (
     private router: ActivatedRoute,
@@ -26,6 +29,9 @@ export class ProductComponent implements OnInit ,OnDestroy {
       this.searchData = results;
       console.log("searchData",this.searchData);
     })
+    this.comApi.wishlistStatus$.subscribe(status => {
+      console.log('product wishlist status:',status);
+    });
   }
   id: any
   getproductData: any
@@ -42,8 +48,8 @@ export class ProductComponent implements OnInit ,OnDestroy {
       this.id = '' + response?._id
       console.log(this.id)
     })
-  }
-
+ }
+ 
   getalldetail () {
     this.router.params.subscribe((response: any) => {
       this.id = '' + response?._id
@@ -53,6 +59,8 @@ export class ProductComponent implements OnInit ,OnDestroy {
         console.log('alldata', this.getCategoryData)
         this.pushcategoryData = this.getCategoryData.filter(
           (id: any) => id.CategoryId._id === this.id
+          
+          
         )
         console.log('pushcategoryData', this.pushcategoryData)
         this.pushsubcategoryData = this.getCategoryData.filter(
