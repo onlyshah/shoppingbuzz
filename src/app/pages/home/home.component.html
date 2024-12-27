@@ -47,7 +47,7 @@
                         <div class="py-10 px-8 rounded"  [ngStyle]="{
                            'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
                            'background-position': 'center center',
-                           'background-color': 'data?.backgroundcolor' ? data?.backgroundcolor : 'transparent',
+                           'background-color': data?.backgroundcolor ? data?.backgroundcolor : 'transparent',
                            'background-size': 'cover',
                            'background-repeat': 'no-repeat',
                            'border-radius': '0.5rem',
@@ -126,7 +126,7 @@
                         [ngStyle]="{
                            'background-image': 'url(' + imagePath + data?.decodedBanner + ')',
                            'background-position': 'center center',
-                           'background-color': 'data?.backgroundcolor' ? data?.backgroundcolor : 'transparent',
+                           'background-color': data?.backgroundcolor ? data?.backgroundcolor : 'transparent',
                            'background-size': 'cover',
                            'background-repeat': 'no-repeat',
                            'border-radius': '0.5rem',
