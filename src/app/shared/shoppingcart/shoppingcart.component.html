@@ -22,7 +22,7 @@
                                        class="mb-3 img-fluid">
                                  </a>
                               </div>
-                              <div class="product-action-btn">
+                              <!-- <div class="product-action-btn">
                                  <a routerLink="/product/{{item?.SubCategoryId?._id}}" class="btn-action mb-1"><i
                                        class="bi bi-eye"></i></a>
                                  <a (click)="Wishlist(item._id ,this.isInWishlist)" class="btn-action mb-1"
@@ -31,7 +31,8 @@
                                     <i class="bi bi-heart"></i>
                                  </a>
 
-                              </div>
+                              </div> -->
+                              <app-sh-button [item]="item" [isInWishlist]="Status"></app-sh-button>
                            </div>
                            <div class="text-container">
                               <!-- <h2 class="fs-6">
@@ -106,19 +107,7 @@
                      <a> <img [src]="imagePath+categorytdata?.productImage" alt="Grocery Ecommerce Template"
                            class="mb-3 img-fluid"></a>
 
-                     <div class="product-action-btn">
-                        <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-                data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-                        <a (click)="Wishlist(categorytdata._id,this.isInWishlist)" class="btn-action mb-1"
-                           [ngClass]="{'wishlist-active':isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                           data-bs-toggle="tooltip" title="Wishlist">
-                           <i class="bi bi-heart"></i>
-                        </a>
-
-                        <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                data-bs-html="true" title="Compare"><i
-                class="bi bi-arrow-left-right"></i></a> -->
-                     </div>
+                           <app-sh-button [item]="item" [type]="Status"></app-sh-button>
                   </div>
 
                   <h2 class="fs-6">
@@ -181,18 +170,7 @@
                      <a> <img [src]="imagePath+subcategorytdata?.productImage" alt="Grocery Ecommerce Template"
                            class="mb-3 img-fluid"></a>
 
-                     <div class="product-action-btn">
-                        <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-                    data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-                        <a (click)="Wishlist(subcategorytdata._id ,this.isInWishlist)" class="btn-action mb-1"
-                           [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                           data-bs-toggle="tooltip" title="Wishlist">
-                           <i class="bi bi-heart"></i>
-                        </a>
-                        <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                    data-bs-html="true" title="Compare"><i
-                    class="bi bi-arrow-left-right"></i></a> -->
-                     </div>
+                           <app-sh-button [item]="item" [type]="Status"></app-sh-button>
                   </div>
 
                   <h2 class="fs-6">
@@ -252,18 +230,7 @@
                         <a> <img [src]="imagePath+categorytdata?.productImage" alt="Grocery Ecommerce Template"
                               class="mb-3 img-fluid"></a>
 
-                        <div class="product-action-btn">
-                           <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-                data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-                           <a (click)="Wishlist(categorytdata._id,this.isInWishlist)" class="btn-action mb-1"
-                              [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                              data-bs-toggle="tooltip" title="Wishlist">
-                              <i class="bi bi-heart"></i>
-                           </a>
-                           <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                data-bs-html="true" title="Compare"><i
-                class="bi bi-arrow-left-right"></i></a> -->
-                        </div>
+                              <app-sh-button [item]="item" [type]="Status"></app-sh-button>
                      </div>
 
                      <h2 class="fs-6">
@@ -323,18 +290,7 @@
                         <a> <img [src]="imagePath+subcategorytdata?.productImage" alt="Grocery Ecommerce Template"
                               class="mb-3 img-fluid"></a>
 
-                        <div class="product-action-btn">
-                           <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-                    data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-                           <a (click)="Wishlist(subcategorytdata._id ,this.isInWishlist)" class="btn-action mb-1"
-                              [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                              data-bs-toggle="tooltip" title="Wishlist">
-                              <i class="bi bi-heart"></i>
-                           </a>
-                           <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                    data-bs-html="true" title="Compare"><i
-                    class="bi bi-arrow-left-right"></i></a> -->
-                        </div>
+                              <app-sh-button [item]="item" [type]="Status"></app-sh-button>
                      </div>
 
                      <h2 class="fs-6">
@@ -505,18 +461,7 @@
 
                         </a>
                         <!-- action btn -->
-                        <div class="product-action-btn">
-                           <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-                  data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-                           <a (click)="Wishlist(data._id ,this.isInWishlist)" class="btn-action mb-1"
-                              [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                              data-bs-toggle="tooltip" title="Wishlist">
-                              <i class="bi bi-heart"></i></a>
-
-                           <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                  data-bs-html="true" title="Compare"><i
-                  class="bi bi-arrow-left-right"></i></a> -->
-                        </div>
+                        <app-sh-button [item]="item" [type]="Status"></app-sh-button>
                      </div>
                      <!-- title -->
 
@@ -569,17 +514,7 @@
 
                         </a>
                         <!-- action btn -->
-                        <div class="product-action-btn">
-                           <!-- <a href="#!" class="btn-action mb-1" data-bs-toggle="modal"
-                  data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a> -->
-                           <a (click)="Wishlist(data._id ,this.isInWishlist)" class="btn-action mb-1"
-                              [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                              data-bs-toggle="tooltip" title="Wishlist">
-                              <i class="bi bi-heart"></i></a>
-                           <!-- <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                  data-bs-html="true" title="Compare"><i
-                  class="bi bi-arrow-left-right"></i></a> -->
-                        </div>
+                        <app-sh-button [item]="item" [type]="Status"></app-sh-button>
                      </div>
                      <!-- title -->
 

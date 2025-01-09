@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 providedIn:'root'
 })
 
-export class ShoppingcartComponent  implements OnInit,OnDestroy,AfterViewInit {
+export class ShoppingcartComponent  implements OnInit,OnDestroy {
   imagePath = environment.baseUrl;
  userId = this.auth.userValue?.userId
   @Input() categorytdata:any
@@ -31,8 +31,9 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy,AfterViewInit {
   cartcount: number;
   wishlistcount:number;
 
-  @Input() isInWishlist:any
+  isInWishlist:any
   isInCart:any
+  Status:any
 
  
   
@@ -46,20 +47,27 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy,AfterViewInit {
   ) {
     console.log('searchitem',this.getSearchData)
      }
-  ngAfterViewInit(): void {
-    
-      console.log('Updated wishlist status:',this.isInWishlist);
-  
-  }
+
     
  
 
   ngOnInit() {
     this.userData=(JSON.parse( sessionStorage.getItem('userData')!))
     console.log('...', this.userData?.userId)
-    let data= { userId: this.userData?.userId, productId: this.item?._id }
-  
-   
+    let item = [];
+    item.push(this.item);
+    let data = {
+      userId: this.userData?.userId,
+      productId: item.length > 0 ? item[0]?._id : null, // Check for array length to avoid errors
+    };
+    console.log('data',data)
+    this.comApi.checkWhislist(data).subscribe((res:any)=>{
+      console.log('##',res)
+      this.Status  = res.success
+      console.log('##',this.Status)
+      
+      
+    })
    
   }
  

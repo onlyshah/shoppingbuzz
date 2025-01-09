@@ -1,0 +1,12 @@
+
+<div class="product-action-btn">
+        <!-- {{item?.SubCategoryId?._id}} -->
+        <a routerLink="['/product/',item?.SubCategoryId?._id]" class="btn-action mb-1"><i
+                class="bi bi-eye"></i></a>
+          <a (click)="Wishlist(item._id ,this.isInWishlist)" class="btn-action mb-1"
+          [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
+             data-bs-toggle="tooltip" title="Wishlist">
+             <i class="bi bi-heart"></i>
+          </a>
+</div>
+

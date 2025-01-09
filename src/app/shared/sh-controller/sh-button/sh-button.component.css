@@ -1,0 +1,9 @@
+.wishlist-active {
+    color: #fff; /* Button color when product is in the wishlist */
+    background-color: red;
+  }
+  
+  .wishlist-inactive {
+    color: #fff; /* Button color when product is not in the wishlist */
+    background-color: green;
+  }

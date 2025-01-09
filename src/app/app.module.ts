@@ -28,6 +28,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ShButtonComponent } from "./shared/sh-controller/sh-button/sh-button.component";
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -46,11 +48,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MyorderComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    
+    ShButtonComponent
     
    
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -63,11 +66,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     TooltipModule,
     TabsModule,
-    NgxSpinnerModule 
-    
-    
-    
-  ],
+    NgxSpinnerModule,
+   
+],
   providers: [BsModalService,
     AuthGuard,
     {
