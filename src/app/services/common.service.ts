@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -53,9 +53,17 @@ export class CommonService implements OnInit {
   getsubCatgeory():Observable<any> {
     return this.http.get(environment.baseUrl + 'viewSubcategory');
   }
-  getall():Observable<any> {
-    return this.http.get(environment.baseUrl + 'getall');
+  // getall():Observable<any> {
+  //   return this.http.get(environment.baseUrl + 'getall');
+  // }
+  getall(page: number = 1, pageSize: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+  
+    return this.http.get<any>(environment.baseUrl + 'getall', { params });
   }
+  
   getcarousel():Observable<any> {
     return this.http.get(environment.baseUrl + 'getcarousle');
   }

@@ -1,5 +1,6 @@
-import { AfterContentChecked, AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Injectable, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, inject, input } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, HostListener, Injectable, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { values } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
@@ -16,27 +17,22 @@ import { environment } from 'src/environments/environment';
 providedIn:'root'
 })
 
-export class ShoppingcartComponent  implements OnInit,OnDestroy {
+export class ShoppingcartComponent  implements OnInit,OnDestroy ,AfterContentInit {
   imagePath = environment.baseUrl;
  userId = this.auth.userValue?.userId
   @Input() categorytdata:any
   @Input() subcategorytdata:any
   @Input() pushproductdata:any
-  @Input() getCategoryData:any
+  @Input() getallData:any
   @Input() routeId:any
   @Input() item:any
   userData:any
   @Input() getSearchData:any
-  //@Input () dataitem :any
   cartcount: number;
   wishlistcount:number;
-
-  isInWishlist:any
+  itemData:any =[]
+  isInWishlist:boolean
   isInCart:any
-  Status:any
-
- 
-  
   constructor(private comApi:CommonService , private route: Router ,
      private router: ActivatedRoute ,
     public auth:AuthService,
@@ -47,30 +43,109 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy {
   ) {
     console.log('searchitem',this.getSearchData)
      }
-
+ 
     
  
 
   ngOnInit() {
     this.userData=(JSON.parse( sessionStorage.getItem('userData')!))
-    console.log('...', this.userData?.userId)
-    let item = [];
-    item.push(this.item);
-    let data = {
-      userId: this.userData?.userId,
-      productId: item.length > 0 ? item[0]?._id : null, // Check for array length to avoid errors
-    };
-    console.log('data',data)
-    this.comApi.checkWhislist(data).subscribe((res:any)=>{
-      console.log('##',res)
-      this.Status  = res.success
-      console.log('##',this.Status)
-      
-      
-    })
+    console.log('...', this.userData?.userId ,this.item,this.categorytdata)
+  
    
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['categorytdata'] ||
+      changes['subcategorytdata'] ||
+      changes['pushproductdata'] ||
+      changes['getallData'] ||
+      changes['item']
+    ) {
+      this.addToItemData(
+        this.categorytdata ||
+        this.subcategorytdata ||
+        this.getallData ||
+        this.pushproductdata ||
+        this.item
+      );
+    }
+      // Log the updated itemData to ensure it is correct
+     
+  
+   
+    
+  }
+  private async addToItemData(input: any): Promise<void> {
+    this.userData = JSON.parse(sessionStorage.getItem('userData')!); // Parse userData from sessionStorage
+  
+    if (input) {
+      console.log("Updated input:", input);
+      this.itemData.push(input);
+
+      const productId = this.itemData.length > 0
+        ? this.itemData[0]?._id || this.itemData[0]?.id :null// Handle array case
+
+      const data = {
+        userId: this.userData?.userId,
+        productId: productId, // Assign extracted productId
+      };
+      try {
+        const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
+        this.isInWishlist = res.success;
+        console.log('##', this.isInWishlist);
+      } catch (error) {
+        console.error('Error checking wishlist:', error);
+      }
+  
+     
+      
+      let itemvalue:any  [] =[]
+      if (Array.isArray(input)) {
+        itemvalue = [...input]; // Only spread if input is an iterable
+        console.log('...', itemvalue);
+      }
+      itemvalue.forEach(async (el:any) => {
+        const productId = el?._id || el?.id; // Safely extract productId
+         const data = {
+        userId: this.userData?.userId,
+         productId: productId, // Assign extracted productId
+       };
+       console.log("Prepared data:",data);
+        try {
+    const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
+    this.isInWishlist = res.success;
+    console.log('##', this.isInWishlist);
+  } catch (error) {
+    console.error('Error checking wishlist:', error);
+  }
+      });
+       
+      
+    }
+  }
+  
+ async ngAfterContentInit(): Promise<void> {
+  
+  // // this.itemData.push(this.item);
  
+
+  // const data = {
+  //   userId: this.userData?.userId,
+  //   productId: this.itemData.length > 0 ? this.itemData[0]?._id : null, // Check for array length to avoid errors
+  // };
+
+  // console.log('data', data);
+
+  // try {
+  //   const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
+  //   this.isInWishlist = res.success;
+  //   console.log('##', this.isInWishlist);
+  // } catch (error) {
+  //   console.error('Error checking wishlist:', error);
+  // }
+}
+
+
  
   addcart(productId: any) {  
     console.log(productId);
@@ -196,7 +271,7 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy {
   this.categorytdata =[]
   this.subcategorytdata =[]
   this.pushproductdata =[]
-  this.getCategoryData =[]
+  this.getallData =[]
   this.routeId =null
   this.item =null
   this.userData =[]

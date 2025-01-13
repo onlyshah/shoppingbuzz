@@ -22,7 +22,8 @@
                                        class="mb-3 img-fluid">
                                  </a>
                               </div>
-                              <!-- <div class="product-action-btn">
+                              <div class="product-action-btn">
+                                 {{isInWishlist}}
                                  <a routerLink="/product/{{item?.SubCategoryId?._id}}" class="btn-action mb-1"><i
                                        class="bi bi-eye"></i></a>
                                  <a (click)="Wishlist(item._id ,this.isInWishlist)" class="btn-action mb-1"
@@ -31,9 +32,8 @@
                                     <i class="bi bi-heart"></i>
                                  </a>
 
-                              </div> -->
-                              <app-sh-button [item]="item" [isInWishlist]="Status"></app-sh-button>
-                           </div>
+                              </div>
+                                     </div>
                            <div class="text-container">
                               <!-- <h2 class="fs-6">
                            <a class="text-inherit text-decoration-none"
@@ -83,7 +83,7 @@
       </div>
    </div>
 </ng-container>
-<ng-container *ngIf="categorytdata != null && subcategorytdata != null && getCategoryData != null ">
+<ng-container *ngIf="categorytdata != null && subcategorytdata != null && getallData != null ">
 
    <div class="col-lg-9 col-md-12 d-none d-lg-block">
       <div class="row g-4 row-cols-lg-8 row-cols-2 row-cols-md-3 mt-2"
@@ -106,8 +106,18 @@
 
                      <a> <img [src]="imagePath+categorytdata?.productImage" alt="Grocery Ecommerce Template"
                            class="mb-3 img-fluid"></a>
+                           <div class="product-action-btn">
+                              {{isInWishlist}}
+                              <a routerLink="/product/{{item?.SubCategoryId?._id}}" class="btn-action mb-1"><i
+                                    class="bi bi-eye"></i></a>
+                              <a (click)="Wishlist(item._id ,this.isInWishlist)" class="btn-action mb-1"
+                                 [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
+                                 data-bs-toggle="tooltip" title="Wishlist">
+                                 <i class="bi bi-heart"></i>
+                              </a>
 
-                           <app-sh-button [item]="item" [type]="Status"></app-sh-button>
+                           </div>
+                           
                   </div>
 
                   <h2 class="fs-6">
@@ -170,7 +180,7 @@
                      <a> <img [src]="imagePath+subcategorytdata?.productImage" alt="Grocery Ecommerce Template"
                            class="mb-3 img-fluid"></a>
 
-                           <app-sh-button [item]="item" [type]="Status"></app-sh-button>
+                           
                   </div>
 
                   <h2 class="fs-6">
@@ -230,7 +240,7 @@
                         <a> <img [src]="imagePath+categorytdata?.productImage" alt="Grocery Ecommerce Template"
                               class="mb-3 img-fluid"></a>
 
-                              <app-sh-button [item]="item" [type]="Status"></app-sh-button>
+                              
                      </div>
 
                      <h2 class="fs-6">
@@ -290,7 +300,7 @@
                         <a> <img [src]="imagePath+subcategorytdata?.productImage" alt="Grocery Ecommerce Template"
                               class="mb-3 img-fluid"></a>
 
-                              <app-sh-button [item]="item" [type]="Status"></app-sh-button>
+                              
                      </div>
 
                      <h2 class="fs-6">
@@ -461,7 +471,7 @@
 
                         </a>
                         <!-- action btn -->
-                        <app-sh-button [item]="item" [type]="Status"></app-sh-button>
+                        
                      </div>
                      <!-- title -->
 
@@ -514,7 +524,7 @@
 
                         </a>
                         <!-- action btn -->
-                        <app-sh-button [item]="item" [type]="Status"></app-sh-button>
+                        
                      </div>
                      <!-- title -->
 
@@ -559,3 +569,12 @@
 
 
 </ng-container>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box"
+ [fullScreen]="true">
+   <span style="color: white; display: flex; align-items: center;">
+     <i class="bi bi-cart4" style="font-size: 24px; margin-right: 10px;"></i>
+     we kindly ask you to please be patient,
+     Loading...
+     take time as we are using free services 
+   </span>
+ </ngx-spinner>

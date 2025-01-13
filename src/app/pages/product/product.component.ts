@@ -29,14 +29,12 @@ export class ProductComponent implements OnInit ,OnDestroy {
       this.searchData = results;
       console.log("searchData",this.searchData);
     })
-    this.comApi.wishlistStatus$.subscribe(status => {
-      console.log('product wishlist status:',status);
-    });
+  
   }
   id: any
   getproductData: any
   //imagePath = environment.baseUrl;
-  getCategoryData: any
+  getallData: any
   pushcategoryData: any = []
   category: any
   pushproductdata: any = []
@@ -55,19 +53,19 @@ export class ProductComponent implements OnInit ,OnDestroy {
       this.id = '' + response?._id
       // console.log('catId',response?._id);
       this.comApi.getall().subscribe((response: any) => {
-        this.getCategoryData = response.product
-        console.log('alldata', this.getCategoryData)
-        this.pushcategoryData = this.getCategoryData.filter(
+        this.getallData = response.product
+        console.log('alldata', this.getallData)
+        this.pushcategoryData = this.getallData.filter(
           (id: any) => id.CategoryId._id === this.id
           
           
         )
         console.log('pushcategoryData', this.pushcategoryData)
-        this.pushsubcategoryData = this.getCategoryData.filter(
+        this.pushsubcategoryData = this.getallData.filter(
           (id: any) => id.SubCategoryId._id === this.id
         )
         console.log('pushsubcategoryData', this.pushsubcategoryData)
-        this.pushproductdata = this.getCategoryData.filter(
+        this.pushproductdata = this.getallData.filter(
           (id: any) => id._id === this.id
         )
         console.log('pushproductdata', this.pushproductdata)
@@ -87,7 +85,7 @@ export class ProductComponent implements OnInit ,OnDestroy {
     this.searchData =[]
     this.id = null
    this.getproductData =[]
-  this.getCategoryData =[]
+  this.getallData =[]
   this.pushcategoryData = []
   this.category = null
   this.pushproductdata = []

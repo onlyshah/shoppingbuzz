@@ -14,6 +14,7 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class ShButtonComponent implements OnInit {
   userData: any;
+  @Input() isInWishlist :boolean
   constructor(
     private comApi:CommonService , private route: Router ,
          private router: ActivatedRoute ,
@@ -27,21 +28,19 @@ export class ShButtonComponent implements OnInit {
  ngOnInit(): void {
   this.userData = JSON.parse( sessionStorage.getItem('userData')!);
  }
- @Input() isInWishlist:any
- @Input() item:any
- Wishlist(productId: any ,type:any) {
-  console.log("productId ,type",productId ,this.isInWishlist , this.userData.userId)
+ Wishlist(type:any) {
+  console.log("productId ,type"  , this.userData.userId ,this.isInWishlist)
   this.userData = JSON.parse( sessionStorage.getItem('userData')!);
 
   if (this.auth.isLoggedIn()) {
     if (this.userData?.userId != null) {
-      var value = {
-        "userId": this.userData.userId,
-        "List": {
-          "productId": productId,
-        }
-      };
-      console.log(value);
+      // var value = {
+      //   "userId": this.userData.userId,
+      //   "List": {
+      //     "productId": productId,
+      //   }
+      // };
+      //console.log(value);
       // if (this.isInWishlist) {
       //   // Remove from wishlist
       //   this.deleteWishlist(this.userData.userId ,productId);

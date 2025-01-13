@@ -103,10 +103,13 @@
             </div>
          </div>
          <div class="col-lg-2 col-3">
-            <div class="slider-arrow" id="slider-third-arrows"></div>
+            <div class="slider-arrow" id="slider-third-arrows"
+           
+            ></div>
          </div>
       </div>
-      <ngx-slick-carousel class="carousel slide" [config]=" bestselling">
+      <ngx-slick-carousel class="carousel slide" [config]=" bestselling"
+      >
          <div ngxSlickItem class="carousel-item active" *ngFor="let item of tDeal; let index=index">
             <app-shoppingcart [item]="item"></app-shoppingcart>
          </div>

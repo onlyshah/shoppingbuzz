@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit,OnDestroy {
   getcarouselvalue: any;
   cardcarouselData: any = [];
   imagePath = environment.baseUrl;
+  currentPage = 1;
+  pageSize = 10; // Number of items per page
+  totalItems = 0; // Will hold the total number of items available
+  isLoading = false;
   slideConfig = {
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -76,7 +80,7 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.getcompareCategory();
+    this.getcompareCategory(this.currentPage);
     this.getcarouselData();
     this.getCardcarouselData();
   }
@@ -109,33 +113,74 @@ export class HomeComponent implements OnInit,OnDestroy {
     });
   }
 
-  getcompareCategory() {
-    this.comApi.getall().subscribe((response: any) => {
-      this.compareCategory = response.product;
-      console.log('compareCategory', this.compareCategory);
-      this.compareCategory.forEach((element: any) => {
-        if (element.displaycategory === 'Todaysdeals') {
-          this.tDeal.push(element);
-          console.log('Todaysdeals', element);
-        }
-      });
-      this.compareCategory.forEach((element: any) => {
-        if (element.displaycategory === 'BestSelling') {
-          this.bSelling.push(element);
-          console.log('BestSelling', element);
-        }
-      });
-      this.compareCategory.forEach((element: any) => {
-        if (element.displaycategory === 'Featuredproduct') {
-          this.featuredData.push(element);
-          console.log('Featuredproduct', element);
-        }
-      });
-      this.spinner.hide();
-    }, () => {
-      this.spinner.hide();
-    });
+  // getcompareCategory() {
+  //   this.comApi.getall().subscribe((response: any) => {
+  //     this.compareCategory = response.product;
+  //     console.log('compareCategory', this.compareCategory);
+  //     this.compareCategory.forEach((element: any) => {
+  //       if (element.displaycategory === 'Todaysdeals') {
+  //         this.tDeal.push(element);
+  //         console.log('Todaysdeals', element);
+  //       }
+  //     });
+  //     this.compareCategory.forEach((element: any) => {
+  //       if (element.displaycategory === 'BestSelling') {
+  //         this.bSelling.push(element);
+  //         console.log('BestSelling', element);
+  //       }
+  //     });
+  //     this.compareCategory.forEach((element: any) => {
+  //       if (element.displaycategory === 'Featuredproduct') {
+  //         this.featuredData.push(element);
+  //         console.log('Featuredproduct', element);
+  //       }
+  //     });
+  //     this.spinner.hide();
+  //   }, () => {
+  //     this.spinner.hide();
+  //   });
+  // }
+  getcompareCategory(page: number) {
+    this.isLoading = true;
+    //this.spinner.show();
+  
+    this.comApi.getall(page, this.pageSize).subscribe(
+      (response: any) => {
+        this.compareCategory = response.product;
+        console.log('compareCategory', this.compareCategory);
+  
+        this.compareCategory.forEach((element: any) => {
+          if (element.displaycategory === 'Todaysdeals') {
+            this.tDeal.push(element);
+            console.log('Todaysdeals', element);
+          }
+             this.totalItems = response.total;
+             this.isLoading = false;
+        });
+  
+        this.compareCategory.forEach((element: any) => {
+          if (element.displaycategory === 'BestSelling') {
+            this.bSelling.push(element);
+            console.log('BestSelling', element);
+          }
+        });
+  
+        this.compareCategory.forEach((element: any) => {
+          if (element.displaycategory === 'Featuredproduct') {
+            this.featuredData.push(element);
+            console.log('Featuredproduct', element);
+          }
+        });
+  
+        this.spinner.hide();
+      },
+      (error) => {
+        console.error('Error fetching categories:', error);
+        this.spinner.hide();
+      }
+    );
   }
+  
 
 itemsPerSlideOneOnMobile(): number {
   // Adjust this logic based on your desired screen size breakpoints
