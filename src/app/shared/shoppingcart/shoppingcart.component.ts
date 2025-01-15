@@ -96,7 +96,7 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy ,AfterContentIni
       } catch (error) {
         console.error('Error checking wishlist:', error);
       }
-  
+      
      
       
       let itemvalue:any  [] =[]

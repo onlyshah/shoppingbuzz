@@ -107,7 +107,7 @@
                      <a> <img [src]="imagePath+categorytdata?.productImage" alt="Grocery Ecommerce Template"
                            class="mb-3 img-fluid"></a>
                            <div class="product-action-btn">
-                              {{isInWishlist}}
+                              {{isInWishlist}}...
                               <a routerLink="/product/{{item?.SubCategoryId?._id}}" class="btn-action mb-1"><i
                                     class="bi bi-eye"></i></a>
                               <a (click)="Wishlist(item._id ,this.isInWishlist)" class="btn-action mb-1"
