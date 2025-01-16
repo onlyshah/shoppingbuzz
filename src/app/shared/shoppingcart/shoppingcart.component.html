@@ -22,7 +22,7 @@
                                        class="mb-3 img-fluid">
                                  </a>
                               </div>
-                              <div class="product-action-btn">
+                              <!-- <div class="product-action-btn">
                                  {{isInWishlist}}
                                  <a routerLink="/product/{{item?.SubCategoryId?._id}}" class="btn-action mb-1"><i
                                        class="bi bi-eye"></i></a>
@@ -32,7 +32,8 @@
                                     <i class="bi bi-heart"></i>
                                  </a>
 
-                              </div>
+                              </div> -->
+                              <app-sh-button [item] ="item"></app-sh-button>
                                      </div>
                            <div class="text-container">
                               <!-- <h2 class="fs-6">
@@ -106,7 +107,7 @@
 
                      <a> <img [src]="imagePath+categorytdata?.productImage" alt="Grocery Ecommerce Template"
                            class="mb-3 img-fluid"></a>
-                           <div class="product-action-btn">
+                           <!-- <div class="product-action-btn">
                               {{isInWishlist}}...
                               <a routerLink="/product/{{item?.SubCategoryId?._id}}" class="btn-action mb-1"><i
                                     class="bi bi-eye"></i></a>
@@ -116,8 +117,8 @@
                                  <i class="bi bi-heart"></i>
                               </a>
 
-                           </div>
-                           
+                           </div> -->
+                           <app-sh-button [categorytdata] ="categorytdata"></app-sh-button>
                   </div>
 
                   <h2 class="fs-6">

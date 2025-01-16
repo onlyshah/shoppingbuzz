@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   cardcarouselData: any = [];
   imagePath = environment.baseUrl;
   currentPage = 1;
-  pageSize = 10; // Number of items per page
+  pageSize = 15; // Number of items per page
   totalItems = 0; // Will hold the total number of items available
   isLoading = false;
   slideConfig = {

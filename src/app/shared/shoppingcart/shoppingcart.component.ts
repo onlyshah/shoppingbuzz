@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 providedIn:'root'
 })
 
-export class ShoppingcartComponent  implements OnInit,OnDestroy ,AfterContentInit {
+export class ShoppingcartComponent  implements OnInit,OnDestroy {
   imagePath = environment.baseUrl;
  userId = this.auth.userValue?.userId
   @Input() categorytdata:any
@@ -53,97 +53,78 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy ,AfterContentIni
   
    
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['categorytdata'] ||
-      changes['subcategorytdata'] ||
-      changes['pushproductdata'] ||
-      changes['getallData'] ||
-      changes['item']
-    ) {
-      this.addToItemData(
-        this.categorytdata ||
-        this.subcategorytdata ||
-        this.getallData ||
-        this.pushproductdata ||
-        this.item
-      );
-    }
-      // Log the updated itemData to ensure it is correct
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (
+  //     changes['categorytdata'] ||
+  //     changes['subcategorytdata'] ||
+  //     changes['pushproductdata'] ||
+  //     changes['getallData'] ||
+  //     changes['item']
+  //   ) {
+  //     this.addToItemData(
+  //       this.categorytdata ||
+  //       this.subcategorytdata ||
+  //       this.getallData ||
+  //       this.pushproductdata ||
+  //       this.item
+  //     );
+  //   }
+  //     // Log the updated itemData to ensure it is correct
      
   
    
     
-  }
-  private async addToItemData(input: any): Promise<void> {
-    this.userData = JSON.parse(sessionStorage.getItem('userData')!); // Parse userData from sessionStorage
+  // }
+  // private async addToItemData(input: any): Promise<void> {
+  //   this.userData = JSON.parse(sessionStorage.getItem('userData')!); // Parse userData from sessionStorage
   
-    if (input) {
-      console.log("Updated input:", input);
-      this.itemData.push(input);
+  //   if (input) {
+  //     console.log("Updated input:", input);
+  //     this.itemData.push(input);
 
-      const productId = this.itemData.length > 0
-        ? this.itemData[0]?._id || this.itemData[0]?.id :null// Handle array case
+  //     const productId = this.itemData.length > 0
+  //       ? this.itemData[0]?._id || this.itemData[0]?.id :null// Handle array case
 
-      const data = {
-        userId: this.userData?.userId,
-        productId: productId, // Assign extracted productId
-      };
-      try {
-        const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
-        this.isInWishlist = res.success;
-        console.log('##', this.isInWishlist);
-      } catch (error) {
-        console.error('Error checking wishlist:', error);
-      }
+  //     const data = {
+  //       userId: this.userData?.userId,
+  //       productId: productId, // Assign extracted productId
+  //     };
+  //     try {
+  //       const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
+  //       this.isInWishlist = res.success;
+  //       console.log('##', this.isInWishlist);
+  //     } catch (error) {
+  //       console.error('Error checking wishlist:', error);
+  //     }
       
      
       
-      let itemvalue:any  [] =[]
-      if (Array.isArray(input)) {
-        itemvalue = [...input]; // Only spread if input is an iterable
-        console.log('...', itemvalue);
-      }
-      itemvalue.forEach(async (el:any) => {
-        const productId = el?._id || el?.id; // Safely extract productId
-         const data = {
-        userId: this.userData?.userId,
-         productId: productId, // Assign extracted productId
-       };
-       console.log("Prepared data:",data);
-        try {
-    const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
-    this.isInWishlist = res.success;
-    console.log('##', this.isInWishlist);
-  } catch (error) {
-    console.error('Error checking wishlist:', error);
-  }
-      });
-       
-      
-    }
-  }
-  
- async ngAfterContentInit(): Promise<void> {
-  
-  // // this.itemData.push(this.item);
- 
-
-  // const data = {
-  //   userId: this.userData?.userId,
-  //   productId: this.itemData.length > 0 ? this.itemData[0]?._id : null, // Check for array length to avoid errors
-  // };
-
-  // console.log('data', data);
-
-  // try {
+  //     let itemvalue:any  [] =[]
+  //     if (Array.isArray(input)) {
+  //       itemvalue = [...input]; // Only spread if input is an iterable
+  //       console.log('...', itemvalue);
+  //     }
+  //     itemvalue.forEach(async (el:any) => {
+  //       const productId = el?._id || el?.id; // Safely extract productId
+  //        const data = {
+  //       userId: this.userData?.userId,
+  //        productId: productId, // Assign extracted productId
+  //      };
+  //      console.log("Prepared data:",data);
+  //       try {
   //   const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
   //   this.isInWishlist = res.success;
   //   console.log('##', this.isInWishlist);
   // } catch (error) {
   //   console.error('Error checking wishlist:', error);
   // }
-}
+  //     });
+       
+      
+  //   }
+  // }
+  
 
 
  
