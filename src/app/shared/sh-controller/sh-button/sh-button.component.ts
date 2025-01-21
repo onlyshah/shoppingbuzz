@@ -51,7 +51,7 @@ export class ShButtonComponent implements OnInit {
       changes['getallData'] ||
       changes['item']
     ) {
-      this.addToItemData(
+      this.getStatus(
         this.categorytdata ||
         this.item
       );
@@ -62,7 +62,7 @@ export class ShButtonComponent implements OnInit {
    
     
   }
-  private async addToItemData(input: any): Promise<void> {
+  private async getStatus(input: any): Promise<void> {
     this.userData = JSON.parse(sessionStorage.getItem('userData')!); // Parse userData from sessionStorage
   
     if (input) {
@@ -81,9 +81,14 @@ export class ShButtonComponent implements OnInit {
         const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
         this.isInWishlist = res.success;
         console.log('##', this.isInWishlist);
+        const cardres: any = await this.comApi.checkcart(data).toPromise(); // Convert Observable to Promise
+        this.isInCart = cardres.success;
+        console.log('##iscart', this.isInCart);
+
       } catch (error) {
-        console.error('Error checking wishlist:', error);
+        console.error('Error checking cart:', error);
       }
+
       
      
       
@@ -103,8 +108,11 @@ export class ShButtonComponent implements OnInit {
     const res: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
     this.isInWishlist = res.success;
     console.log('##', this.isInWishlist);
+    const cartres: any = await this.comApi.checkWhislist(data).toPromise(); // Convert Observable to Promise
+    this.isInCart = cartres.success;
+    console.log('##iscart', this.isInCart);
   } catch (error) {
-    console.error('Error checking wishlist:', error);
+    console.error('Error checking cart:', error);
   }
       });
        
@@ -184,7 +192,7 @@ export class ShButtonComponent implements OnInit {
       });
   }
   
-  addcart(productId: any) {  
+addcart(productId: any) {  
     console.log(productId);
     
     this.userData = this.auth.userValue
@@ -215,18 +223,5 @@ export class ShButtonComponent implements OnInit {
       // alert('You must be logged in to add items to the cart');
     }
   }
-  addTocart(value:any){
-    this.comApi.addtocart(value).subscribe((response: any) => {
-      console.log("addcard",response);
-      console.log('user',this.userData.userId)
-      //this.isInCart = true;
-      this.comApi.getproducttocart(this.userData.userId).pipe(first())
-      .subscribe({
-        next: (res: any) => {
-          this.cartcount = res.productCount;
-          console.log('cartCount', this.cartcount);
-        },
-      });
-    });
-  }
+ 
 }

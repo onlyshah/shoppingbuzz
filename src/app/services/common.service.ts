@@ -183,12 +183,6 @@ export class CommonService implements OnInit {
       return response;
     }));
   }
-  setWishlistStatus(status: boolean): void {
-    this.wishliststatusSubject.next(status);
-  }
-  
-  getWishlistStatus(): Observable<boolean> {
-    return this.wishliststatusSubject.asObservable();
-  }
+ 
  
 }

@@ -1,9 +1,13 @@
 .wishlist-active {
     color: #fff; /* Button color when product is in the wishlist */
-    background-color: red;
+    background-color: var(--fc-primary);
+    color: var(--fc-white);
+    display: block;
   }
   
   .wishlist-inactive {
     color: #fff; /* Button color when product is not in the wishlist */
     background-color: green;
+    display: block;
   }
+  

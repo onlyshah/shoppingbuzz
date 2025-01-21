@@ -1,21 +1,26 @@
-<div class="d-flex justify-content-between mt-4">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a *ngIf="isInCart === false" (click)="addcart(categorytdata._id)" 
+        class="btn btn-primary btn-sm">
+               Add <i class="bi bi-bag-plus-fill"></i></a>
+        <a *ngIf="isInCart === true" routerLink="" class="btn btn-primary btn-sm ">
+                Move  <i class="bi bi-bag-plus-fill"></i> </a>
 
-        <a (click)="addcart(item._id)" class="btn btn-primary btn-sm">
-                <i class="bi bi-bag-plus-fill"></i>
-                Add
+
+        <a *ngIf="isInWishlist === false" (click)="Wishlist(item._id ,isInWishlist)"
+                [ngClass]="{'wishlist-active': isInWishlist}" class="btn btn-primary btn-sm">
+                Add <i class="bi bi-heart"></i>
+
         </a>
+        <a *ngIf="isInWishlist === true" (click)="Wishlist(item._id ,isInWishlist)"
+                [ngClass]="{'wishlist-inactive': !isInWishlist}" class="btn btn-primary btn-sm">
 
-        <a (click)="Wishlist(item._id ,isInWishlist)"
-                [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-                class="btn btn-primary btn-sm">
                 <i class="bi bi-heart"></i>
-                <span *ngIf="isInWishlist === false">WishList</span>  
-                <span *ngif="isInWishlist === true">Move To WishList</span> 
+                Move 
+
         </a>
-        
         <a routerLink="['/product/',item?.SubCategoryId?._id]" class="btn btn-primary btn-sm">
-                <i class="bi bi-eye"></i>
-                View
+
+                View <i class="bi bi-eye"></i>
         </a>
 
 </div>
@@ -30,4 +35,13 @@
              data-bs-toggle="tooltip" title="Wishlist">
              <i class="bi bi-heart"></i>
           </a>
+          
+      <a *ngIf="isInCart" (click)="addcart(item._id)" class="btn btn-primary btn-sm">
+                <i class="bi bi-bag-plus-fill"></i>
+                Add
+        </a>
+        <a (click)="addcart(item._id)" class="btn btn-primary btn-sm">
+                <i class="bi bi-bag-plus-fill"></i>
+                Move
+        </a>
  </div> -->
