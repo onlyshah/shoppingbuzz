@@ -1,9 +1,9 @@
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a *ngIf="isInCart === false" (click)="addcart(categorytdata._id)" 
-        class="btn btn-primary btn-sm">
-               Add <i class="bi bi-bag-plus-fill"></i></a>
+        <a *ngIf="isInCart === false" (click)="addcart(categorytdata._id)" class="btn btn-primary btn-sm">
+                Add <i class="bi bi-bag-plus-fill" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Quick View" data-bs-original-title="Quick View"></i></a>
+
         <a *ngIf="isInCart === true" routerLink="" class="btn btn-primary btn-sm ">
-                Move  <i class="bi bi-bag-plus-fill"></i> </a>
+                Move <i class="bi bi-bag-plus-fill"></i> </a>
 
 
         <a *ngIf="isInWishlist === false" (click)="Wishlist(item._id ,isInWishlist)"
@@ -15,7 +15,7 @@
                 [ngClass]="{'wishlist-inactive': !isInWishlist}" class="btn btn-primary btn-sm">
 
                 <i class="bi bi-heart"></i>
-                Move 
+                Move
 
         </a>
         <a routerLink="['/product/',item?.SubCategoryId?._id]" class="btn btn-primary btn-sm">
@@ -24,24 +24,3 @@
         </a>
 
 </div>
-<!-- <div class="d-grid mt-4 btn-container">
-        <a  (click)="addcart(item._id)" 
-        class="btn btn-primary btn-sm "><i class="bi bi-bag-plus-fill"></i></a>
-        <a routerLink="['/product/',item?.SubCategoryId?._id]" class="btn-action mb-1">
-                <i
-                class="bi bi-eye"></i></a>
-          <a (click)="Wishlist(item._id ,isInWishlist)" class="btn-action mb-1"
-          [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-             data-bs-toggle="tooltip" title="Wishlist">
-             <i class="bi bi-heart"></i>
-          </a>
-          
-      <a *ngIf="isInCart" (click)="addcart(item._id)" class="btn btn-primary btn-sm">
-                <i class="bi bi-bag-plus-fill"></i>
-                Add
-        </a>
-        <a (click)="addcart(item._id)" class="btn btn-primary btn-sm">
-                <i class="bi bi-bag-plus-fill"></i>
-                Move
-        </a>
- </div> -->

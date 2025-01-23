@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.getCardcarouselData();
   }
 
-  getcarouselData() {
+  async getcarouselData() {
     this.comApi.getcarousel().subscribe((response: any) => {
       this.getcarouselvalue = response.map((item: any) => ({
         ...item,
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     });
   }
 
-  getCardcarouselData() {
+ async  getCardcarouselData() {
     this.comApi.getCardcarousel().subscribe((response: any) => {
       this.cardcarouselData = response.map((item: any) => ({
         ...item,
@@ -140,10 +140,9 @@ export class HomeComponent implements OnInit,OnDestroy {
   //     this.spinner.hide();
   //   });
   // }
-  getcompareCategory(page: number) {
+  async getcompareCategory(page: number) {
     this.isLoading = true;
-    //this.spinner.show();
-  
+   
     this.comApi.getall(page, this.pageSize).subscribe(
       (response: any) => {
         this.compareCategory = response.product;
