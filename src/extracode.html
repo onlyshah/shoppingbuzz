@@ -1,32 +1,83 @@
-<!-- <div class="d-grid mt-4 btn-container">
-        <a  (click)="addcart(item._id)" 
-        class="btn btn-primary btn-sm "><i class="bi bi-bag-plus-fill"></i></a>
-        <a routerLink="['/product/',item?.SubCategoryId?._id]" class="btn-action mb-1">
-                <i
-                class="bi bi-eye"></i></a>
-          <a (click)="Wishlist(item._id ,isInWishlist)" class="btn-action mb-1"
-          [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-             data-bs-toggle="tooltip" title="Wishlist">
-             <i class="bi bi-heart"></i>
-          </a>
-          
-      <a *ngIf="isInCart" (click)="addcart(item._id)" class="btn btn-primary btn-sm">
-                <i class="bi bi-bag-plus-fill"></i>
-                Add
-        </a>
-        <a (click)="addcart(item._id)" class="btn btn-primary btn-sm">
-                <i class="bi bi-bag-plus-fill"></i>
-                Move
-        </a>
- </div> -->
-
-<!-- <div class="product-action-btn">
-        {{isInWishlist}}
-        <a routerLink="['/product/',item?.SubCategoryId?._id]" class="btn-action mb-1"><i
-                class="bi bi-eye"></i></a>
-          <a (click)="Wishlist(item._id ,isInWishlist)" class="btn-action mb-1"
-          [ngClass]="{'wishlist-active': isInWishlist, 'wishlist-inactive': !isInWishlist}"
-             data-bs-toggle="tooltip" title="Wishlist">
-             <i class="bi bi-heart"></i>
-          </a>
-</div> -->
+  
+addcart(productId: any, type: any) {
+   console.log(productId);
+ 
+   this.userData = this.auth.userValue;
+   console.log(this.auth.isLoggedIn(), this.userData?.userId);
+ 
+   if (this.auth.isLoggedIn()) {
+     if (!this.userData?.userId) {
+       this.toster.error("Please log in to add items to the cart.", "Authentication Required");
+       return;
+     }
+ 
+     const value = {
+       userId: this.userData.userId,
+       products: {
+         productId: productId,
+         quantity: 1,
+       },
+     };
+ 
+     console.log(value);
+ 
+     // Add to cart
+     this.addTocart(value);
+   } else {
+     // Redirect to login if the user is not logged in
+     this.route.navigate(['/login']);
+     this.toster.warning("Please log in to continue.", "Redirecting to Login");
+   }
+ }
+ 
+ addTocart(value: any) {
+   this.spinner.show(); // Show loader
+ 
+   this.comApi.addtocart(value).subscribe({
+     next: (response: any) => {
+       console.log("addToCart Response:", response);
+       this.toster.success("Item added to the cart.", "Success"); // Show success toast
+ 
+       // Update cart count dynamically
+       this.updateCartCount();
+     },
+     error: (err: any) => {
+       console.error("Error adding to cart:", err);
+       this.toster.error("Failed to add item to the cart.", "Error"); // Show error toast
+     },
+     complete: () => {
+       this.spinner.hide(); // Hide loader
+     },
+   });
+ }
+ deleteCartitem(userId: any, productId: any) {
+   this.comApi.deletecartItem(userId, productId).subscribe({
+     next: (res: any) => {
+       console.log('deleted', res);
+       this.toster.info('Item removed from cart.', 'Removed'); // Toast info message
+ 
+       // Update wishlist count and toggle `isInWishlist`
+       this.isInCart = false;
+       this.updateCartCount();
+     },
+     error: (err: any) => {
+       console.error('Error removing from Cart', err);
+       this.toster.error('Failed to remove item from Cart.', 'Error'); // Toast error message
+     },
+     complete: () => {
+       this.spinner.hide(); // Hide loader
+     },
+   });
+ }
+ 
+ updateCartCount() {
+   this.comApi.getproducttocart(this.userData.userId).pipe(first()).subscribe({
+     next: (res: any) => {
+       this.cartcount = res.productCount; // Update the cart count dynamically
+       console.log("Updated cart count:", this.cartcount);
+     },
+     error: (err: any) => {
+       console.error("Error fetching cart count:", err);
+     },
+   });
+ }

@@ -27,7 +27,7 @@ export class ShButtonComponent implements OnInit {
   @Input() getSearchData:any
   cartcount: number;
   wishlistcount:number;
-  isInCart:any
+  isInCart:boolean
   constructor(
     private comApi:CommonService , private route: Router ,
          private router: ActivatedRoute ,
@@ -275,63 +275,60 @@ updateWishlistCount() {
   });
 }
 
-  
-addcart(productId: any) {
-  console.log(productId);
-
-  this.userData = this.auth.userValue;
-  console.log(this.auth.isLoggedIn(), this.userData?.userId);
+addcart(productId: any, type: any) {
+  console.log("productId ,type", this.userData?.userId, this.isInCart, type);
+  this.userData = JSON.parse(sessionStorage.getItem('userData')!);
 
   if (this.auth.isLoggedIn()) {
-    if (!this.userData?.userId) {
-      this.toster.error("Please log in to add items to the cart.", "Authentication Required");
-      return;
+    if (this.userData?.userId != null) {
+      const value = {
+        userId: this.userData.userId,
+        List: {
+          productId: productId,
+        },
+      };
+      console.log(value);
+
+      this.spinner.show(); // Show loader
+
+      if (this.isInWishlist) {
+        // Remove from wishlist
+        this.deletecart(this.userData.userId, productId);
+      } else {
+        // Add to wishlist
+        this.addToWishlist(value);
+      }
     }
-
-    const value = {
-      userId: this.userData.userId,
-      products: {
-        productId: productId,
-        quantity: 1,
-      },
-    };
-
-    console.log(value);
-
-    // Add to cart
-    this.addTocart(value);
   } else {
-    // Redirect to login if the user is not logged in
+    // User is not logged in
     this.route.navigate(['/login']);
-    this.toster.warning("Please log in to continue.", "Redirecting to Login");
+    this.toster.warning('Please log in to manage your wishlist.', 'Authentication Required');
   }
 }
-
-addTocart(value: any) {
-  this.spinner.show(); // Show loader
-
+addToCart(value: any) {
   this.comApi.addtocart(value).subscribe({
-    next: (response: any) => {
-      console.log("addToCart Response:", response);
-      this.toster.success("Item added to the cart.", "Success"); // Show success toast
+    next: (res: any) => {
+      console.log('cart', res);
+      this.toster.success('Item added to Cart.', 'Success'); // Toast success message
 
-      // Update cart count dynamically
+      // Update wishlist count and toggle `isInWishlist`
+      this.isInCart = true;
       this.updateCartCount();
     },
     error: (err: any) => {
-      console.error("Error adding to cart:", err);
-      this.toster.error("Failed to add item to the cart.", "Error"); // Show error toast
+      console.error('Error adding to wishlist', err);
+      this.toster.error('Failed to add item to wishlist.', 'Error'); // Toast error message
     },
     complete: () => {
       this.spinner.hide(); // Hide loader
     },
   });
 }
-deleteCartitem(userId: any, productId: any) {
+deletecart(userId: any, productId: any) {
   this.comApi.deletecartItem(userId, productId).subscribe({
     next: (res: any) => {
       console.log('deleted', res);
-      this.toster.info('Item removed from wishlist.', 'Removed'); // Toast info message
+      this.toster.info('Item removed from Cart.', 'Removed'); // Toast info message
 
       // Update wishlist count and toggle `isInWishlist`
       this.isInCart = false;
@@ -346,7 +343,6 @@ deleteCartitem(userId: any, productId: any) {
     },
   });
 }
-
 updateCartCount() {
   this.comApi.getproducttocart(this.userData.userId).pipe(first()).subscribe({
     next: (res: any) => {
@@ -358,6 +354,5 @@ updateCartCount() {
     },
   });
 }
-
  
 }

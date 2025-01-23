@@ -1,5 +1,5 @@
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a *ngIf="isInCart === false" (click)="addcart(categorytdata._id)" class="btn btn-primary btn-sm">
+        <a *ngIf="isInCart === false" (click)="addcart(item._id,isInCart)" class="btn btn-primary btn-sm">
                 Add <i class="bi bi-bag-plus-fill" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Quick View" data-bs-original-title="Quick View"></i></a>
 
         <a *ngIf="isInCart === true" routerLink="" class="btn btn-primary btn-sm ">
