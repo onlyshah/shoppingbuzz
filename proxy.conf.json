@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://e-commercebackend-6r5v.onrender.com",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
+  
