@@ -291,12 +291,12 @@ addcart(productId: any, type: any) {
 
       this.spinner.show(); // Show loader
 
-      if (this.isInWishlist) {
+      if (this.isInCart) {
         // Remove from wishlist
         this.deletecart(this.userData.userId, productId);
       } else {
         // Add to wishlist
-        this.addToWishlist(value);
+        this.addToCart(value);
       }
     }
   } else {
