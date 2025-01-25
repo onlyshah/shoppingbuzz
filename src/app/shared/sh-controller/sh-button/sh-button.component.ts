@@ -282,7 +282,7 @@ addcart(productId: any, type: any) {
   if (this.auth.isLoggedIn()) {
     if (this.userData?.userId != null) {
       const value = {
-        userId: this.userData.userId,
+        userId: this.userData?.userId,
         List: {
           productId: productId,
         },

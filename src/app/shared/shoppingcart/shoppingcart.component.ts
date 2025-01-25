@@ -49,7 +49,7 @@ export class ShoppingcartComponent  implements OnInit,OnDestroy {
 
   ngOnInit() {
     this.userData=(JSON.parse( sessionStorage.getItem('userData')!))
-    console.log('...', this.userData?.userId ,this.item,this.categorytdata)
+   // console.log('...', this.userData?.userId ,this.item,this.categorytdata)
   
    
   }
